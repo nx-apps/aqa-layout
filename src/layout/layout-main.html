@@ -17,7 +17,7 @@
 <link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
-<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 
 
 <link rel="import" href="../components/aqa-font/aqa-mitr-font.html">
@@ -63,6 +63,23 @@
                     background-color: #f3f7f9;
                 }
                 --paper-item-selected-weight:100;
+            }
+            iron-icon{
+                cursor: pointer;
+            }
+            .icon-sm{
+                --iron-icon-height: 16px;
+                --iron-icon-width: 16px;
+            }
+            .icon-md{
+                margin-left: 0.4rem;
+                margin-right: 0.4rem;
+                --iron-icon-height: 24px;
+                --iron-icon-width: 24px;
+            }
+            .icon-lg{
+                --iron-icon-height: 32px;
+                --iron-icon-width: 32px;
             }
             paper-item,
             paper-item-body {
@@ -143,7 +160,12 @@
                                 </paper-item>
                                 <paper-item>
                                     <iron-icon icon="icons:settings"></iron-icon>
-                                    &nbsp;&nbsp;Setting
+                                    <paper-item-body two-line>
+                                        &nbsp;&nbsp;Setting
+                                    </paper-item-body>
+                                    <iron-icon class="icon-sm" icon="editor:format-size" on-tap="smFont"></iron-icon>
+                                    <iron-icon class="icon-md" icon="editor:format-size" on-tap="mdFont"></iron-icon>
+                                    <iron-icon class="icon-lg" icon="editor:format-size" on-tap="lgFont"></iron-icon>
                                 </paper-item>
                                 <paper-item>
                                     <iron-icon icon="icons:exit-to-app"></iron-icon>
@@ -253,7 +275,15 @@
                     this.progressEnable = false
                 }, 500)
             }
-
+            smFont(){
+                console.log('smFont')
+            }
+            mdFont(){
+                console.log('mdFont')
+            }
+            lgFont(){
+                console.log('lgFont')
+            }
         }
 
         window.customElements.define(LayoutMain.is, LayoutMain);
