@@ -1,0 +1,286 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="./pages/page-list.html">
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="../../redux-mixin.html">
+<link rel="import" href="../../redux/profile/profile-redux.html">
+
+<link rel="import" href="../../layout/shared-styles.html">
+
+<!-- <link rel="import" href="../../i18n/profile/page-00-i18n.html"> -->
+<link rel="import" href="../../i18n/profile/main-i18n.html">
+<link rel="import" href="./pages/page-00.html">
+
+<link rel="import" href="../../components/aqa-title/aqa-title.html">
+<link rel="import" href="../../components/aqa-breadcrumb/aqa-breadcrumb.html">
+<!-- 
+<link rel="import" href=""> -->
+
+<!-- <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../components/apa-icon/aqa-icon-menu.html"> -->
+
+
+<dom-module id="page-profile">
+    <template>
+        <style include="shared-styles flexbox-grid-remove-padding">
+            iron-selector>* {
+                padding-left: 15px;
+                padding-top: 3px;
+            }
+
+            .topic {
+                font-size: 1em;
+            }
+
+            .menu {
+                font-size: .8em;
+                padding-left: 30px;
+            }
+
+            .menu:hover {
+                background-color: var(--paper-indigo-500);
+                font-weight: bold;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .iron-selected {
+                /* padding-left: 15px; */
+                background-color: var(--paper-blue-500);
+                font-weight: bold;
+                color: #fff;
+                /* border-left: 4px solid #dd4b39; */
+            }
+
+            .border {
+                border: 1px solid black;
+            }
+
+            /* .header{
+                margin-bottom: 2em;
+            } */
+
+            .header-title-profile {
+                @apply --nylon-font-mitr-family;
+            }
+
+            .flex-container{
+                display: flex;
+                justify-content: space-between;
+            }
+            .header-content>b{
+                font-family: MitrLight;
+            }
+            .icon{
+                --iron-icon-height: 32px;
+                --iron-icon-width: 32px;
+                margin: 0.4rem;
+                --iron-icon-fill-color:#37474F;
+            }
+        </style>
+
+        
+
+
+        <div class="flex-container">
+            <div class="flex-item">
+                <aqa-title>ข้อมูลพื้นฐาน</aqa-title>
+                <aqa-breadcrumb items="[[datas]]"></aqa-breadcrumb>
+            </div>
+            <div class="flex-item" style="display:flex;color:#777">
+                <div style="margin:auto">
+                    <div class="header-content">
+                        <b>ผู้ประเมินระดับการศึกษาขั้นพื้นฐาน (ปฐมวัย)</b>
+                    </div>
+                    <div class="header-content" style="text-align:right">
+                        <b>รองศาสตร์จารย์บรรเจิด เริศฤดี</b>
+                    </div>
+                </div>
+                <div style="margin:auto">
+                    <iron-icon class="icon" icon="social:person"></iron-icon>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <!-- <paper-icon-button icon="aqa-icon-menu:address"></paper-icon-button> -->
+
+        <!-- <div class="row header" style="padding: 20px"> -->
+        <!-- <div class="row" style="padding-left: 20px"> -->
+        <!-- <app-toolbar slot="header"> -->
+        <!-- <div class="col-md-6">
+                <div class="start-xs header-title-profile">
+                    [[info.type_assessor.type_assessor_name]] : [[basic.firstname_th]] [[basic.lastname_th]]
+
+                </div>
+            </div>
+             -->
+        <!-- <div class="col-md-6">
+                <div class="end-xs">
+                    <paper-button raised class="btn-primary" id="btnApprove" on-click="_confirmApprove" disabled="{{props}}">
+                        <iron-icon icon="offline-pin"></iron-icon>[[i18n.profile.approve]]
+                    </paper-button>
+                </div>
+            </div> -->
+
+        <!-- </div> -->
+
+        <div class="row">
+
+
+            <template is="dom-if" if={{isDashboard}}>
+                <div class="col-md-12 ">
+                    <page-00></page-00>
+                </div>
+            </template>
+
+            <template is="dom-if" if={{!isDashboard}}>
+                <div class="col-md-12 ">
+                    <page-list selected="[[_params.name]]"></page-list>
+                </div>
+            </template>
+
+        </div>
+    </template>
+
+    <script>
+        class PageProfile extends ReduxMixin(Polymer.Element) {
+            static get is() {
+                return 'page-profile';
+            }
+            static get properties() {
+                return {
+                    i18n: {
+                        type: Object,
+                        statePath: 'i18n'
+                    },
+                    _params: {
+                        type: Object,
+                        observer: 'setMenu'
+                    },
+                    menu: {
+                        type: Object,
+                        statePath: 'profile.menu'
+                    },
+                    info: {
+                        type: Object,
+                        statePath: 'profile.info'
+                    },
+                    props: {
+                        type: Boolean,
+                        statePath: 'profile.info.properties'
+                    },
+                    currentPage: {
+                        type: String,
+                        value: ''
+                    },
+                    basic: {
+                        type: Object,
+                        statePath: 'profile.info.basic',
+                        value: {}
+                    },
+                    isDashboard: {
+                        type: Boolean,
+                        value: true
+                    },
+                    items: {
+                        type: Array,
+                        value: [
+                            {
+                                name: 'ทดสอบ',
+                                email: '12334@mail.com'
+                            },
+                            {
+                                name: 'ครูไทย',
+                                email: 'kruthai.com'
+                            }
+                        ]
+                    },
+                    datas: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ข้อมูลทั่วไป',
+                                url: '#test'
+                            },
+                            {
+                                label: 'ข้อมูลพื้นฐาน',
+                                url: '#test'
+                            }
+                        ]
+                    }
+
+                };
+            }
+
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+                // Nylon.dispatch('PROFILE_GET');
+                // console.log(this._params)
+            }
+            setMenu(e) {
+                this.set('currentPage', e.name)
+                this.set('isDashboard', this.currentPage === 'หน้าหลัก')
+            }
+            _changePage(e) {
+                // if (typeof this.info.id === 'undefined') {
+                //     Nylon.redirect('/register');
+                // } else {
+                //     let page = e.currentTarget.name
+                //     this.set('isDashboard', page === this.i18n.page00.mainPage)
+                //     Nylon.redirect('/profile/' + page);
+                // }
+            }
+            // _disabled() {
+            //     console.log(this.props);
+            //     if (this.props == true) {
+            //         this.$.btnApprove.disabled = true
+            //     } else {
+            //         this.$.btnApprove.disabled = false
+            //     }
+            // }
+            _confirmApprove(e) {
+                Nylon.confirm({
+                    title: this.i18n.confirm.approve.title,
+                    msg: this.i18n.confirm.approve.msg,
+                    icon: this.i18n.confirm.approve.icon,
+                    btn: [
+                        {
+                            label: this.i18n.button.close.label,
+                            icon: this.i18n.button.close.icon,
+                            class: 'btn-default',
+                            'dialog-dismiss': true
+                        },
+                        {
+                            label: this.i18n.button.confirm.label,
+                            icon: this.i18n.button.confirm.icon,
+                            class: 'btn-success',
+                            'dialog-confirm': true,
+                            'autofocus': true,
+                            action: () => {
+                                Nylon.dispatch('PROFILE_UPDATE', this.info.id, 'properties', true,
+                                    () => {
+                                        Nylon.toast('update')
+                                        Nylon.dispatch('APPROVE_GET_LISTS')
+                                        // this._disabled()
+                                    }
+                                );
+                            }
+                        }
+                    ]
+                })
+            }
+        }
+
+        window.customElements.define(PageProfile.is, PageProfile);
+    </script>
+</dom-module>
