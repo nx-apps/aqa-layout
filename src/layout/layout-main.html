@@ -163,9 +163,9 @@
                                     <paper-item-body two-line>
                                         &nbsp;&nbsp;Setting
                                     </paper-item-body>
-                                    <iron-icon class="icon-sm" icon="editor:format-size" on-tap="smFont"></iron-icon>
-                                    <iron-icon class="icon-md" icon="editor:format-size" on-tap="mdFont"></iron-icon>
-                                    <iron-icon class="icon-lg" icon="editor:format-size" on-tap="lgFont"></iron-icon>
+                                    <iron-icon class="icon-sm" icon="editor:format-size" size="0.8" on-tap="chFont"></iron-icon>
+                                    <iron-icon class="icon-md" icon="editor:format-size" size="1" on-tap="chFont"></iron-icon>
+                                    <iron-icon class="icon-lg" icon="editor:format-size" size="1.2" on-tap="chFont"></iron-icon>
                                 </paper-item>
                                 <paper-item>
                                     <iron-icon icon="icons:exit-to-app"></iron-icon>
@@ -275,15 +275,24 @@
                     this.progressEnable = false
                 }, 500)
             }
-            smFont(){
-                console.log('smFont')
+
+            chFont(e){
+                document.querySelector('body').style.fontSize = e.currentTarget.getAttribute('size')+'rem'
             }
-            mdFont(){
-                console.log('mdFont')
-            }
-            lgFont(){
-                console.log('lgFont')
-            }
+
+            // smFont(){
+            //     console.log({x:document.querySelector('body')})
+            //     document.querySelector('body').style.fontSize = '0.8rem'
+            //     console.log('smFont')
+            // }
+            // mdFont(){
+            //     console.log('mdFont')
+            //     document.querySelector('body').style.fontSize = '1rem'
+            // }
+            // lgFont(){
+            //     console.log('lgFont')
+            //     document.querySelector('body').style.fontSize = '1.2rem'
+            // }
         }
 
         window.customElements.define(LayoutMain.is, LayoutMain);
