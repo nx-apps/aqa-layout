@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<!-- <link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html"> -->
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
@@ -7,24 +6,18 @@
 <link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
-
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 
+
+<link rel="import" href="../components/aqa-font/aqa-mitr-font.html">
 <link rel="import" href="./flexbox-grid.html">
 
-<link rel="import" href="./nylon-trirong-font.html">
-<link rel="import" href="./nylon-cschatthai-font.html">
-<link rel="import" href="./nylon-mitr-font.html">
-
-<link rel="import" href="../i18n/profile/page-00-i18n.html">
-
-<link rel="import" href="../i18n/dashboard/dashboard-i18n.html">
-
 <link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../i18n/profile/page-00-i18n.html">
+<link rel="import" href="../i18n/dashboard/dashboard-i18n.html">
 <link rel="import" href="../i18n/menu-i18n.html">
-<link rel="import" href="../my-icons.html">
+
 <link rel="import" href="../components/apa-icon/aqa-icon-menu.html">
 
 <dom-module id="layout-drawer">
@@ -45,23 +38,6 @@
                 z-index: 1;
             }
 
-            /* .drawer-list {
-                margin: 0 20px;
-            }
-
-            .drawer-list a {
-                display: block;
-                padding: 0 16px;
-                text-decoration: none;
-                color: var(--app-secondary-color);
-                line-height: 40px;
-            }
-
-            .drawer-list a.iron-selected {
-                color: black;
-                font-weight: bold;
-            } */
-
             #drawer {
                 z-index: 1
             }
@@ -71,7 +47,6 @@
                 font-family: mitr-light, sans-serif;
                 -webkit-font-smoothing: antialiased;
                 background-color: #263238;
-                /* color: #efeff1; */
                 color: #b0bec5;
             }
 
@@ -96,12 +71,11 @@
                 font-family: mitr-light, sans-serif;
                 -webkit-font-smoothing: antialiased;
                 background-color: #263238;
-                /* color: #efeff1; */
                 color: #b0bec5;
             }
 
             .menu-item {
-                padding:3px 10px 3px 30px;
+                padding:3px 10px 3px 20px;
                 display: -webkit-flex;
                 display: flex;
                 -webkit-align-items: center;
@@ -110,7 +84,7 @@
 
                 --paper-item-min-height: 30px;
                 line-height: 30px;
-                font-size: 14px;
+                font-size: 1rem;
             }
 
             iron-selector>.menu-item:hover {
@@ -124,7 +98,7 @@
             }
 
             .menu-item > div {
-                padding-left:5px;
+                padding-left:15px;
             }
 
 
@@ -142,7 +116,7 @@
 
                 height: 45px;
                 padding-left: 16px;
-                background-color: #3583CB;
+                background-color: #77838f;
                 border-bottom: 1px solid #333;
                 color: #efeff1;
                 cursor: pointer;
@@ -162,10 +136,7 @@
                 --iron-icon-width: 45px;
             }
 
-            .header-left-menu {
-                background-color: #4e97d9;
-                height: 55px;
-            }
+          
 
             #style-4::-webkit-scrollbar-track {
                 -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -185,12 +156,7 @@
             .page {
                 background-color: #263238;
                 height: 100vh;
-                /* position:relative; */
             }
-
-            /* .borderz {
-                border: 1px solid red;
-            } */
 
             .icon-page {
                 height: 128px;
@@ -200,12 +166,24 @@
                 height: 80%;
                 width: 80%;
             }
+
+            app-toolbar{
+                font-family: MitrLight;
+                font-size: 1.6rem;
+                height: 60px;
+                color: #fff;
+                background-color: #4e97d9;
+                text-align: center;
+            }
+            
         </style>
         <div class="page">
-            <div class="row center-md middle-md home-icon header-left-menu">
+            <!-- <div class="row center-md middle-md home-icon header-left-menu">
                 <iron-icon icon="home" class="icon-menu" on-tap="changeMenu"></iron-icon>
-            </div>
-
+            </div> -->
+            <app-toolbar>
+                <div main-title>Automated QA</div>
+            </app-toolbar>
             <div style="height:100%">
                 <div id="style-4" style="height: 100%; overflow: auto; display:block">
                     <iron-pages selected="{{menuPage}}" attr-for-selected="name">
