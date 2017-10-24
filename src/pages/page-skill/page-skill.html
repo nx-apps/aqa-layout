@@ -12,6 +12,7 @@
 <link rel="import" href="../../components/aqa-form/aqa-input.html">
 <link rel="import" href="./components/skill-form.html">
 
+<link rel="import" href="../../components/aqa-font/aqa-mitr-font.html">
 <dom-module id="page-skill">
     <template>
         <style include="flexbox-grid">
@@ -33,8 +34,13 @@
             .white-space{
                 margin: 1rem;
             }
+            h2{
+                font-family: MitrRegular;
+                font-weight: normal;
+            }
         </style>
         <div class="page-container">
+            <!-- <h2>ความสามารถอื่นๆ</h2> -->
             <aqa-panel id="card basic">
                 <app-toolbar slot="header">
                     <div main-title>ความสามารถด้านการศึกษา</div>
