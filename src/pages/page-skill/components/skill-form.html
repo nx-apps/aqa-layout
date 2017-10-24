@@ -1,0 +1,45 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../../components/nylon-rating/nylon-rating.html">
+<link rel="import" href="../../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../layout/shared-styles.html">
+<link rel="import" href="../../../layout/flexbox-grid.html">
+<dom-module id="skill-form">
+    <template>
+        <style include="shared-styles flexbox-grid">
+            .textRight {
+                text-align: right;
+            }
+        </style>
+        <div class="row  center-xs">
+
+            <template is="dom-repeat" items="[[items]]">
+                <div class="textRight col-xs-12 col-md-6" style="margin:auto 0">
+                    [[item.label]]
+                </div>
+                <div class="textRight col-xs-12 col-md-6">
+                    <nylon-rating></nylon-rating>
+                </div>
+            </template>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:1rem">
+                    <aqa-button type="success">บันทึก</aqa-button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        class SkillForm extends Polymer.Element {
+            static get is() { return 'skill-form'; }
+            static get properties() {
+                return {
+                    items: {
+                        type: Array,
+                        value: []
+                    }
+                }
+            }
+        }
+        window.customElements.define(SkillForm.is, SkillForm);
+    </script>
+</dom-module>

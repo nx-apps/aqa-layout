@@ -2,36 +2,181 @@
 <link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 
+<link rel="import" href="../../components/nylon-rating/nylon-rating.html">
+
 <link rel="import" href="../../layout/flexbox-grid.html">
 <link rel="import" href="../../layout/shared-styles.html">
 <link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-form/aqa-input.html">
+<link rel="import" href="./components/skill-form.html">
 
 <dom-module id="page-skill">
     <template>
-        <style></style>
-         <div class="page-container">
-              <aqa-panel id="basic">
-                    <app-toolbar slot="header">
-                        <div main-title>ความสามารถอื่นๆ</div>
-                    </app-toolbar>
-                    <div slot="content">
-                        ss
+        <style include="flexbox-grid">
+            .section {
+                margin: 0.5rem;
+            }
+            
+            .section-header {
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .section-content {
+                margin-left: 1.5rem;
+            }
+            .textRight{
+                text-align: right;
+            }
+            .white-space{
+                margin: 1rem;
+            }
+        </style>
+        <div class="page-container">
+            <aqa-panel id="card basic">
+                <app-toolbar slot="header">
+                    <div main-title>ความสามารถด้านการศึกษา</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div class="row center-xs">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="textRight col-xs-12 col-md-6" style="margin:auto 0">
+                                    มีประสบการณ์ด้านการบริหารสถานศึกษา
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <aqa-combo-box></aqa-combo-box>
+                                </div>
+                                <div class="col-xs-12 col-md-1" style="margin:auto 0">
+                                    ปี
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="textRight col-xs-12 col-md-6" style="margin:auto 0">
+                                    มีประสบการณ์ด้านการบริหารสถานศึกษา
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <aqa-combo-box></aqa-combo-box>
+                                </div>
+                                <div class="col-xs-12 col-md-1" style="margin:auto 0">
+                                    ปี
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="textRight col-xs-12 col-md-6" style="margin:auto 0">
+                                    มีประสบการณ์ด้านการประกันคุณภาพ
+                                </div>
+                                <div class="col-xs-12 col-md-2">
+                                    <aqa-combo-box></aqa-combo-box>
+                                </div>
+                                <div class="col-xs-12 col-md-1" style="margin:auto 0">
+                                    ปี
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <aqa-button type="success">บันทึก</aqa-button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-              </aqa-panel>
-         </div>
+                </div>
+            </aqa-panel>
+            <div class="white-space"></div>
+            <aqa-panel id="card basic">
+                 <app-toolbar slot="header">
+                    <div main-title>ความสามารถด้านคอมพิวเตอร์</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div>
+                        <skill-form items="[[computer]]"></skill-form>
+                    </div>
+                </div>
+            </aqa-panel>
+            <div class="white-space"></div>
+            <aqa-panel id="card basic">
+                <app-toolbar slot="header">
+                    <div main-title>ความสามารถด้านการพิมพ์</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div>
+                        <skill-form items="[[print]]"></skill-form>
+                    </div>
+                </div>
+            </aqa-panel>
+            <div class="white-space"></div>
+            <aqa-panel id="card basic">
+                <app-toolbar slot="header">
+                    <div main-title>ความสามารถด้านภาษา</div>
+                </app-toolbar>
+                <div slot="content">
+                    <!-- <div class="row">
+                        <div class="section section-header col-xs-12">
+                            <b>
+                                ความสามารถด้านภาษา
+                                <hr>
+                            </b>
+                        </div>
+                    </div> -->
+                    <div>
+                        <skill-form items="[[language]]"></skill-form>
+                    </div>
+                </div>
+            </aqa-panel>
+        </div>
     </template>
     <script>
-        class PageSkill extends Polymer.Element{
+        class PageSkill extends Polymer.Element {
             static get is() { return 'page-skill'; }
             static get properties() {
                 return {
+                    computer:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'Microsoft Word'
+                            },
+                            {
+                                label:'Microsoft Excel'
+                            },
+                            {
+                                label:'Microsoft Power Point'
+                            },
+                            {
+                                label:'Email'
+                            },
+                            {
+                                label:'Smart Device (Smartphone/Tablet/Notebook)'
+                            }
+                        ]
+                    },
+                    print:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'ภาษาไทย'
+                            },
+                            {
+                                label:'ภาษาอังกฤษ'
+                            }
+                        ]
+                    },
+                    language:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'ภาษาไทย'
+                            },
+                            {
+                                label:'ภาษาอังกฤษ'
+                            }
+                        ]
+                    }
                 }
             }
         }
         window.customElements.define(PageSkill.is, PageSkill);
-
     </script>
 </dom-module>

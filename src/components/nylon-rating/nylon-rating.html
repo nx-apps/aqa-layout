@@ -7,17 +7,20 @@
             .resultRating{
                 display: flex; 
                 width: auto;
-                height: 25px;
+                height: 30px;
                 color:black;
             }
             .resultRating>div{
-                margin: auto;
+                padding: 0.5rem;
+                margin: auto 0;
             }
             .rating {
                 border: none;
                 float: left;
             }
-
+            .section{
+                margin-right: 0.5rem;
+            }
             .rating>input {
                 display: none;
             }
@@ -80,52 +83,49 @@
         </style>
 
         <fieldset class="rating">
-            <div class="resultRating"><div>[[title]][[value]]</div></div>
-             
-
-            <input type="radio" id="star5" name="rating" value="5" />
-            <label class="full" for="star5" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Awesome - 5 stars">
+             <input type="radio" id="star5" name="rating" value="5" />
+            <label class="full" for="star5" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="มากที่สุด">
                 <div class="avartar">
                     <div>5</div>
                 </div>
             </label>
 
             <input type="radio" id="star4" name="rating" value="4" />
-            <label class="full" for="star4" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Pretty good - 4 stars">
+            <label class="full section" for="star4" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="มาก">
                  <div class="avartar">
                     <div>4</div>
                 </div>
-            </label>
+            </label> 
 
             <input type="radio" id="star3" name="rating" value="3" />
-            <label class="full" for="star3" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Meh - 3 stars">
+            <label class="full section" for="star3" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ปานกลาง">
                 <div class="avartar">
                     <div>3</div>
                 </div>
             </label>
 
             <input type="radio" id="star2" name="rating" value="2" />
-            <label class="full" for="star2" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Kinda bad - 2 stars">
+            <label class="full section" for="star2" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="น้อย">
                 <div class="avartar">
                     <div>2</div>
                 </div>
             </label>
 
             <input type="radio" id="star1" name="rating" value="1" />
-            <label class="full" for="star1" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Sucks big time - 1 star">
+            <label class="full section" for="star1" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="น้อยที่สุด">
                 <div class="avartar">
                     <div>1</div>
                 </div>
             </label>
 
             <input type="radio" id="star0" name="rating" value="0" checked/>
-            <label class="full" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="Noob!!">
+            <label class="full section" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ">
                 <div class="avartar">
                     <div>0</div>
                 </div>
             </label>
         </fieldset>
-
+        <div class="resultRating"><div>[[value]]</div></div>
     </template>
 
     <script>
@@ -150,16 +150,17 @@
                 }
             }
             showText(e){
-                this.value = '';
-                this.title = e.currentTarget.title
+                this.active = false;
+                this.value = e.currentTarget.title
             }
             clearText(){
-                this.value = this.title;
-                this.title = '';
+                if(this.active != true)
+                    this.value = this.title;
             }
             setText(e){
-                // this.active = false;
-                 this.value = e.currentTarget.title
+                this.active = true
+                this.value = e.currentTarget.title;
+                this.title = e.currentTarget.title;
             }
         }
 
