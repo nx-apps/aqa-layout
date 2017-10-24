@@ -22,6 +22,7 @@
 <link rel="import" href="../../../mixins/animate-mixin.html">
 <link rel="import" href="../../../components/aqa-button/aqa-button.html">
 
+<link rel="import" href="../../../../bower_components/vaadin-valo-theme/vaadin-grid.html">
 <link rel="import" href="../../aqa-vaadin-grid/aqa-vaadin-grid.html">
 <link rel="import" href="../../../components/aqa-icon-button/aqa-icon-button.html">
 <dom-module id="page-08">
@@ -49,7 +50,8 @@
                 <div main-title>[[i18n.page08.title]]</div>
             </app-toolbar>
             <div slot="content">
-                <aqa-button type="primary" icon="[[i18n.button.add.icon]]" action="add" on-tap="openPanelRight">เพิ่ม</aqa-button><br><br>
+                <aqa-button type="primary" icon="[[i18n.button.add.icon]]" action="add" on-tap="openPanelRight">เพิ่ม</aqa-button>
+                <p></p>
                 <aqa-vaadin-grid>
                     <vaadin-grid id="material" items="{{datas}}">
                         <vaadin-grid-column width="50px" flex-grow="0">

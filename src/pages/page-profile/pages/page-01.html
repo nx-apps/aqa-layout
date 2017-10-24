@@ -1,9 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../components/nylon-panel-card/nylon-panel-card.html">
 <link rel="import" href="../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../../../components/nylon-input/nylon-combo-box.html">
 
-<link rel="import" href="../../../components/nylon-input/nylon-input.html">
 
 <link rel="import" href="../../../../bower_components/granite-bootstrap/granite-bootstrap.html"> ้
 <link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
@@ -19,6 +17,10 @@
 <link rel="import" href="../../../components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../components/aqa-form/aqa-input.html">
 <link rel="import" href="../../../components/aqa-button/aqa-button.html">
+
+<link rel="import" href="../../../components/aqa-combo-box/aqa-combo-box.html">
+
+
 <dom-module id="page-01">
     <template>
         <style include="granite-bootstrap"></style>
@@ -113,7 +115,7 @@
                         <div class="row middle-md ">
                             <div class="col-md-2">
                                 <!-- {{data.gender_id}}// -->
-                                <nylon-combo-box always-float-label label="[[i18n.page01.gender]]" items='{{genderList}}' value="{{data.gender_id}}" item-label-path="gender_name_th"
+                                <nylon-combo-box always-float-label label="[[i18n.page01.gender]]" items="{{genderList}}" value="{{data.gender_id}}" item-label-path="gender_name_th"
                                     item-value-path="id" on-selected-item-changed="getObject" object-name="data.gender" class="required"
                                     required>
                                     <template>
@@ -122,14 +124,14 @@
                                 </nylon-combo-box>
                             </div>
                             <div class="col-md-4 col-md-offset-1">
-                                <nylon-combo-box always-float-label label="[[i18n.page01.ethnicity]]" items='{{nationalityList}}' value="{{data.race_id}}"
+                                <nylon-combo-box always-float-label label="[[i18n.page01.ethnicity]]" items="{{nationalityList}}" value="{{data.race_id}}"
                                     item-label-path="nationality_name_th" item-value-path="id" on-selected-item-changed="getObject"
                                     object-name="data.race" class="required" required>
                                     <template>
                                         [[item.nationality_name_th]]
                                     </template>
                                 </nylon-combo-box>
-                                <!-- <nylon-combo-box-light id="demo3" attr-for-value="bind-value" always-float-label label="[[i18n.page01.ethnicity]]" items='{{nationalityList}}'
+                                <!-- <nylon-combo-box-light id="demo3" attr-for-value="bind-value" always-float-label label="[[i18n.page01.ethnicity]]" items="{{nationalityList}}"
                                         value="{{data.race_id}}" item-label-path="nationality_name_th" item-value-path="id" on-selected-item-changed="getObject"
                                         object-name="data.race" class="required" required>
                                         <iron-input>
@@ -141,18 +143,19 @@
                                     top: 32px; right: 16px; cursor: pointer;" on-tap="_openDropDown"></iron-icon> -->
                             </div>
                             <div class="col-md-4">
-                                <nylon-combo-box always-float-label label="[[i18n.page01.religion]]" items='{{religionList}}' value="{{data.religion_id}}"
+                                <aqa-combo-box label="[[i18n.page01.religion]]" items="{{religionList}}" item-label-path="religion_name_th" item-value-path="id" value="{{data.religion_id}}" on-selected-item-changed="getObject"></aqa-combo-box>
+                                <!-- <nylon-combo-box always-float-label label="[[i18n.page01.religion]]" items="{{religionList}}" value="{{data.religion_id}}"
                                     item-label-path="religion_name_th" item-value-path="id" on-selected-item-changed="getObject"
                                     object-name="data.religion" class="required" required>
                                     <template>
                                         [[item.religion_name_th]]
                                     </template>
-                                </nylon-combo-box>
+                                </nylon-combo-box> -->
                             </div>
                         </div>
                         <div class="row middle-md ">
                             <div class="col-md-3">
-                                <nylon-combo-box always-float-label label="[[i18n.page01.nationality]]" items='{{nationalityList}}' value="{{data.nationality_id}}"
+                                <nylon-combo-box always-float-label label="[[i18n.page01.nationality]]" items="{{nationalityList}}" value="{{data.nationality_id}}"
                                     item-label-path="nationality_name_th" item-value-path="id" on-selected-item-changed="getObject"
                                     object-name="data.nationality" class="required" required>
                                     <template>
@@ -161,7 +164,7 @@
                                 </nylon-combo-box>
                             </div>
                             <div class="col-md-4">
-                                <nylon-combo-box always-float-label label="[[i18n.page01.status]]" items='{{statusList}}' value="{{data.status_id}}" item-label-path="work_status_name_th"
+                                <nylon-combo-box always-float-label label="[[i18n.page01.status]]" items="{{statusList}}" value="{{data.status_id}}" item-label-path="work_status_name_th"
                                     item-value-path="id" on-selected-item-changed="getObject" object-name="data.status" class="required"
                                     required>
                                     <template>
@@ -170,7 +173,7 @@
                                 </nylon-combo-box>
                             </div>
                             <div class="col-md-4">
-                                <nylon-combo-box always-float-label label="[[i18n.page01.academic]]" items='{{academicList}}' value="{{data.type_academic_id}}"
+                                <nylon-combo-box always-float-label label="[[i18n.page01.academic]]" items="{{academicList}}" value="{{data.type_academic_id}}"
                                     item-label-path="academic_position_name_th" item-value-path="id" on-selected-item-changed="getObject"
                                     object-name="data.type_academic" class="required" required>
                                     <template>
