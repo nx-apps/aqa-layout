@@ -4,7 +4,6 @@
     <template>
         <style>
             .grid ::slotted(*) {
-                color:green;
                 height: auto;
                 --divider-color: rgba(0, 0, 0, var(--dark-divider-opacity)); 
                  --vaadin-grid-cell: {
@@ -12,7 +11,7 @@
                 };
                 --vaadin-grid-header-cell: {
                     color: white;
-                    font-size: 18px;
+                    font-size: 1rem;
                     background-color:#62a8ea;
                     padding: 0.5rem;
                     border-right:1px solid #ddd;
@@ -22,6 +21,7 @@
                 --vaadin-grid-body-cell: {
                     color: rgba(0, 0, 0, var(--dark-primary-opacity));
                     font-size: 1rem;
+                    padding:5px;
                     border-right:1px solid #ddd;
                     font-family: TrirongRegular;
                     white-space: normal;

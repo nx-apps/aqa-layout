@@ -1,11 +1,39 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="../../layout/shared-styles.html">
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-form/aqa-input.html">
+<link rel="import" href="./components/education-list.html">
+
 <dom-module id="page-education">
     <template>
-        <style></style>
-        PageEducation
+        <style include="flexbox-grid"></style>
+        <div class="page-container">
+            <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title>วุฒิการศึกษา</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div class="row start-xs" style="margin-bottom:0.5rem">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                เพิ่มวุฒิการศึกษา
+                                <aqa-button type="primary">เพิ่ม</aqa-button>
+                            </div>
+                        </div>
+                    </div>
+                    <education-list></education-list>
+                </div>
+            </aqa-panel>
+        </div>
     </template>
     <script>
-        class PageEducation extends Polymer.Element{
+        class PageEducation extends Polymer.Element {
             static get is() { return 'page-education'; }
             static get properties() {
                 return {
@@ -13,6 +41,5 @@
             }
         }
         window.customElements.define(PageEducation.is, PageEducation);
-
     </script>
 </dom-module>

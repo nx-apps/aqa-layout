@@ -1,8 +1,27 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="../../layout/shared-styles.html">
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-form/aqa-input.html">
+
 <dom-module id="page-skill">
     <template>
         <style></style>
-        PageSkill
+         <div class="page-container">
+              <aqa-panel id="basic">
+                    <app-toolbar slot="header">
+                        <div main-title>ความสามารถอื่นๆ</div>
+                    </app-toolbar>
+                    <div slot="content">
+                        ss
+                    </div>
+              </aqa-panel>
+         </div>
     </template>
     <script>
         class PageSkill extends Polymer.Element{

@@ -1,0 +1,109 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../aqa-vaadin-grid/aqa-vaadin-grid.html">
+<link rel="import" href="../../../components/aqa-button/aqa-button.html">
+
+<link rel="import" href="../../../layout/shared-styles.html">
+<dom-module id="education-list">
+    <template>
+        <style include="shared-styles">
+            aqa-button{
+                margin: auto;
+            }
+        </style>
+
+        <aqa-vaadin-grid>
+            <vaadin-grid id="material" items="{{datas}}">
+                <vaadin-grid-column width="100px" flex-grow="0">
+                    <template class="header">
+                        <div style="text-align: center">ลำดับที่</div>
+                    </template>
+                    <template>
+                        <div style="text-align: center">[[count(index)]]</div>
+                    </template>
+                </vaadin-grid-column>
+                <vaadin-grid-column width="200px">
+                    <template class="header">สถานศึกษา</template>
+                    <template><div>[[item.address_education]]</div></template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">ระดับการศึกษา</template>
+                    <template><div style="text-align: center">[[item.level_education]]</div></template>
+                </vaadin-grid-column>
+                <vaadin-grid-column width="200px" flex-grow="0">
+                    <template class="header">ชื่อปริญญา</template>
+                    <template> <div style="text-align: center">[[item.name_education]]</div> </template>
+                </vaadin-grid-column>
+                <vaadin-grid-column width="100px" flex-grow="0">
+                    <template class="header">ปีที่จบ</template>
+                    <template> <div style="text-align: center">[[item.year_education]]</div></template>
+                </vaadin-grid-column>
+                <vaadin-grid-column width="150px">
+                    <template class="header">ผู้แก้ไข / วันที่</template>
+                    <template> <div style="text-align: center">[[item.edit_name]] [[item.edit_date]]</div></template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">เครื่องมือ</template>
+                    <template>
+                        <div style="display:flex">
+                            <aqa-button type="primary">แก้ไข</aqa-button>
+                            <aqa-button type="default">ลบ</aqa-button>
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </aqa-vaadin-grid>
+        <div style="margin-top:1rem">จำนวนรายการทั้งหมด [[datas.length]] รายการ </div>
+       
+    </template>
+    <script>
+        class EducationList extends Polymer.Element {
+            static get is() { return 'education-list'; }
+            static get properties() {
+                return {
+                    datas:{
+                        type:Array,
+                        value:[
+                            {
+                                address_education:'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
+                                level_education:'ปริญญาตรี',
+                                name_education:'การศึกษาบัณฑิต',
+                                year_education:2560,
+                                edit_name:'ผู้ใช้งาน',
+                                edit_date:'2/7/2560'
+                            },
+                            {
+                                address_education:'มหาวิทยาลัยแม่โจ้',
+                                level_education:'ปริญญาตรี',
+                                name_education:'เกษตรศาสตรบัณฑิต',
+                                year_education:2560,
+                                edit_name:'ผู้ใช้งาน',
+                                edit_date:'9/10/2560'
+                            },
+                            {
+                                address_education:'มหาวิทยาลัยเชียงใหม่',
+                                level_education:'ปริญญาตรี',
+                                name_education:'ครุศาสตรบัณฑิต',
+                                year_education:2560,
+                                edit_name:'ผู้ใช้งาน',
+                                edit_date:'2/10/2561'
+                            },
+                            {
+                                address_education:'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา',
+                                level_education:'ปริญญาตรี',
+                                name_education:'เทคโนโลยีบัณฑิต',
+                                year_education:2560,
+                                edit_name:'ผู้ใช้งาน',
+                                edit_date:'3/11/2561'
+                            }
+                        ]
+                    }
+                }
+            }
+            count(val){
+                return val+1
+            }
+        }
+        window.customElements.define(EducationList.is, EducationList);
+    </script>
+</dom-module>

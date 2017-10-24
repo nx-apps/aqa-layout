@@ -9,12 +9,12 @@
 <link rel="import" href="../../components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-form/aqa-input.html">
 
-<dom-module id="page-bank-account">
+<dom-module id="page-bank">
     <template>
         <style include="flexbox-grid shared-styles"></style>
         <div class="page-container">
             <aqa-panel id="basic">
-                 <app-toolbar slot="header">
+                <app-toolbar slot="header">
                     <div main-title>บัญชีธนาคาร</div>
                 </app-toolbar>
                  <div slot="content">
@@ -55,8 +55,8 @@
         </div>
     </template>
     <script>
-        class PageBankAccount extends Polymer.Element{
-            static get is() { return 'page-bank-account'; }
+        class PageBank extends Polymer.Element{
+            static get is() { return 'page-bank'; }
             static get properties() {
                 return {
                     bankList:{
@@ -100,7 +100,7 @@
                 }
             }
         }
-        window.customElements.define(PageBankAccount.is, PageBankAccount);
+        window.customElements.define(PageBank.is, PageBank);
 
     </script>
 </dom-module>

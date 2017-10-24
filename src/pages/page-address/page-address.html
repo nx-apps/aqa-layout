@@ -1,18 +1,105 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="../../layout/shared-styles.html">
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-form/aqa-input.html">
+
+<link rel="import" href="./components/address-form-contact.html">
 <dom-module id="page-address">
     <template>
-        <style></style>
-        PageAddress
+        <style include="flexbox-grid shared-styles">
+            .section {
+                margin: 0.5rem;
+            }
+
+            .section-header {
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .section-content {
+                margin-left: 1.5rem;
+            }
+        </style>
+        <div class="page-container">
+            <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title>ที่อยู่ในการติดต่อ</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div class="section row">
+                        <div class="col-xs-12 section-header" style="margin:auto 0">
+                            <b>ที่จัดส่งเอกสาร</b>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <aqa-combo-box label="สถานที่จัดส่งเอกสาร" items="[[address]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section row">
+                        <div class="col-xs-12 section-header">
+                            <b>ที่อยู่ที่ติดต่อได้สะดวก</b>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <address-form-contact></address-form-contact>
+                    </div>
+
+                    <div class="section row">
+                        <div class="col-xs-12 section-header">
+                            <b>ที่ทำงาน</b>
+                            <aqa-button type="primary">คัดลอกจากที่อยู่ที่สะดวกในการติดต่อ</aqa-button>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <aqa-input label="ชื่อองค์กร" value=""></aqa-input>
+                            </div>
+                        </div>
+                        <address-form-contact></address-form-contact>
+                    </div>
+                    <div class="section row center-xs">
+                        <div class="col-xs-12">
+                            <aqa-button type="success">บันทึก</aqa-button>
+                        </div>
+                    </div>
+                </div>
+            </aqa-panel>
+        </div>
     </template>
     <script>
-        class PageAddress extends Polymer.Element{
+        class PageAddress extends Polymer.Element {
             static get is() { return 'page-address'; }
             static get properties() {
                 return {
+                    address: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ที่อยู่ที่สะดวกในการติดต่อ',
+                                value: '01'
+                            },
+                            {
+                                label: 'ที่อยู่ที่ทำงาน',
+                                value: '02'
+                            }
+                        ]
+                    }
                 }
             }
         }
         window.customElements.define(PageAddress.is, PageAddress);
-
     </script>
 </dom-module>
