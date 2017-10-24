@@ -1,14 +1,102 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../layout/flexbox-grid.html">
+<link rel="import" href="../../layout/shared-styles.html">
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-form/aqa-input.html">
+
 <dom-module id="page-bank-account">
     <template>
-        <style></style>
-        PageBankAccount
+        <style include="flexbox-grid shared-styles"></style>
+        <div class="page-container">
+            <aqa-panel id="basic">
+                 <app-toolbar slot="header">
+                    <div main-title>บัญชีธนาคาร</div>
+                </app-toolbar>
+                 <div slot="content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <aqa-combo-box label="ธนาคาร" items="[[bankList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <aqa-combo-box label="ประเภทบัญชี" items="[[typeAccount]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <aqa-input label="สาขา" value=""></aqa-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-4 col-lg-3">
+                            <aqa-input label="เลขที่บัญชี" value=""></aqa-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-sm-4 col-lg-4">
+                            <aqa-input label="ชื่อบัญชี" value=""></aqa-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <b>แนบไฟล์ : ภาพถ่ายสมุดบัญชีธนาคาร</b>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-sm-4 col-lg-2">
+                            <aqa-button type="primary" icon="icons:file-upload">อัพโหลด</aqa-button>
+                        </div>
+                    </div>
+                    <div class="row center-xs">
+                        <div class="col-xs-12">
+                            <aqa-button type="success">บันทึก</aqa-button>
+                        </div>
+                    </div>
+                 </div>
+            </aqa-panel>
+        </div>
     </template>
     <script>
         class PageBankAccount extends Polymer.Element{
             static get is() { return 'page-bank-account'; }
             static get properties() {
                 return {
+                    bankList:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'ธนาคารกรุงเทพ',
+                                value:'01'
+                            },
+                            {
+                                label:'ธนาคารกรุงไทย',
+                                value:'02'
+                            },
+                            {
+                                label:'ธนาคารกสิกรไทย',
+                                value:'03'
+                            },
+                            {
+                                label:'ธนาคารไทยพาณิชย์',
+                                value:'04'
+                            }
+                        ]
+                    },
+                    typeAccount:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'บัญชีเงินฝากออมทรัพย์',
+                                value:'01'
+                            },
+                            {
+                                label:'บัญชีเงินฝากประจำ',
+                                value:'02'
+                            },
+                            {
+                                label:'บัญชีเงินฝากกระแสรายวัน',
+                                value:'03'
+                            }
+                        ]
+                    }
                 }
             }
         }
