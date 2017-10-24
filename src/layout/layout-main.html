@@ -131,7 +131,7 @@
             }
         </style>
 
-        <app-drawer-layout>
+        <app-drawer-layout responsive-width="1024px">
             <app-drawer slot="drawer" id="drawer">
                 <layout-drawer id="layoutDrawer" path-name="[[pathName]]" on-layout-close-drawer="_closeDrawer"></layout-drawer>
             </app-drawer>
@@ -236,7 +236,10 @@
 
             
             _closeDrawer() {
-                this.$.drawer.close()
+                if(document.body.offsetWidth<=1024){
+                    this.$.drawer.close()
+                }
+                
             }
 
             progress() {
