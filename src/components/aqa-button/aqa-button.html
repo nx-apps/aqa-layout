@@ -12,6 +12,10 @@
                 font-size: 1rem;
                 cursor: pointer;
             }
+            .btn-full-width{
+                width:100%;
+                height: auto;
+            }
             .btn:disabled{
                 cursor: no-drop;
                 color:#C2C9CE;
@@ -75,16 +79,11 @@
                 background-color: #a0a3a9;
                 border: 1px solid #a0a3a9;
             }
-            iron-icon {
-                margin-right: 0.2rem;
-            }
         </style>
         
         <button class$="btn btn-[[type]]" disabled$="[[disabled]]">
-            <div style="display:flex">
-                <iron-icon icon="[[icon]]"></iron-icon>
-                <slot></slot>
-            </div>
+            <iron-icon icon="[[icon]]"></iron-icon>
+            <slot></slot>
         </button>
 
 
