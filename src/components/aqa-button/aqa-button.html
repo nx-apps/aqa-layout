@@ -82,7 +82,10 @@
         </style>
         
         <button class$="btn btn-[[type]]" disabled$="[[disabled]]">
-            <iron-icon icon="[[icon]]"></iron-icon>
+            
+            <template is="dom-if" if="[[check_icon(icon)]]">
+                <iron-icon icon="[[icon]]"></iron-icon>
+            </template>
             <slot></slot>
         </button>
 
@@ -111,6 +114,10 @@
                         value: false
                     }
                 };
+            }
+            check_icon(val){
+                if(val) return true;
+                else return false
             }
             ready() {
                 super.ready();
