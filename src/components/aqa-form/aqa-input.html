@@ -74,25 +74,34 @@
                 max-width: 100%;
                 margin-bottom: 5px;
                 color: #000;
+                text-overflow: ellipsis;
+
+                /* Required for text-overflow to do anything */
+                white-space: nowrap;
+                overflow: hidden;
             }
 
             .help-block {
                 margin-bottom: 0;
             }
+
             small{
                 font-size: 70%;
                 color: #f96868;
             }
+
             label[has-error]{
                 color: #f96868;
             }
+
             input[has-error]{
                 border-color: #f96868 !important;
             }
 
-            label>span{
+            label > span{
                 color: #f96868;
             }
+
         </style>
         <div class="form-group">
             <label class="control-label" has-error$="{{hasError}}">[[label]] 
