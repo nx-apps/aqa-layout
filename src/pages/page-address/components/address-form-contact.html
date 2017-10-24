@@ -1,0 +1,97 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../../layout/flexbox-grid.html">
+<link rel="import" href="../../../layout/shared-styles.html">
+<link rel="import" href="../../../components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../components/aqa-form/aqa-input.html">
+
+<dom-module id="address-form-contact">
+    <template>
+        <style include="flexbox-grid shared-styles">
+           
+        </style>
+        <div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="เลขที่" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="หมู่ที่" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="หมู่บ้าน" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
+                    <aqa-input label="อาคาร" value=""></aqa-input>
+                </div>
+            </div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="ซอย" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="ถนน" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="ภาค" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
+                    <aqa-input label="จังหวัด" value=""></aqa-input>
+                </div>
+            </div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="อำเภอ / เขต" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="ตำบล / แขวง" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="รหัสไปรษณีย์" value=""></aqa-input>
+                </div>
+            </div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="โทรศัพท์" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="โทรสาร" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="โทรศัพท์เคลื่อนที่" value=""></aqa-input>
+                </div>
+            </div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="อีเมล" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="Line ID" value=""></aqa-input>
+                </div>
+            </div>
+            <div class="section-content row">
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2" style="margin:auto 0">
+                    <b>ช่วงเวลาที่สามารถติดต่อได้ : </b>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="ตั้งแต่เวลา" value=""></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="ถึงเวลา" value=""></aqa-input>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        class AddressFormContract extends Polymer.Element {
+            static get is() { return 'address-form-contact'; }
+            static get properties() {
+                return {
+                }
+            }
+        }
+        window.customElements.define(AddressFormContract.is, AddressFormContract);
+    </script>
+</dom-module>
