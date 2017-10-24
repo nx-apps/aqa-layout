@@ -132,8 +132,8 @@
         </style>
 
         <app-drawer-layout>
-            <app-drawer slot="drawer">
-                <layout-drawer id="layoutDrawer" path-name="[[pathName]]"></layout-drawer>
+            <app-drawer slot="drawer" id="drawer">
+                <layout-drawer id="layoutDrawer" path-name="[[pathName]]" on-layout-close-drawer="_closeDrawer"></layout-drawer>
             </app-drawer>
             <app-header-layout>
                 <app-header slot="header" fixed condenses effects="waterfall">
@@ -219,16 +219,10 @@
                 Nylon.changeLanguage('th')
             }
             setFullScreen(e) {
-                // let createslot = document.createElement("slot");
                 if (e === '/') {
                     this.set('showDrawer', false)
-                    // console.log(this.$.slotlogin);
-                    // console.log('---------------');
-                    // console.log(e)
                 } else {
                     this.set('showDrawer', true)
-                    // console.log('---------------');
-                    // console.log(e)
                 }
 
             }
@@ -240,8 +234,9 @@
                 }
             }
 
-            toogleMenu() {
-                this.$.layoutDrawer.toogleMenu()
+            
+            _closeDrawer() {
+                this.$.drawer.close()
             }
 
             progress() {
