@@ -1,0 +1,280 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="./aqa-date-icon.html">
+<link rel="import" href="../../../bower_components/iron-validator-behavior/iron-validator-behavior.html">
+<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../../bower_components/iron-input/iron-input.html">
+
+<link rel="import" href="./aqa-date-picker-light.html">
+<link rel="import" href="../aqa-font/aqa-trirong-font.html">
+
+<dom-module id="aqa-date-picker">
+  <template>
+    <style>
+      /* input {
+          font: inherit;
+          outline: none;
+          box-shadow: none;
+          border: none;
+          width: auto;
+          text-align: center;
+          font-size: medium;
+        } */
+
+      * {
+        font-family: TrirongLight;
+        box-sizing: border-box;
+      }
+
+      .form-control {
+        -webkit-appearance: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -moz-appearance: none;
+        display: block;
+        padding: 6px 5px;
+        font-size: 1rem;
+        line-height: 1.57142857;
+        color: #57626D;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #e4eaec;
+        border-radius: 3px;
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      }
+
+      input {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        line-height: normal;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        outline: none;
+      }
+
+      label {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        color: #000;
+      }
+
+      div {
+        font-size: 10px
+      }
+
+      paper-input-container {
+        --paper-input-container-underline: {
+          border-bottom: var(--paper-input-border-success);
+        }
+      }
+
+      paper-icon-button {
+        color: #8d8d8d;
+        -o-transition: color .2s ease-out;
+        -ms-transition: color .2s ease-out;
+        -moz-transition: color .2s ease-out;
+        -webkit-transition: color .2s ease-out;
+        transition: color .2s ease-out;
+      }
+
+      paper-icon-button:hover {
+        color: black;
+      }
+
+      paper-icon-button[disabled] {
+        display: none;
+      }
+    </style>
+    <label class="control-label" >[[label]]</label>
+    <iron-input bind-value="{{dayBe}}" allowed-pattern="[0-9]" aria-label="First 2 digits of date" on-focus="_setSeleteValue">
+      <input class="form-control" maxlength="2" size="2" min="1" max="31">
+    </iron-input>
+    /
+    <iron-input bind-value="{{monthBe}}" allowed-pattern="[0-9]" aria-label="Middle 2 digits of month " on-focus="_setSeleteValue">
+      <input class="form-control" maxlength="2" size="2" min="1" max="12">
+    </iron-input>
+    /
+    <iron-input bind-value="{{yearBe}}" allowed-pattern="[0-9]" aria-label="Last 4 digits of year" on-focus="_setSeleteValue">
+      <input class="form-control" maxlength="4" size="4" min="1" max="9999">
+    </iron-input>
+    </span>
+    <paper-icon-button slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></paper-icon-button>
+    <paper-input-error slot="add-on">Date invalid!</paper-input-error>
+
+
+    <!-- [[selected]] /// [[showBc]]
+    <br> [[selectedBe]]
+    <p>111212</p> -->
+
+    <iron-dropdown id="dropdown" horizontal-align="right" vertical-align="top" open-animation-config="[[openAnimationConfig]]"
+      close-animation-config="[[closeAnimationConfig]]">
+      <div slot="dropdown-content" class="box">
+        <aqa-date-picker-light day-be="{{dayBe}}" month-be="{{monthBe}}" year-be="{{yearBe}}" selected="{{selected}}" selected-be="{{selectedBe}}"
+          show-bc="{{showBc}}" is-close="{{isClose}}"></aqa-date-picker-light>
+      </div>
+    </iron-dropdown>
+  </template>
+
+  <script>
+    /**
+     * `aqa-date-picker`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AqaDatePicker extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior], Polymer.Element) {
+      static get is() { return 'aqa-date-picker'; }
+      static get properties() {
+        return {
+          showBc: {
+            type: Boolean,
+            value: false,
+            notify: true,
+          },
+          selected: {
+            type: String,
+            // observer: '_selectedChanged',
+            notify: true,
+            value: '',
+          },
+          selectedBe: {
+            type: String,
+            // observer: '_selectedBeChanged',
+            notify: true,
+            //value:'15/9/2560'
+          },
+          dayBe: String,
+          monthBe: String,
+          yearBe: String,
+          label: {
+            type: String,
+            value: ''
+          },
+          disabled: {
+            type: Boolean,
+            value: false
+          },
+          value: {
+            type: String,
+            value: '',
+            notify: true,
+          },
+          noLabelFloat: {
+            type: Boolean,
+            value: false
+          },
+          alwaysFloatLabel: {
+            type: Boolean,
+            value: false
+          },
+          hidden: {
+            type: Boolean,
+            value: false
+          },
+          isClose: {
+            type: Boolean,
+            value: false,
+            observer: 'setCloseDropDown'
+          },
+          // daysOfWeek: {
+          //   type: Array,
+          //   value: ['จัน', 'อัง', 'พุธ', 'พฤ', 'ศุกร์', 'เสาร์', 'อา']
+          //   // value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          // },
+          // months: {
+          //   type: Array,
+          //   value: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          // },
+          openAnimationConfig: {
+            type: Array,
+            value: function () {
+              return [{
+                name: 'fade-in-animation',
+                timing: {
+                  delay: 150,
+                  duration: 50
+                }
+              }, {
+                name: 'expand-animation',
+                timing: {
+                  delay: 150,
+                  duration: 200
+                }
+              }];
+            }
+          },
+          closeAnimationConfig: {
+            type: Array,
+            value: function () {
+              return [{
+                name: 'fade-out-animation',
+                timing: {
+                  duration: 200
+                }
+              }];
+            }
+          }
+        };
+      }
+
+      _setSeleteValue(e) {
+
+        let value = e.target
+        // value.value= ''
+        // console.log(value.updateValueAndPreserveCaret());
+        // console.log(value.select());
+        value.select()
+      }
+      setZeroBefore(day) {
+        if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
+          // console.log(1);
+          return '0' + day
+        } else {
+          // console.log(2);
+          return day
+        }
+      }
+      openCalendar() {
+        // console.log(this.$.dropdown.open());
+        this.$.dropdown.open();
+        this.set('isClose', false)
+      }
+      setCloseDropDown(isClose) {
+        // console.log(isClose);
+        if (isClose)
+          this.$.dropdown.close();
+        this.set('isClose', false)
+      }
+      validate(value) {
+        // 29/9/2560
+        let dc = (/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected)
+        let be = (/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe)
+        let style = '1px solid green'
+        if (dc !== be)
+          style = '1px solid red'
+        this.updateStyles({
+          '--paper-input-border-success': style
+        })
+        return dc === be
+      }
+      reset() {
+        this.updateStyles({ '--paper-input-border-success': '1px solid #737373' })
+      }
+    }
+
+    window.customElements.define(AqaDatePicker.is, AqaDatePicker);
+  </script>
+</dom-module>
