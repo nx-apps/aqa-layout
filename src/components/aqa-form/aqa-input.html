@@ -82,6 +82,7 @@
             }
 
             .help-block {
+                font-size: 14px;
                 margin-bottom: 0;
             }
 
@@ -104,7 +105,7 @@
 
         </style>
         <div class="form-group">
-            <label class="control-label" has-error$="{{hasError}}">[[label]] 
+            <label class="control-label" has-error$="{{hasError}}">[[label]]
                 <template is="dom-if" if="[[required]]">
                     <span>*</span>
                 </template>
@@ -157,11 +158,6 @@
                     type:{
                         type:String,
                         value:'text'
-                    },
-                    value:{
-                        type:Object,
-                        value:{},
-                        notify:true
                     }
                 }
             }

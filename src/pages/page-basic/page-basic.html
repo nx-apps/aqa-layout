@@ -13,6 +13,8 @@
 <link rel="import" href="../../components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-form/aqa-input.html">
 
+<link rel="import" href="../../components/aqa-title/aqa-title-name.html">
+
 <link rel="import" href="../../components/aqa-form/aqa-phone.html">
 <link rel="import" href="../../components/aqa-form/aqa-date-picker.html">
 
@@ -31,8 +33,24 @@
                 height: auto;
                 max-width: 400px;
             }
+            .img-circle {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+
+            .flex-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .header-content>b {
+                font-family: MitrLight;
+            }
         </style>
         <div class="page-container">
+           
+            <aqa-title-name></aqa-title-name>
             <aqa-panel id="basic">
                 <app-toolbar slot="header">
                     <div main-title>ข้อมูลพื้นฐาน</div>
@@ -47,7 +65,7 @@
                         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                                    <aqa-input label="เลขประจำตัวประชาชน" value=""></aqa-input>
+                                    <aqa-input class="form" label="เลขประจำตัวประชาชน" value="" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
@@ -60,24 +78,24 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                    <aqa-input label="คำนำหน้า (ไทย)" value=""></aqa-input>
+                                    <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <aqa-input label="ชื่อ (ไทย)" value=""></aqa-input>
+                                    <aqa-input class="form" label="ชื่อ (ไทย)" value="" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <aqa-input label="นามสกุล (ไทย)" value=""></aqa-input>
+                                    <aqa-input class="form" label="นามสกุล (ไทย)" value="" required></aqa-input>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                    <aqa-input label="คำนำหน้า (อังกฤษ)" value=""></aqa-input>
+                                    <aqa-input class="form" label="คำนำหน้า (อังกฤษ)" value="" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <aqa-input label="ชื่อ (อังกฤษ)" value=""></aqa-input>
+                                    <aqa-input class="form" label="ชื่อ (อังกฤษ)" value="" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <aqa-input label="นามสกุล (อังกฤษ)" value=""></aqa-input>
+                                    <aqa-input class="form" label="นามสกุล (อังกฤษ)" value="" required></aqa-input>
                                 </div>
                             </div>
                             <div class="row">
@@ -122,7 +140,7 @@
                     <div class="row center-xs">
 
                         <div class="col-xs-12">
-                            <aqa-button type="success">บันทึก</aqa-button>
+                            <aqa-button type="success" on-tap="getForm">บันทึก</aqa-button>
                         </div>
                     </div>
                 </div>
@@ -253,6 +271,16 @@
                     Nylon.dispatch('PROFILE_01_GET_LIST_WORK_STATUS')
                     Nylon.dispatch('REGISTER_CHECK_PERSON', localStorage.getItem('taxno'))
                 });
+            }
+            getForm(){
+                // console.log(this.queryFrom('.form'))
+                for (var index = 0; index < this.queryFrom('.form').length; index++) {
+                     if(this.queryFrom('.form')[index].validate() == true){
+                        this.queryFrom('.form')[index].errorMassage = "กรุณากรอกข้อมูล"
+                     }
+                     
+                    
+                }
             }
         }
         window.customElements.define(PageBasic.is, PageBasic);
