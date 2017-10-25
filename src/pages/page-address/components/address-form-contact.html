@@ -15,7 +15,7 @@
         <div>
             <div class="section-content row">
                 <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="เลขที่" value=""></aqa-input>
+                    <aqa-input label="เลขที่" value="" required></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                     <aqa-input label="หมู่ที่" value=""></aqa-input>
@@ -35,21 +35,21 @@
                     <aqa-input label="ถนน" value=""></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="ภาค" value=""></aqa-input>
+                    <aqa-combo-box label="ภาค" items="[[address1]]" item-label-path="label" item-value-path="value" value="" required></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
-                    <aqa-input label="จังหวัด" value=""></aqa-input>
+                    <aqa-combo-box label="จังหวัด" items="[[address2]]" item-label-path="label" item-value-path="value" value="" required></aqa-combo-box>
                 </div>
             </div>
             <div class="section-content row">
                 <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="อำเภอ / เขต" value=""></aqa-input>
+                    <aqa-input label="อำเภอ / เขต" value="" required></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <aqa-input label="ตำบล / แขวง" value=""></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="รหัสไปรษณีย์" value=""></aqa-input>
+                    <aqa-input label="รหัสไปรษณีย์" value="" required></aqa-input>
                 </div>
             </div>
             <div class="section-content row">
@@ -60,12 +60,12 @@
                     <aqa-input label="โทรสาร" value=""></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="โทรศัพท์เคลื่อนที่" value=""></aqa-input>
+                    <aqa-input label="โทรศัพท์เคลื่อนที่" value="" required></aqa-input>
                 </div>
             </div>
             <div class="section-content row">
                 <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="อีเมล" value=""></aqa-input>
+                    <aqa-input label="อีเมล" value="" required></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <aqa-input label="Line ID" value=""></aqa-input>
@@ -89,6 +89,48 @@
             static get is() { return 'address-form-contact'; }
             static get properties() {
                 return {
+                    address1:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'ภาคเหนือ',
+                                value:'1'
+                            },
+                            {
+                                label:'ภาคกลาง',
+                                value:'2'
+                            },
+                            {
+                                label:'ภาคใต้',
+                                value:'3'
+                            },
+                            {
+                                label:'ภาคอีสาน',
+                                value:'4'
+                            }
+                        ]
+                    },
+                    address2:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'กรุงเทพมหานคร ',
+                                value:'1'
+                            },
+                            {
+                                label:'กระบี่',
+                                value:'2'
+                            },
+                            {
+                                label:'ตราด',
+                                value:'3'
+                            },
+                            {
+                                label:'ประจวบคีรีขันธ์',
+                                value:'4'
+                            }
+                        ]
+                    }
                 }
             }
         }

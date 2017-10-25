@@ -19,6 +19,8 @@
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 
 <link rel="import" href="../components/aqa-font/aqa-mitr-font.html">
 <link rel="import" href="./flexbox-grid.html">
@@ -140,6 +142,9 @@
                     <app-toolbar class="header">
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div main-title>[[i18n.common.myApp]]</div>
+                        <paper-icon-button icon="social:notifications"></paper-icon-button>
+                        <!-- <paper-badge for="number" label="4"></paper-badge>  -->
+                        <paper-icon-button icon="icons:mail"></paper-icon-button>
                         <paper-menu-button no-overlap horizontal-align="right">
                             <div class="divImage" slot="dropdown-trigger" alt="menu">
                                 <img class="img-circle" src$="[[rootPath]]images/I20170901111610.jpg" />
@@ -173,6 +178,7 @@
                                 </paper-item>
                             </paper-listbox>
                         </paper-menu-button>
+                        
                     </app-toolbar>
                     <template is="dom-if" if="[[progressEnable]]">
                         <paper-progress id="progress" value="[[progressValue]]" indeterminate="[[progressIndeterminate]]"></paper-progress>
