@@ -290,8 +290,8 @@
                 }
             }
             mathAge(date){
-                console.log(date)
-                if(typeof date == 'undefined') return
+                // console.log('ss',date)
+                if(!date) return
                 var nowDate = new Date().toISOString();
                 var birthDay = date
                 const _today = {
