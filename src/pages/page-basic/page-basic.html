@@ -57,11 +57,7 @@
                 </app-toolbar>
                 <div slot="content">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
-                            <!-- <iron-image sizing="contain" id="example-sizing-contain" alt="The Polymer logo." src$="[[rootPath]]images/I20170901111610.jpg"></iron-image> -->
-                            <img id="output_image" src$="[[rootPath]]../../../images/default_profile.png" />
-                            <aqa-button type="primary btn-full-width" icon="icons:file-upload">อัพโหลด</aqa-button>
-                        </div>
+                        
                         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
@@ -121,7 +117,7 @@
                                     <!-- <aqa-input label="วัน/เดือน/ปี เกิด" value=""></aqa-input> -->
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                                    <aqa-input label="อายุ" value="{{mathAge(birthDay)}}" disabled></aqa-input>
+                                    <aqa-input label="อายุ (ปี)" value="{{mathAge(birthDay)}}" disabled></aqa-input>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -132,6 +128,11 @@
                                     <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+                            <!-- <iron-image sizing="contain" id="example-sizing-contain" alt="The Polymer logo." src$="[[rootPath]]images/I20170901111610.jpg"></iron-image> -->
+                            <img id="output_image" src$="[[rootPath]]../../../images/default_profile.png" />
+                            <aqa-button type="primary btn-full-width" icon="icons:file-upload">อัพโหลด</aqa-button>
                         </div>
                     </div>
                     
