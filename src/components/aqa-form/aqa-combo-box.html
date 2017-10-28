@@ -107,7 +107,7 @@
             </label>
             <vaadin-combo-box-light items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value" value="[[value]]">
                 <iron-input>
-                    <input class="form-control" has-error$="{{hasError}}">
+                    <input class="form-control" placeholder="[[placeholder]]" has-error$="{{hasError}}">
                 </iron-input>
             </vaadin-combo-box-light>
             <!-- <input type$="[[type]]" class="form-control" placeholder="[[placeholder]]" value="{{value::input}}" has-error$="{{hasError}}"> -->
@@ -155,6 +155,10 @@
                     hasError:{
                         type:Boolean,
                         value:false
+                    },
+                    placeholder:{
+                        type:String,
+                        value:''
                     }
 
                 }
