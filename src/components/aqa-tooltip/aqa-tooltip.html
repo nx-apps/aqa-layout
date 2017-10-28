@@ -1,9 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="./aqa-tooltip-section.html">
-
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
-
-<script src="../../../node_modules/hyperhtml/index.js"></script>
+<link rel="import" href="./aqa-tooltip-section.html">
 
 <dom-module id="aqa-tooltip">
     <template>
@@ -32,9 +29,7 @@
             ready() {
                 super.ready();
 
-                Polymer.RenderStatus.afterNextRender(this, function() {
-                    
-                });
+                console.log(this.shadowRoot)
             }
 
             constructor(){
@@ -49,17 +44,17 @@
                     // tooltipSection.innerHTML = 'meow'
                     document.querySelector('body').appendChild(tooltipSection)
 
-                    var tick = (render) => {
-                        render`
-                            <div id="xx">
-                                meow
-                            </div>
-                        `;
-                    }
+                    // var tick = (render) => {
+                    //     render`
+                    //         <div id="xx">
+                    //             meow
+                    //         </div>
+                    //     `;
+                    // }
 
-                    setInterval(tick, 1000,
-                        hyperHTML(tooltipSection)
-                    );
+                    // setInterval(tick, 1000,
+                    //     hyperHTML(tooltipSection)
+                    // );
 
                     
 
