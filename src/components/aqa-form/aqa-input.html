@@ -110,7 +110,7 @@
                     <span>*</span>
                 </template>
             </label>
-            <input type$="[[type]]" class="form-control" placeholder="[[placeholder]]" value="{{value::input}}" has-error$="[[hasError]]" disabled$="[[disabled]]">
+            <input id="input" type="text" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" has-error$="[[hasError]]" disabled$="[[disabled]]">
             <template is="dom-if" if="[[hasError]]">
                 <small class="help-block" data-fv-validator="notEmpty" data-fv-for="username" data-fv-result="INVALID">[[errorMassage]]</small>
             </template>
@@ -126,11 +126,15 @@
                         type: String,
                         value: ""
                     },
-                    value:{
-                        type: String,
+                    value: {
+                        type:String,
                         notify: true,
-                        value: "",
-                        observer:'_valueChanged'
+                        value:"0824521491",
+                        observer: "_valueChanged"
+                    },
+                    valueInput:{
+                        type: String,
+                        value: ""
                     },
                     pattern:{
                         type: String
@@ -157,10 +161,15 @@
                     },
                     type:{
                         type:String,
-                        value:'text'
+                        value:"text",
+                        observer: '_typeChanged'
                     },
                     disabled:{
                         type:Boolean
+                    },
+                    dataPattern:{
+                        type:String,
+                        value:""
                     }
                 }
             }
@@ -180,15 +189,60 @@
                 this.value = ""
             }
 
+            _typeChanged(type){
+                if(type=="phone"){
+                    this.allowedPattern = "[0-9]"
+                }
+            }
+
             _valueChanged(newVal,oldVal){
-                if(newVal!="" && this.allowedPattern!="" ){
+                
+                var value = newVal || ""
+                //0824521491
+
+                var valueInput = ""  
+
+                valueInput += value.substring(0, 3)
+                if(value.length >= 3){
+                    valueInput += '-'
+                }
+
+                valueInput +=  value.substring(3, 6)
+                if(value.length >= 6){
+                    valueInput +=  '-'
+                }
+
+                valueInput +=  value.substring(6, 10)
+                this.$.input.value = valueInput
+                //console.log(valueInput)
+            
+            }
+
+            _inputChanged(e){
+
+                var value = e.target.value || ""
+                value = value.replace(/-/g, "")
+
+                if(value!="" && this.allowedPattern!="" ){
                     var patt = new RegExp('^'+this.allowedPattern+'*$');
-                    var res = patt.test(this.value);
+                    var res = patt.test(value);
                     if(!res){
-                        this.value = oldVal
+                        this.$.input.value = this.value
                     }
                 }
-                
+
+                this.value = this.$.input.value
+
+
+                // var value = this.newVal || ""
+                // value = val.replace(/-/g, "")
+                // //this.value = value
+
+                // var valueInput = ""  
+                // if(value.length >= 3){
+                //     valueInput +=  valueInput.substring(0, 3)+'-'
+                // }
+                // this.valueInput
             }
         }
 
