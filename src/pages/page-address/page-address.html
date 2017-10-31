@@ -13,7 +13,12 @@
 
 <link rel="import" href="../../components/aqa-font/aqa-mitr-font.html">
 
+<link rel="import" href="../../mixins/common-mixin.html">
+<link rel="import" href="../../redux-mixin.html">
 <link rel="import" href="./components/address-form-contact.html">
+
+<link rel="import" href="../../redux/profile/page-02-redux.html">
+
 <dom-module id="page-address">
     <template>
         <style include="flexbox-grid shared-styles">
@@ -29,10 +34,12 @@
             /* .section-content {
                 margin-left: 1.5rem;
             } */
-            .white-space{
+
+            .white-space {
                 margin: 1rem;
             }
-            h2{
+
+            h2 {
                 font-family: MitrRegular;
                 font-weight: normal;
             }
@@ -54,8 +61,8 @@
                     <div class="section-content">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                <input type="radio" name="address" checked> ที่อยู่ที่สะดวกในการติดต่อ 
-                                <input type="radio" name="address"> ที่อยู่ที่ทำงาน 
+                                <input type="radio" name="address" checked> ที่อยู่ที่สะดวกในการติดต่อ
+                                <input type="radio" name="address"> ที่อยู่ที่ทำงาน
                                 <!-- <aqa-combo-box label="สถานที่จัดส่งเอกสาร" items="[[address]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
                             </div>
                         </div>
@@ -79,7 +86,7 @@
                     </div>
                 </div>
             </aqa-panel>
-             <div class="white-space"></div>
+            <div class="white-space"></div>
             <aqa-panel id="basic">
                 <app-toolbar slot="header">
                     <div main-title>ที่ทำงาน </div>
@@ -96,7 +103,7 @@
                         <p>
                             <aqa-button type="primary">คัดลอกจากที่อยู่ที่สะดวกในการติดต่อ</aqa-button>
                         </p>
-                        
+
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                 <aqa-input label="ชื่อองค์กร" value=""></aqa-input>
@@ -104,7 +111,7 @@
                         </div>
                         <address-form-contact></address-form-contact>
                     </div>
-                    
+
                 </div>
             </aqa-panel>
             <div class="white-space"></div>
@@ -116,7 +123,7 @@
         </div>
     </template>
     <script>
-        class PageAddress extends Polymer.Element {
+        class PageAddress extends CommonMixin(ReduxMixin(Polymer.Element)) {
             static get is() { return 'page-address'; }
             static get properties() {
                 return {
@@ -134,6 +141,19 @@
                         ]
                     }
                 }
+            }
+            ready() {
+                super.ready();
+                // console.log(1111);
+                Polymer.RenderStatus.afterNextRender(this, function () {
+                    Nylon.dispatch('PROFILE_02_GET_LIST_REGION')
+                    // console.log(111);
+                    // Nylon.dispatch('PROFILE_01_GET_LIST_GENDER')
+                    // Nylon.dispatch('PROFILE_01_GET_LIST_NATIONALITY')
+                    // Nylon.dispatch('PROFILE_01_GET_LIST_RELIGION')
+                    // Nylon.dispatch('PROFILE_01_GET_LIST_WORK_STATUS')
+                    // Nylon.dispatch('REGISTER_CHECK_PERSON', localStorage.getItem('taxno'))
+                });
             }
         }
         window.customElements.define(PageAddress.is, PageAddress);
