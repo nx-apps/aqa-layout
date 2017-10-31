@@ -1,8 +1,12 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
+
+<link rel="import" href="../../layout/shared-styles.html">
+
 
 <dom-module id="aqa-vaadin-grid">
     <template>
-        <style>
+        <style include="shared-styles">
             .grid ::slotted(*) {
                 height: auto;
                 --divider-color: rgba(0, 0, 0, var(--dark-divider-opacity)); 
@@ -130,6 +134,8 @@
             } */
         </style>
         <div class="grid">
+            <paper-tooltip id="tooltip" for="[[tooltipFor]]" position="bottom" offset="0">
+            </paper-tooltip>
             <slot></slot>
         </div>
     </template>
@@ -138,6 +144,10 @@
             static get is() { return 'aqa-vaadin-grid'; }
             static get properties() {
                 return {
+                    tooltipFor:{
+                        type:String,
+                        value:''
+                    }
                 }
             }
             ready(){

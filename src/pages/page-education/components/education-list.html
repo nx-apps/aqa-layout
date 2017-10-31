@@ -54,10 +54,11 @@
                     <template class="header">เครื่องมือ</template>
                     <template>
                         <div style="display:flex">
-                            <aqa-tooltip>
+                            <!-- <aqa-tooltip>
                                 <iron-icon icon="create" id="btn-[[index]]"></iron-icon>
-                            </aqa-tooltip>
-                            <!-- <paper-icon-button id="btn-[[index]]" on-tap="getPosition" on-mouseover="updatePosition" icon="create"></paper-icon-button> -->
+                            </aqa-tooltip> -->
+                              <paper-icon-button id="btn-[[index]]" name="แก้ไข" on-tap="getPosition" on-mouseover="updatePosition" icon="create"></paper-icon-button>
+                              <paper-icon-button id="btns-[[index]]" name="ลบ" on-tap="getPosition" on-mouseover="updatePosition" icon="delete"></paper-icon-button>   
                              <!-- <aqa-icon-button on-tap="getPosition" label="ss" style="margin:auto">
                                 <iron-icon icon="create"></iron-icon>
                             </aqa-icon-button>
@@ -69,7 +70,7 @@
                 </vaadin-grid-column>
             </vaadin-grid>
         </aqa-vaadin-grid>
-        <!-- <paper-tooltip id="tooltip" offset="0">wake up!</paper-tooltip> -->
+          <paper-tooltip id="tooltip" offset="0"></paper-tooltip>  
         <div style="display:inline">
             <div style="margin-top:1rem">จำนวนรายการทั้งหมด [[datas.length]] รายการ </div>
             <div style="margin-top:1rem">แก้ไขล่าสุดวันที่ : 25/10/2560 ผู้แก้ไข : ผู้ใช้งาน </div>
@@ -120,9 +121,11 @@
                     }
                 }
             }
-            // updatePosition(e){
-            //     this.$.tooltip.for = e.currentTarget.id;
-            // }
+            updatePosition(e){
+                this.$.tooltip.textContent = e.currentTarget.getAttribute('name');
+                this.$.tooltip.for = e.currentTarget.id;
+                this.$.tooltip.updatePosition()
+            }
             getPosition(e){
                 console.log(e.currentTarget.positionTarget)
             }

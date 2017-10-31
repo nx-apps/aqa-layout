@@ -34,11 +34,7 @@
 
             constructor(){
                 super()
-
                 if(typeof  window.tooltipSection == "undefined"){
-
-
-
                     window.tooltipSection = document.createElement('aqa-tooltip-section')
                     tooltipSection.setAttribute('id',"tooltipSection")
                     // tooltipSection.innerHTML = 'meow'
@@ -48,7 +44,6 @@
                     //     render`
                     //         <div id="xx">
                     //             meow
-                    //         </div>
                     //     `;
                     // }
 
@@ -58,20 +53,14 @@
 
                     
 
-
-                }
-                
-                                    
-
-                
+                    //         </div>
+                }                
             }
 
             _showTooltip(e){
-                document.getElementById('tooltipSection').label ="edit"
-                // document.getElementById('tooltipSection').for = e.target.id;
-                // console.log(this.$.tooltipSection)
                 console.log(document.getElementById('tooltipSection'))
-                // console.log(hyperHTML)
+                // document.getElementById('tooltipSection').label ="edit"
+                // console.log(document.getElementById('tooltipSection'))
             }
 
         }

@@ -162,8 +162,14 @@
             </vaadin-grid>
         </aqa-vaadin-grid>
 
-        <aqa-listbox></aqa-listbox>
-        <!-- <nylon-rating></nylon-rating>  -->
+        <!-- <aqa-listbox></aqa-listbox> -->
+        
+        <template is="dom-bind">
+            <nylon-rating name="1"></nylon-rating>  
+        </template>
+        <template is="dom-bind">
+            <nylon-rating name="2"></nylon-rating>  
+        </template>
         <aqa-button type="primary" icon="done">บันทึก</aqa-button>
 
 
