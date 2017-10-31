@@ -15,7 +15,6 @@
 
 <link rel="import" href="../../components/aqa-title/aqa-title-name.html">
 
-<link rel="import" href="../../components/aqa-form/aqa-phone.html">
 <link rel="import" href="../../components/aqa-form/aqa-date-picker.html">
 
 
@@ -71,8 +70,7 @@
                         <div class="col-xs-12 col-lg-10">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                                    <aqa-input class="form" label="เลขประจำตัวประชาชน" type="phone" value="{{xx}}" required></aqa-input>
-                                    [[xx]]
+                                    <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
@@ -146,7 +144,7 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
-                            <aqa-phone label="เบอร์มือถือ"></aqa-phone>
+                            <aqa-input class="form" label="เบอร์มือถือ" type="phone" required></aqa-input>
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -224,17 +222,78 @@
                                 value: '01'
                             },
                             {
-                                label: 'มาเลเซีย',
+                                label: 'กัมพูชา',
                                 value: '02'
                             },
                             {
-                                label: 'เยอรมนี',
+                                label: 'เกาหลีใต้',
                                 value: '03'
                             },
                             {
-                                label: 'รัสเซีย',
+                                label: 'จีน',
                                 value: '04'
+                            },
+                             {
+                                label: 'ญี่ปุ่น',
+                                value: '05'
+                            },
+                             {
+                                label: 'นิวซีแลนด์',
+                                value: '06'
+                            },
+                             {
+                                label: 'บรูไนดารุสซาลาม',
+                                value: '07'
+                            },
+                             {
+                                label: 'พม่า',
+                                value: '08'
+                            },
+                             {
+                                label: 'ฟิลิปปินส์',
+                                value: '09'
+                            },
+                             {
+                                label: 'มาเลเซีย',
+                                value: '10'
+                            },
+                             {
+                                label: 'เยอรมนี',
+                                value: '11'
+                            },
+                              {
+                                label: 'รัสเซีย',
+                                value: '12'
+                            },
+                              {
+                                label: 'ลาว',
+                                value: '13'
+                            },
+                              {
+                                label: 'เวียดนาม',
+                                value: '14'
+                            },
+                              {
+                                label: 'สหรัฐอเมริกา',
+                                value: '15'
+                            },
+                              {
+                                label: 'สิงคโปร์',
+                                value: '16'
+                            },
+                            {
+                                label: 'ออสเตรเลีย',
+                                value: '17'
+                            },
+                            {
+                                label: 'อังกฤษ',
+                                value: '18'
+                            },
+                            {
+                                label: 'อินโดนีเซีย',
+                                value: '19'
                             }
+                            
                         ]
                     },
                     religionList: {
@@ -251,6 +310,18 @@
                             {
                                 label: 'อิสลาม',
                                 value: '03'
+                            },
+                            {
+                                label: 'พราหมณ์',
+                                value: '04'
+                            },
+                            {
+                                label: 'ฮินดู',
+                                value: '05'
+                            },
+                            {
+                                label: 'ซิกข์',
+                                value: '06'
                             }
                         ]
                     },
