@@ -1,6 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../../aqa-vaadin-grid/aqa-vaadin-grid.html">
+<link rel="import" href="../../../components/aqa-vaadin-grid/aqa-vaadin-grid.html">
 <link rel="import" href="../../../components/aqa-button/aqa-button.html">
 
 <link rel="import" href="../../../components/aqa-tooltip/aqa-tooltip.html">
@@ -48,7 +48,7 @@
                         <div>[[item.sub_name_education]]</div>
                     </template>
                 </vaadin-grid-column>
-                <vaadin-grid-column>
+                <vaadin-grid-column width="200px" flex-grow="0">
                     <template class="header">คณะ</template>
                     <template>
                         <div>[[item.name_faculty]]</div>
@@ -96,7 +96,9 @@
                 </vaadin-grid-column>
             </vaadin-grid>
         </aqa-vaadin-grid>
-        <paper-tooltip id="tooltip" offset="0"></paper-tooltip>
+
+        
+        <paper-tooltip id="tooltip"  position="top" offset="0"></paper-tooltip>
         <div style="display:inline">
             <div class="row">
                 <div class="col-xs-12 col-md-6">

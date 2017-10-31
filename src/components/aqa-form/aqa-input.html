@@ -47,6 +47,10 @@
                 outline: none;
             }
 
+            input[disabled] {
+                border: 0;
+            }
+
             input:focus {
                 border-color: #62a8ea
             }
@@ -75,13 +79,10 @@
                 font-weight: 300;
                 display: inline-block;
                 max-width: 100%;
-                /* margin-bottom: 5px; */
                 color: #000;
                 text-overflow: ellipsis;
-
-                /* Required for text-overflow to do anything */
                 white-space: nowrap;
-                overflow: hidden;
+                /* overflow: hidden; */
             }
 
             .help-block {

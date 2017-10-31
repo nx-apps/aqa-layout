@@ -69,15 +69,17 @@
                     <div class="row center-sm" style="text-align:left">
                         <div class="col-xs-12 col-lg-10">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                                     <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
-                                    <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker>
+                                    <!-- <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker> -->
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker>
+                                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
+                                    <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                    <!-- <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker> -->
                                     <!-- <aqa-input label="วันที่บัตรหมดอายุ" value=""></aqa-input> -->
                                 </div>
                             </div>
@@ -113,6 +115,7 @@
                                 </div>
                             </div>
                             <aqa-button type="primary btn-full-width" icon="icons:file-upload">อัพโหลด</aqa-button>
+                            <div style="margin:1rem"></div>
                         </div>
                     </div>
 
@@ -130,27 +133,26 @@
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
                             <aqa-combo-box label="ศาสนา" items="[[religionList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                            <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
                             <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker>
-                            <!-- <aqa-input label="วัน/เดือน/ปี เกิด" value=""></aqa-input> -->
+                            <!-- <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
                             <aqa-input label="อายุ (ปี)" value="{{mathAge(birthDay)}}" disabled></aqa-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                             <aqa-input class="form" label="เบอร์มือถือ" type="phone" required></aqa-input>
+                        </div>
+                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                            <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker>
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
-                            <aqa-input class="form" label="เบอร์มือถือ" type="phone" required></aqa-input>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                            <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                        </div>
+                            <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker>
+                            <!-- <aqa-input class="form" label="เบอร์มือถือ" type="phone" required></aqa-input> -->
+                        </div> 
                     </div>
+                 
                 </div>
 
         </div>
