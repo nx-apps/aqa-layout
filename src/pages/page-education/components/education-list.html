@@ -24,50 +24,58 @@
             <vaadin-grid id="material" items="{{datas}}">
                 <vaadin-grid-column width="100px" flex-grow="0">
                     <template class="header">
-                        <div style="text-align: center">ลำดับ</div>
+                        <div class="header" style="text-align: center">ลำดับ</div>
                     </template>
                     <template>
                         <div style="text-align: center">[[count(index)]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column  width="200px" flex-grow="0">
-                    <template class="header">สถานศึกษา</template>
+                    <template class="header">
+                        <div class="header">
+                            สถานศึกษา
+                        </div>
+                    </template>
                     <template>
                         <div>[[item.address_education]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column>
-                    <template class="header">ระดับการศึกษา</template>
+                    <template class="header">
+                        <div class="header">
+                            ระดับการศึกษา
+                        </div>
+                    </template>
                     <template>
                         <div>[[item.level_education]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column>
-                    <template class="header">ชื่อปริญญา (ย่อ)</template>
+                    <template class="header"><div class="header">ชื่อปริญญา (ย่อ)</div></template>
                     <template>
                         <div>[[item.sub_name_education]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column width="200px" flex-grow="0">
-                    <template class="header">คณะ</template>
+                    <template class="header"><div class="header">คณะ</div></template>
                     <template>
                         <div>[[item.name_faculty]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column>
-                    <template class="header">สาขา</template>
+                    <template class="header"><div class="header">สาขา</div></template>
                     <template>
                         <div>[[item.name_branch]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column>
-                    <template class="header">วิชาเอก</template>
+                    <template class="header"><div class="header">วิชาเอก</div></template>
                     <template>
                         <div>[[item.name_major]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column width="100px" flex-grow="0">
-                    <template class="header">ปี พ.ศ. ที่จบ</template>
+                    <template class="header"><div class="header">ปี พ.ศ. ที่จบ</div></template>
                     <template>
                         <div style="text-align: center">[[item.year_education]]</div>
                     </template>
@@ -77,7 +85,9 @@
                     <template> <div style="text-align: center">[[item.edit_name]] [[item.edit_date]]</div></template>
                 </vaadin-grid-column> -->
                 <vaadin-grid-column width="100px" flex-grow="0">
-                    <template class="header">เครื่องมือ</template>
+                    <template class="header">
+                        <div class="header">เครื่องมือ</div>
+                    </template>
                     <template>
                         <div style="display:flex">
                             <!-- <aqa-tooltip>
