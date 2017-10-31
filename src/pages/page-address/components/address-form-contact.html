@@ -44,10 +44,11 @@
             </div>
             <div class="section-content row">
                 <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="อำเภอ / เขต" value="" required></aqa-input>
+                    <!-- <aqa-input label="อำเภอ / เขต" value="" required></aqa-input> -->
+                    <aqa-combo-box label="อำเภอ / เขต" items="[[district]]" item-label-path="label" item-value-path="value" required></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="ตำบล / แขวง" value=""></aqa-input>
+                    <aqa-combo-box label="ตำบล / แขวง" items="[[subdistrict]]" item-label-path="label" item-value-path="value" value=""></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <aqa-input label="รหัสไปรษณีย์" value="" required></aqa-input>
@@ -61,7 +62,7 @@
                     <aqa-input label="โทรสาร" value=""></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="โทรศัพท์เคลื่อนที่" value="" required></aqa-input>
+                    <aqa-input type="phone" label="โทรศัพท์เคลื่อนที่" value="" required></aqa-input>
                 </div>
             </div>
             <div class="section-content row">
@@ -147,6 +148,24 @@
                                 "id": "17ca0851-d76a-46da-8829-b91b7e37456e",
                                 "old_id": "6",
                                 "region_th": "ภาคใต้"
+                            }
+                        ]
+                    },
+                    district:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'เมือง',
+                                value:'01'
+                            }
+                        ]
+                    },
+                    subdistrict:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'เทศบาลตำบลบ้านดู่',
+                                value:'01'
                             }
                         ]
                     },

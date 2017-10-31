@@ -47,9 +47,9 @@
                 outline: none;
             }
 
-            input[disabled] {
+            /* input[disabled] {
                 border: 0;
-            }
+            } */
 
             input:focus {
                 border-color: #62a8ea
@@ -134,6 +134,7 @@
                     value: {
                         type: String,
                         notify: true,
+                        value:'',
                         observer: "_valueChanged"
                     },
                     valueInput: {

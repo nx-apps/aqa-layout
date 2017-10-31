@@ -70,18 +70,18 @@
                                         <div class="col-xs-12 col-md-4">
                                             <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                         </div>
-                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                        <div class="col-xs-12 font col-md-2" style="text-align:left;margin:auto 0">
                                             ปี
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="textRight font col-xs-12 col-md-4" style="margin:auto 0">
-                                            มีประสบการณ์ด้านการบริหารสถานศึกษา
+                                            มีประสบการณ์ด้านการจัดการเรียนการสอน
                                         </div>
                                         <div class="col-xs-12 col-md-4">
                                             <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                         </div>
-                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                        <div class="col-xs-12 font col-md-2" style="text-align:left;margin:auto 0">
                                             ปี
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                         <div class="col-xs-12 col-md-4">
                                             <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                         </div>
-                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                        <div class="col-xs-12 font col-md-2" style="text-align:left;margin:auto 0">
                                             ปี
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12">
                     <div class="white-space"></div>
                     <aqa-panel id="card basic">
                         <app-toolbar slot="header">
@@ -129,7 +129,7 @@
                         </div>
                     </aqa-panel>
                 </div>
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12">
                     <div class="white-space"></div>
                     <aqa-panel id="card basic">
                         <app-toolbar slot="header">
@@ -145,10 +145,12 @@
             </div>
             <div style="margin:1rem"></div>
             <div class="row center-xs">
-                <div class="col-xs-12">
-                    <aqa-button type="success">บันทึก</aqa-button>
+                <div class="col-lg-2">
+                    <div style="padding:0rem 2rem;">
+                        <aqa-button type="success btn-full-width">บันทึก</aqa-button>
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div> 
     </template>
     <script>
@@ -177,18 +179,21 @@
                             }
                         ]
                     },
-                    print: {
+                    language: {
                         type: Array,
                         value: [
                             {
-                                label: 'ภาษาไทย'
+                                label: 'ภาษาอังกฤษ'
                             },
                             {
-                                label: 'ภาษาอังกฤษ'
+                                label: 'จีน'
+                            },
+                            {
+                                label: 'ญี่ปุ่น'
                             }
                         ]
                     },
-                    language: {
+                    print: {
                         type: Array,
                         value: [
                             {

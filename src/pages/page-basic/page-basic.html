@@ -85,8 +85,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                     <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input> 
-                                    <!-- <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> -->
+                                     <!-- <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input>  -->
+                                     <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> 
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <aqa-input class="form" label="ชื่อ (ไทย)" value="" required></aqa-input>
@@ -97,8 +97,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                     <aqa-input label="คำนำหน้า (อังกฤษ)" value=""></aqa-input> 
-                                    <!-- <aqa-combo-box class="form" label="คำนำหน้า (อังกฤษ)" items="[[prefix]]" item-label-path="label_eng" item-value-path="value"></aqa-combo-box> -->
+                                     <!-- <aqa-input label="คำนำหน้า (อังกฤษ)" value=""></aqa-input>  -->
+                                     <aqa-combo-box class="form" label="คำนำหน้า (อังกฤษ)" items="[[prefix]]" item-label-path="label_eng" item-value-path="value"></aqa-combo-box> 
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <aqa-input label="ชื่อ (อังกฤษ)" value=""></aqa-input>
@@ -160,9 +160,10 @@
 
 
         <div class="row center-xs">
-
-            <div class="col-xs-12">
-                <aqa-button type="success" on-tap="getForm">บันทึก</aqa-button>
+            <div class="col-lg-2">
+                <div style="padding:0rem 2rem;">
+                    <aqa-button type="success btn-full-width" on-tap="getForm">บันทึก</aqa-button>
+                </div>
             </div>
         </div>
     </template>
@@ -348,26 +349,26 @@
                             }
                         ]
                     },
-                    // prefix: {
-                    //     type: Array,
-                    //     value: [
-                    //         {
-                    //             label_th: 'นาย',
-                    //             label_eng: 'Mr.',
-                    //             value: '01'
-                    //         },
-                    //         {
-                    //             label_th: 'นาง',
-                    //             label_eng: 'Mrs.',
-                    //             value: '02'
-                    //         },
-                    //         {
-                    //             label_th: 'นางสาว',
-                    //             label_eng: 'Miss',
-                    //             value: '03'
-                    //         }
-                    //     ]
-                    // },
+                    prefix: {
+                        type: Array,
+                        value: [
+                            {
+                                label_th: 'นาย',
+                                label_eng: 'Mr.',
+                                value: '01'
+                            },
+                            {
+                                label_th: 'นาง',
+                                label_eng: 'Mrs.',
+                                value: '02'
+                            },
+                            {
+                                label_th: 'นางสาว',
+                                label_eng: 'Miss',
+                                value: '03'
+                            }
+                        ]
+                    },
                     info: {
                         type: Object,
                         statePath: 'profile.info'

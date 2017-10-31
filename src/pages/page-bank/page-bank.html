@@ -18,7 +18,7 @@
                 <app-toolbar slot="header">
                     <div main-title>บัญชีธนาคาร</div>
                 </app-toolbar>
-                 <div slot="content">
+                <div slot="content">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <aqa-combo-box label="ธนาคาร" items="[[bankList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
@@ -27,7 +27,7 @@
                             <aqa-input label="ประเภทบัญชี" value=""></aqa-input>
                             <!-- <aqa-combo-box label="ประเภทบัญชี" items="[[typeAccount]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
                         </div>
-                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <aqa-input label="สาขา" value=""></aqa-input>
                         </div>
                     </div>
@@ -49,122 +49,124 @@
                         </div>
                     </div>
                     <div class="row center-xs">
-                        <div class="col-xs-12">
-                            <aqa-button type="success">บันทึก</aqa-button>
+                        <div class="col-lg-2">
+                            <div style="padding:0rem 2rem;">
+                                <aqa-button type="success btn-full-width">บันทึก</aqa-button>
+                            </div>
                         </div>
                     </div>
-                 </div>
+                </div>
             </aqa-panel>
         </div>
     </template>
     <script>
-        class PageBank extends Polymer.Element{
+        class PageBank extends Polymer.Element {
             static get is() { return 'page-bank'; }
             static get properties() {
                 return {
-                    bankList:{
-                        type:Array,
-                        value:[
+                    bankList: {
+                        type: Array,
+                        value: [
                             {
-                                label:'ธนาคารกรุงเทพ',
-                                value:'01'
-                            },
-                            {
-                                label:'ธนาคารกรุงศรีอยุธยา',
-                                value:'02'
+                                label: 'ธนาคารกรุงเทพ',
+                                value: '01'
                             },
                             {
-                                label:'ธนาคารกสิกรไทย',
-                                value:'03'
+                                label: 'ธนาคารกรุงศรีอยุธยา',
+                                value: '02'
                             },
                             {
-                                label:'ธนาคารเกียรตินาคิน',
-                                value:'04'
+                                label: 'ธนาคารกสิกรไทย',
+                                value: '03'
                             },
                             {
-                                label:'ธนาคารซิติแบงก์',
-                                value:'05'
+                                label: 'ธนาคารเกียรตินาคิน',
+                                value: '04'
                             },
                             {
-                                label:'ธนาคารทหารไทย',
-                                value:'06'
+                                label: 'ธนาคารซิติแบงก์',
+                                value: '05'
                             },
                             {
-                                label:'ธนาคารทิสโก้',
-                                value:'07'
+                                label: 'ธนาคารทหารไทย',
+                                value: '06'
                             },
                             {
-                                label:'ธนาคารซีไอเอ็มบี ไทย ',
-                                value:'08'
+                                label: 'ธนาคารทิสโก้',
+                                value: '07'
                             },
                             {
-                                label:'ธนาคารไทยพาณิชย์',
-                                value:'09'
+                                label: 'ธนาคารซีไอเอ็มบี ไทย ',
+                                value: '08'
                             },
                             {
-                                label:'ธนาคารธนชาต',
-                                value:'10'
+                                label: 'ธนาคารไทยพาณิชย์',
+                                value: '09'
                             },
                             {
-                                label:'ธนาคารนครหลวงไทย',
-                                value:'11'
+                                label: 'ธนาคารธนชาต',
+                                value: '10'
                             },
                             {
-                                label:'ธนาคารยูโอบี',
-                                value:'12'
+                                label: 'ธนาคารนครหลวงไทย',
+                                value: '11'
                             },
                             {
-                                label:'ธนาคารสแตนดาร์ดชาร์เตอร์ดไทย',
-                                value:'13'
+                                label: 'ธนาคารยูโอบี',
+                                value: '12'
                             },
                             {
-                                label:'ธนาคารเมกะสากลพาณิชย์',
-                                value:'14'
+                                label: 'ธนาคารสแตนดาร์ดชาร์เตอร์ดไทย',
+                                value: '13'
                             },
                             {
-                                label:'ธนาคารไอซีบีซี',
-                                value:'15'
+                                label: 'ธนาคารเมกะสากลพาณิชย์',
+                                value: '14'
                             },
                             {
-                                label:'ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย',
-                                value:'16'
+                                label: 'ธนาคารไอซีบีซี',
+                                value: '15'
                             },
                             {
-                                label:'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร',
-                                value:'17'
+                                label: 'ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย',
+                                value: '16'
                             },
-                              {
-                                label:'ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย',
-                                value:'18'
+                            {
+                                label: 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร',
+                                value: '17'
                             },
-                              {
-                                label:'ธนาคารออมสิน',
-                                value:'19'
+                            {
+                                label: 'ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย',
+                                value: '18'
                             },
-                              {
-                                label:'ธนาคารอาคารสงเคราะห์',
-                                value:'20'
+                            {
+                                label: 'ธนาคารออมสิน',
+                                value: '19'
                             },
-                              {
-                                label:'ธนาคารอิสลามแห่งประเทศไทย',
-                                value:'21'
+                            {
+                                label: 'ธนาคารอาคารสงเคราะห์',
+                                value: '20'
+                            },
+                            {
+                                label: 'ธนาคารอิสลามแห่งประเทศไทย',
+                                value: '21'
                             },
                         ]
                     },
-                    typeAccount:{
-                        type:Array,
-                        value:[
+                    typeAccount: {
+                        type: Array,
+                        value: [
                             {
-                                label:'บัญชีเงินฝากออมทรัพย์',
-                                value:'01'
+                                label: 'บัญชีเงินฝากออมทรัพย์',
+                                value: '01'
                             },
                             {
-                                label:'บัญชีเงินฝากประจำ',
-                                value:'02'
+                                label: 'บัญชีเงินฝากประจำ',
+                                value: '02'
                             },
                             {
-                                label:'บัญชีเงินฝากกระแสรายวัน',
-                                value:'03'
+                                label: 'บัญชีเงินฝากกระแสรายวัน',
+                                value: '03'
                             }
                         ]
                     }
@@ -172,6 +174,5 @@
             }
         }
         window.customElements.define(PageBank.is, PageBank);
-
     </script>
 </dom-module>
