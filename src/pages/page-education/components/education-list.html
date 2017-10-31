@@ -74,6 +74,12 @@
                         <div>[[item.name_major]]</div>
                     </template>
                 </vaadin-grid-column>
+                <vaadin-grid-column>
+                        <template class="header"><div class="header">วิชาโท</div></template>
+                        <template>
+                            <div>[[item.name_major2]]</div>
+                        </template>
+                    </vaadin-grid-column>
                 <vaadin-grid-column width="100px" flex-grow="0">
                     <template class="header"><div class="header">ปี พ.ศ. ที่จบ</div></template>
                     <template>
@@ -138,6 +144,7 @@
                                 name_faculty:'คณะครุศาสตร์อุตสาหกรรม',
                                 name_branch:'คอมพิวเตอร์',
                                 name_major:'เทคโนโลยีคอมพิวเตอร์',
+                                name_major2: '',
                                 name_education: 'การศึกษาบัณฑิต',
                                 year_education: 2560,
                                 edit_name: 'ผู้ใช้งาน',
