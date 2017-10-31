@@ -83,49 +83,49 @@
         </style>
 
         <fieldset class="rating">
-             <input type="radio" id="star5" name="rating" value="5" />
+             <input type="radio" id="star5" name="rating-[[name]]" value="5" />
             <label class="full" for="star5" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="มากที่สุด">
                 <div class="avartar">
                     <div>5</div>
                 </div>
             </label>
 
-            <input type="radio" id="star4" name="rating" value="4" />
+            <input type="radio" id="star4" name="rating-[[name]]" value="4" />
             <label class="full section" for="star4" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="มาก">
                  <div class="avartar">
                     <div>4</div>
                 </div>
             </label> 
 
-            <input type="radio" id="star3" name="rating" value="3" />
+            <input type="radio" id="star3" name="rating-[[name]]" value="3" />
             <label class="full section" for="star3" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ปานกลาง">
                 <div class="avartar">
                     <div>3</div>
                 </div>
             </label>
 
-            <input type="radio" id="star2" name="rating" value="2" />
+            <input type="radio" id="star2" name="rating-[[name]]" value="2" />
             <label class="full section" for="star2" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="น้อย">
                 <div class="avartar">
                     <div>2</div>
                 </div>
             </label>
 
-            <input type="radio" id="star1" name="rating" value="1" />
+            <input type="radio" id="star1" name="rating-[[name]]" value="1" />
             <label class="full section" for="star1" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="น้อยที่สุด">
                 <div class="avartar">
                     <div>1</div>
                 </div>
             </label>
 
-            <input type="radio" id="star0" name="rating" value="0" checked/>
+            <input type="radio" id="star0" name="rating-[[name]]" value="0" checked/>
             <label class="full section" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ">
                 <div class="avartar">
                     <div>0</div>
                 </div>
             </label>
 
-            <input type="radio" id="star0" name="rating" value="0" checked hidden/>
+            <input type="radio" id="star0" name="rating-[[name]]" value="0" checked hidden/>
             <label class="full section" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ" hidden>
                 <div class="avartar">
                     <div>0</div>
@@ -153,6 +153,10 @@
                     active:{
                         type:Boolean,
                         value: true
+                    },
+                    name:{
+                        type:String,
+                        value:'0'
                     }
                 }
             }

@@ -31,8 +31,11 @@
             #output_image {
                 width: 100%;
                 height: auto;
-                max-width: 400px;
+                max-width: 200px;
+                max-height: 200px;
+                margin: 0 auto;
             }
+
             .img-circle {
                 width: 30px;
                 height: 30px;
@@ -47,18 +50,25 @@
             .header-content>b {
                 font-family: MitrLight;
             }
+
+            .flex {
+                display: flex;
+            }
+
+            .flex-item {
+                margin: 0 auto;
+            }
         </style>
         <div class="page-container">
-           
+
             <aqa-title-name></aqa-title-name>
             <aqa-panel id="basic">
                 <app-toolbar slot="header">
                     <div main-title>ข้อมูลพื้นฐาน</div>
                 </app-toolbar>
                 <div slot="content">
-                    <div class="row">
-                        
-                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
+                    <div class="row center-sm" style="text-align:left">
+                        <div class="col-xs-12 col-lg-10">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                                     <aqa-input class="form" label="เลขประจำตัวประชาชน" value="" required></aqa-input>
@@ -74,7 +84,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                    <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input>
+                                    <!-- <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input> -->
+                                    <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <aqa-input class="form" label="ชื่อ (ไทย)" value="" required></aqa-input>
@@ -85,7 +96,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                                    <aqa-input label="คำนำหน้า (อังกฤษ)" value=""></aqa-input>
+                                    <!-- <aqa-input label="คำนำหน้า (อังกฤษ)" value=""></aqa-input> -->
+                                    <aqa-combo-box class="form" label="คำนำหน้า (อังกฤษ)" items="[[prefix]]" item-label-path="label_eng" item-value-path="value"></aqa-combo-box>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
                                     <aqa-input label="ชื่อ (อังกฤษ)" value=""></aqa-input>
@@ -94,58 +106,66 @@
                                     <aqa-input label="นามสกุล (อังกฤษ)" value=""></aqa-input>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                                    <aqa-combo-box label="เพศ" items="[[genderList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                                    <aqa-combo-box label="เชื้อชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                                    <aqa-combo-box label="สัญชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
-                                    <aqa-combo-box label="ศาสนา" items="[[religionList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                                    <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker>
-                                    <!-- <aqa-input label="วัน/เดือน/ปี เกิด" value=""></aqa-input> -->
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                                    <aqa-input label="อายุ (ปี)" value="{{mathAge(birthDay)}}" disabled></aqa-input>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                                    <aqa-phone label="เบอร์มือถือ"></aqa-phone>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                                    <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
-                            <!-- <iron-image sizing="contain" id="example-sizing-contain" alt="The Polymer logo." src$="[[rootPath]]images/I20170901111610.jpg"></iron-image> -->
-                            <img id="output_image" src$="[[rootPath]]../../../images/default_profile.png" />
+                        <div class="first-xs last-lg col-xs-12 col-sm-4 col-lg-2">
+                            <div class="flex">
+                                <div class="flex-item">
+                                    <img id="output_image" src$="[[rootPath]]../../../images/default_profile.png" />
+                                </div>
+                            </div>
                             <aqa-button type="primary btn-full-width" icon="icons:file-upload">อัพโหลด</aqa-button>
                         </div>
                     </div>
-                    
-                    
-                    
-                    <div class="row center-xs">
 
-                        <div class="col-xs-12">
-                            <aqa-button type="success" on-tap="getForm">บันทึก</aqa-button>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <aqa-combo-box label="เพศ" items="[[genderList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <aqa-combo-box label="เชื้อชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <aqa-combo-box label="สัญชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                            <aqa-combo-box label="ศาสนา" items="[[religionList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                            <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker>
+                            <!-- <aqa-input label="วัน/เดือน/ปี เกิด" value=""></aqa-input> -->
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <aqa-input label="อายุ (ปี)" value="{{mathAge(birthDay)}}" disabled></aqa-input>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                            <aqa-phone label="เบอร์มือถือ"></aqa-phone>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                            <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
                     </div>
                 </div>
-            </aqa-panel>
+
+        </div>
+
+
+
+        <div class="row center-xs">
+
+            <div class="col-xs-12">
+                <aqa-button type="success" on-tap="getForm">บันทึก</aqa-button>
+            </div>
+        </div>
+        </div>
+        </aqa-panel>
         </div>
     </template>
     <script>
@@ -257,13 +277,33 @@
                             }
                         ]
                     },
+                    prefix: {
+                        type: Array,
+                        value: [
+                            {
+                                label_th: 'นาย',
+                                label_eng: 'Mr.',
+                                value: '01'
+                            },
+                            {
+                                label_th: 'นาง',
+                                label_eng: 'Mrs.',
+                                value: '02'
+                            },
+                            {
+                                label_th: 'นางสาว',
+                                label_eng: 'Miss',
+                                value: '03'
+                            }
+                        ]
+                    },
                     info: {
                         type: Object,
                         statePath: 'profile.info'
                     },
-                    birthDay:{
-                        type:String,
-                        value:''
+                    birthDay: {
+                        type: String,
+                        value: ''
                     }
                 }
             }
@@ -280,43 +320,43 @@
                     Nylon.dispatch('REGISTER_CHECK_PERSON', localStorage.getItem('taxno'))
                 });
             }
-            getForm(){
+            getForm() {
                 // console.log(this.queryFrom('.form'))
                 for (var index = 0; index < this.queryFrom('.form').length; index++) {
-                     if(this.queryFrom('.form')[index].validate() == true){
+                    if (this.queryFrom('.form')[index].validate() == true) {
                         this.queryFrom('.form')[index].errorMassage = "กรุณากรอกข้อมูล"
-                     }
-                     
-                    
+                    }
+
+
                 }
             }
-            mathAge(date){
+            mathAge(date) {
                 // console.log('ss',date)
-                if(!date) return
+                if (!date) return
                 var nowDate = new Date().toISOString();
                 var birthDay = date
                 const _today = {
-                    year : parseInt(nowDate.split('-')[0]),
-                    month : parseInt(nowDate.split('-')[1]),
-                    day : parseInt(nowDate.split('-')[2].split('T')[0]),
+                    year: parseInt(nowDate.split('-')[0]),
+                    month: parseInt(nowDate.split('-')[1]),
+                    day: parseInt(nowDate.split('-')[2].split('T')[0]),
                 }
-                const _birthDay =  {
-                    year : parseInt(birthDay.split('-')[0]),
-                    month : parseInt(birthDay.split('-')[1]),
-                    day : parseInt(birthDay.split('-')[2]),
+                const _birthDay = {
+                    year: parseInt(birthDay.split('-')[0]),
+                    month: parseInt(birthDay.split('-')[1]),
+                    day: parseInt(birthDay.split('-')[2]),
                 }
                 // console.log(_birthDay.day)
                 var resultMonth = ((_today.year * 12) + (_today.month + 1)) - ((_birthDay.year * 12) + (_birthDay.month + 1));
                 if (0 > (_today.day - _birthDay.day)) {
                     var y = _today.year, m = _today.month;
                     m = (--m < 0) ? 11 : m;
-                    _today.day += 
-                    [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m] 
-                        + (((1 == m) && ((y % 4) == 0) && (((y % 100) > 0) || ((y % 400) == 0))) 
+                    _today.day +=
+                        [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m]
+                        + (((1 == m) && ((y % 4) == 0) && (((y % 100) > 0) || ((y % 400) == 0)))
                             ? 1 : 0);
                     --resultMonth;
-                } 
-                return (resultMonth - (resultMonth % 12))/12;
+                }
+                return (resultMonth - (resultMonth % 12)) / 12;
             }
         }
         window.customElements.define(PageBasic.is, PageBasic);

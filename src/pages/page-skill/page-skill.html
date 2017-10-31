@@ -21,7 +21,7 @@
 
 <dom-module id="page-skill">
     <template>
-        <style include="shared-styles">
+        <style include="flexbox-grid shared-styles">
             .section {
                 margin: 0.5rem;
             }
@@ -39,6 +39,10 @@
                 text-align: right;
             }
 
+            .textLeft {
+                text-align: left;
+            }
+
             .white-space {
                 margin: 1rem;
             }
@@ -48,107 +52,111 @@
                 font-weight: normal;
             }
         </style>
-        <div class="page-container">
+         <div class="page-container">
             <aqa-title-name></aqa-title-name>
-            <!-- <h2>ความสามารถอื่นๆ</h2> -->
-            <aqa-panel id="card basic">
-                <app-toolbar slot="header">
-                    <div main-title>ความสามารถด้านการศึกษา</div>
-                </app-toolbar>
-                <div slot="content">
-                    <div class="row center-xs">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="textRight font col-xs-12 col-md-6" style="margin:auto 0">
-                                    มีประสบการณ์ด้านการบริหารสถานศึกษา
-                                </div>
-                                <div class="col-xs-12 col-md-2">
-                                    <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 font col-md-1" style="margin:auto 0">
-                                    ปี
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="textRight font col-xs-12 col-md-6" style="margin:auto 0">
-                                    มีประสบการณ์ด้านการบริหารสถานศึกษา
-                                </div>
-                                <div class="col-xs-12 col-md-2">
-                                    <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 font col-md-1" style="margin:auto 0">
-                                    ปี
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="textRight font col-xs-12 col-md-6" style="margin:auto 0">
-                                    มีประสบการณ์ด้านการประกันคุณภาพ
-                                </div>
-                                <div class="col-xs-12 col-md-2">
-                                    <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 font col-md-1" style="margin:auto 0">
-                                    ปี
+             <div class="row">
+                <div class="col-xs-12">
+                    <aqa-panel id="card basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ความสามารถด้านการศึกษา</div>
+                        </app-toolbar>
+                        <div slot="content">
+                            <div class="row center-xs">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="textRight font col-xs-12 col-md-4" style="margin:auto 0">
+                                            มีประสบการณ์ด้านการบริหารสถานศึกษา
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                        </div>
+                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                            ปี
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="textRight font col-xs-12 col-md-4" style="margin:auto 0">
+                                            มีประสบการณ์ด้านการบริหารสถานศึกษา
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                        </div>
+                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                            ปี
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="textRight font col-xs-12 col-md-4" style="margin:auto 0">
+                                            มีประสบการณ์ด้านการประกันคุณภาพ
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">
+                                            <aqa-combo-box items="[[list]]" placeholder="เลือก" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                        </div>
+                                        <div class="col-xs-12 font col-md-2" style="margin:auto 0">
+                                            ปี
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </aqa-panel>
                 </div>
-            </aqa-panel>
-            <div class="white-space"></div>
-            <aqa-panel id="card basic">
-                <app-toolbar slot="header">
-                    <div main-title>ความสามารถด้านคอมพิวเตอร์</div>
-                </app-toolbar>
-                <div slot="content">
-                    <div>
-                        <skill-form items="[[computer]]"></skill-form>
-                    </div>
-                </div>
-            </aqa-panel>
-            <div class="white-space"></div>
-            <aqa-panel id="card basic">
-                <app-toolbar slot="header">
-                    <div main-title>ความสามารถด้านการพิมพ์</div>
-                </app-toolbar>
-                <div slot="content">
-                    <div>
-                        <skill-form items="[[print]]"></skill-form>
-                    </div>
-                </div>
-            </aqa-panel>
-            <div class="white-space"></div>
-            <aqa-panel id="card basic">
-                <app-toolbar slot="header">
-                    <div main-title>ความสามารถด้านภาษา</div>
-                </app-toolbar>
-                <div slot="content">
-                    <!-- <div class="row">
-                        <div class="section section-header col-xs-12">
-                            <b>
-                                ความสามารถด้านภาษา
-                                <hr>
-                            </b>
+                 <div class="white-space"></div>
+                <div class="col-xs-12">
+                    <aqa-panel id="card basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ความสามารถด้านคอมพิวเตอร์</div>
+                        </app-toolbar>
+                        <div slot="content">
+                            <div>
+                                <skill-form items="[[computer]]"></skill-form>
+                            </div>
                         </div>
-                    </div> -->
-                    <div>
-                        <skill-form items="[[language]]"></skill-form>
-                    </div>
+                    </aqa-panel>
                 </div>
-            </aqa-panel>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="white-space"></div>
+                    <aqa-panel id="card basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ความสามารถด้านการพิมพ์</div>
+                        </app-toolbar>
+                        <div slot="content">
+                            <div>
+                                <skill-form items="[[print]]"></skill-form>
+                            </div>
+                        </div>
+                    </aqa-panel>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="white-space"></div>
+                    <aqa-panel id="card basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ความสามารถด้านภาษา</div>
+                        </app-toolbar>
+                        <div slot="content">
+                            <div>
+                                <skill-form items="[[language]]"></skill-form>
+                            </div>
+                        </div>
+                    </aqa-panel>
+                </div> 
+            </div>
             <div style="margin:1rem"></div>
             <div class="row center-xs">
                 <div class="col-xs-12">
                     <aqa-button type="success">บันทึก</aqa-button>
                 </div>
-            </div>
-        </div>
+            </div> 
+        </div> 
     </template>
     <script>
         class PageSkill extends Polymer.Element {
             static get is() { return 'page-skill'; }
             static get properties() {
                 return {
+
                     computer: {
                         type: Array,
                         value: [
