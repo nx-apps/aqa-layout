@@ -641,13 +641,8 @@
                 }
             }
             checkIsRegion(region_id, province) {
-                // console.log(this.$.province.value);
                 let newProvice = province.filter(item => item.region_old_id === region_id)
-                // for (var i = 0; i < province.length; i++) {
-                //     console.log(province[i]);
-                // }
                 return newProvice
-                // console.log(newProvice);
             }
         }
         window.customElements.define(AddressFormContract.is, AddressFormContract);
