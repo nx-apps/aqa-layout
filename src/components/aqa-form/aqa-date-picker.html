@@ -17,28 +17,27 @@
 <dom-module id="aqa-date-picker">
   <template>
     <style>
-      /* input {
-          font: inherit;
-          outline: none;
-          box-shadow: none;
-          border: none;
-          width: auto;
-          text-align: center;
-          font-size: medium;
-        } */
-
       * {
         font-family: TrirongLight;
         box-sizing: border-box;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 20px;
       }
 
       .form-control {
         -webkit-appearance: none;
         -webkit-box-shadow: none;
         box-shadow: none;
+
         -moz-appearance: none;
+
         display: block;
-        padding: 6px 5px;
+        width: 100%;
+        height: 36px;
+        padding: 6px 15px;
         font-size: 1rem;
         line-height: 1.57142857;
         color: #57626D;
@@ -51,7 +50,7 @@
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
       }
 
-      input {
+      iron-input {
         font-family: inherit;
         font-size: inherit;
         line-height: inherit;
@@ -60,43 +59,75 @@
         font: inherit;
         color: inherit;
         outline: none;
+        width: 100%;
+        height: auto;
+      }
+
+      input:focus {
+        border-color: #62a8ea
+      }
+
+      input::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #A9A9A9;
+      }
+
+      input::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #A9A9A9;
+      }
+
+      input:-ms-input-placeholder {
+        /* IE 10+ */
+        color: #A9A9A9;
+      }
+
+      input:-moz-placeholder {
+        /* Firefox 18- */
+        color: #A9A9A9;
       }
 
       label {
-        display: block;
+        font-weight: 300;
+        display: inline-block;
         max-width: 100%;
         margin-bottom: 5px;
         color: #000;
       }
 
-      div {
-        font-size: 10px
+      .help-block {
+        margin-bottom: 0;
       }
 
-      paper-input-container {
-        --paper-input-container-underline: {
-          border-bottom: var(--paper-input-border-success);
-        }
+      small {
+        font-size: 70%;
+        color: #f96868;
       }
 
-      paper-icon-button {
-        color: #8d8d8d;
-        -o-transition: color .2s ease-out;
-        -ms-transition: color .2s ease-out;
-        -moz-transition: color .2s ease-out;
-        -webkit-transition: color .2s ease-out;
-        transition: color .2s ease-out;
+      label[has-error] {
+        color: #f96868;
       }
 
-      paper-icon-button:hover {
-        color: black;
+      input[has-error] {
+        border-color: #f96868 !important;
       }
 
-      paper-icon-button[disabled] {
-        display: none;
+      label>span {
+        color: #f96868;
+      }
+
+      .arrow-drop-down {
+        position: absolute;
+        top: 35px;
+        right: 0;
+      }
+
+      iron-icon {
+        cursor: pointer;
+        padding-right: 5%;
       }
     </style>
-    <label class="control-label" >[[label]]</label>
+    <!-- <label class="control-label" >[[label]]</label>
     <iron-input bind-value="{{dayBe}}" allowed-pattern="[0-9]" aria-label="First 2 digits of date" on-focus="_setSeleteValue">
       <input class="form-control" maxlength="2" size="2" min="1" max="31">
     </iron-input>
@@ -110,9 +141,21 @@
     </iron-input>
     </span>
     <paper-icon-button slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></paper-icon-button>
-    <paper-input-error slot="add-on">Date invalid!</paper-input-error>
-
-
+    <paper-input-error slot="add-on">Date invalid!</paper-input-error> -->
+    <div class="form-group">
+      <label class="control-label" has-error$="{{hasError}}">[[label]]
+        <template is="dom-if" if="[[required]]">
+          <span>*</span>
+        </template>
+      </label>
+      <iron-input bind-value="{{selectedBe}}">
+        <input class="form-control" placeholder="[[placeholder]]" has-error$="{{hasError}}" >
+        <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
+      </iron-input>
+      <template is="dom-if" if="[[hasError]]">
+        <small class="help-block">[[errorMassage]]</small>
+      </template>
+    </div>
     <!-- [[selected]] /// [[showBc]]
     <br> [[selectedBe]]
     <p>111212</p> -->
