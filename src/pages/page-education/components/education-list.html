@@ -30,7 +30,7 @@
                         <div style="text-align: center">[[count(index)]]</div>
                     </template>
                 </vaadin-grid-column>
-                <vaadin-grid-column width="200px">
+                <vaadin-grid-column  width="200px" flex-grow="0">
                     <template class="header">สถานศึกษา</template>
                     <template>
                         <div>[[item.address_education]]</div>
@@ -39,17 +39,35 @@
                 <vaadin-grid-column>
                     <template class="header">ระดับการศึกษา</template>
                     <template>
-                        <div style="text-align: center">[[item.level_education]]</div>
+                        <div>[[item.level_education]]</div>
                     </template>
                 </vaadin-grid-column>
-                <vaadin-grid-column width="200px" flex-grow="0">
-                    <template class="header">ชื่อปริญญา</template>
+                <vaadin-grid-column>
+                    <template class="header">ชื่อปริญญา (ย่อ)</template>
                     <template>
-                        <div style="text-align: center">[[item.name_education]]</div>
+                        <div>[[item.sub_name_education]]</div>
+                    </template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">คณะ</template>
+                    <template>
+                        <div>[[item.name_faculty]]</div>
+                    </template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">สาขา</template>
+                    <template>
+                        <div>[[item.name_branch]]</div>
+                    </template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">วิชาเอก</template>
+                    <template>
+                        <div>[[item.name_major]]</div>
                     </template>
                 </vaadin-grid-column>
                 <vaadin-grid-column width="100px" flex-grow="0">
-                    <template class="header">ปีที่จบ</template>
+                    <template class="header">ปี พ.ศ. ที่จบ</template>
                     <template>
                         <div style="text-align: center">[[item.year_education]]</div>
                     </template>
@@ -85,7 +103,7 @@
                     <div style="margin-top:1rem">จำนวนรายการทั้งหมด [[datas.length]] รายการ </div>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                     <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560 ผู้แก้ไข : ผู้ใช้งาน </div>
+                     <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560 ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
                 </div>
             </div>
             
@@ -104,35 +122,39 @@
                             {
                                 address_education: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
                                 level_education: 'ปริญญาตรี',
+                                sub_name_education:'คอบ',
+                                name_faculty:'คณะครุศาสตร์อุตสาหกรรม',
+                                name_branch:'คอมพิวเตอร์',
+                                name_major:'เทคโนโลยีคอมพิวเตอร์',
                                 name_education: 'การศึกษาบัณฑิต',
                                 year_education: 2560,
                                 edit_name: 'ผู้ใช้งาน',
                                 edit_date: '2/7/2560'
                             },
-                            {
-                                address_education: 'มหาวิทยาลัยแม่โจ้',
-                                level_education: 'ปริญญาตรี',
-                                name_education: 'เกษตรศาสตรบัณฑิต',
-                                year_education: 2560,
-                                edit_name: 'ผู้ใช้งาน',
-                                edit_date: '9/10/2560'
-                            },
-                            {
-                                address_education: 'มหาวิทยาลัยเชียงใหม่',
-                                level_education: 'ปริญญาตรี',
-                                name_education: 'ครุศาสตรบัณฑิต',
-                                year_education: 2560,
-                                edit_name: 'ผู้ใช้งาน',
-                                edit_date: '2/10/2561'
-                            },
-                            {
-                                address_education: 'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา',
-                                level_education: 'ปริญญาตรี',
-                                name_education: 'เทคโนโลยีบัณฑิต',
-                                year_education: 2560,
-                                edit_name: 'ผู้ใช้งาน',
-                                edit_date: '3/11/2561'
-                            }
+                            // {
+                            //     address_education: 'มหาวิทยาลัยแม่โจ้',
+                            //     level_education: 'ปริญญาตรี',
+                            //     name_education: 'เกษตรศาสตรบัณฑิต',
+                            //     year_education: 2560,
+                            //     edit_name: 'ผู้ใช้งาน',
+                            //     edit_date: '9/10/2560'
+                            // },
+                            // {
+                            //     address_education: 'มหาวิทยาลัยเชียงใหม่',
+                            //     level_education: 'ปริญญาตรี',
+                            //     name_education: 'ครุศาสตรบัณฑิต',
+                            //     year_education: 2560,
+                            //     edit_name: 'ผู้ใช้งาน',
+                            //     edit_date: '2/10/2561'
+                            // },
+                            // {
+                            //     address_education: 'มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา',
+                            //     level_education: 'ปริญญาตรี',
+                            //     name_education: 'เทคโนโลยีบัณฑิต',
+                            //     year_education: 2560,
+                            //     edit_name: 'ผู้ใช้งาน',
+                            //     edit_date: '3/11/2561'
+                            // }
                         ]
                     }
                 }
