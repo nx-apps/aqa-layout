@@ -4,7 +4,6 @@
 <dom-module id="aqa-input">
     <template>
         <style>
-       
             * {
                 font-family: TrirongLight;
                 box-sizing: border-box;
@@ -18,7 +17,7 @@
                 -webkit-appearance: none;
                 -webkit-box-shadow: none;
                 box-shadow: none;
-               
+
                 -moz-appearance: none;
 
                 display: block;
@@ -52,19 +51,23 @@
                 border-color: #62a8ea
             }
 
-            input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            input::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
                 color: #A9A9A9;
             }
 
-            input::-moz-placeholder { /* Firefox 19+ */
+            input::-moz-placeholder {
+                /* Firefox 19+ */
                 color: #A9A9A9;
             }
 
-            input:-ms-input-placeholder { /* IE 10+ */
+            input:-ms-input-placeholder {
+                /* IE 10+ */
                 color: #A9A9A9;
             }
-            
-            input:-moz-placeholder { /* Firefox 18- */
+
+            input:-moz-placeholder {
+                /* Firefox 18- */
                 color: #A9A9A9;
             }
 
@@ -86,23 +89,22 @@
                 margin-bottom: 0;
             }
 
-            small{
+            small {
                 font-size: 70%;
                 color: #f96868;
             }
 
-            label[has-error]{
+            label[has-error] {
                 color: #f96868;
             }
 
-            input[has-error]{
+            input[has-error] {
                 border-color: #f96868 !important;
             }
 
-            label > span{
+            label>span {
                 color: #f96868;
             }
-
         </style>
         <div class="form-group">
             <label class="control-label" has-error$="{{hasError}}">[[label]]
@@ -110,7 +112,8 @@
                     <span>*</span>
                 </template>
             </label>
-            <input id="input" type="text" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" has-error$="[[hasError]]" disabled$="[[disabled]]">
+            <input id="input" type="text" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" has-error$="[[hasError]]"
+                disabled$="[[disabled]]">
             <template is="dom-if" if="[[hasError]]">
                 <small class="help-block" data-fv-validator="notEmpty" data-fv-for="username" data-fv-result="INVALID">[[errorMassage]]</small>
             </template>
@@ -127,111 +130,121 @@
                         value: ""
                     },
                     value: {
-                        type:String,
+                        type: String,
                         notify: true,
-                        value:"0824521491",
+                        value: "0824521491",
                         observer: "_valueChanged"
                     },
-                    valueInput:{
+                    valueInput: {
                         type: String,
                         value: ""
                     },
-                    pattern:{
+                    pattern: {
                         type: String
                     },
-                    hasError:{
-                        type:Boolean,
-                        value:false
+                    hasError: {
+                        type: Boolean,
+                        value: false
                     },
-                    required:{
-                        type:Boolean,
-                        value:false
+                    required: {
+                        type: Boolean,
+                        value: false
                     },
-                    placeholder:{
-                        type:String,
-                        value:""
+                    placeholder: {
+                        type: String,
+                        value: ""
                     },
-                    errorMassage:{
-                        type:String,
-                        value:""
+                    errorMassage: {
+                        type: String,
+                        value: ""
                     },
-                    allowedPattern:{
-                        type:String,
-                        value:""
+                    allowedPattern: {
+                        type: String,
+                        value: ""
                     },
-                    type:{
-                        type:String,
-                        value:"text",
+                    type: {
+                        type: String,
+                        value: "text",
                         observer: '_typeChanged'
                     },
-                    disabled:{
-                        type:Boolean
+                    disabled: {
+                        type: Boolean
                     },
-                    dataPattern:{
-                        type:String,
-                        value:""
+                    dataPattern: {
+                        type: String,
+                        value: ""
                     }
                 }
             }
 
-            validate(){
+            validate() {
                 this.hasError = false
                 // this.value = this.value.trim()
-                if(this.required && this.value==""){
+                if (this.required && this.value == "") {
                     this.hasError = true
                 }
 
                 return this.hasError
             }
 
-            reset(){
+            reset() {
                 this.hasError = false
                 this.value = ""
             }
 
-            _typeChanged(type){
-                if(type=="phone"){
+            _typeChanged(type) {
+                if (type == "phone") {
                     this.allowedPattern = "[0-9]"
                 }
             }
 
-            _valueChanged(newVal,oldVal){
-                
-                var value = newVal || ""
-                //0824521491
+            _valueChanged(newVal, oldVal) {
+                console.log
+                this.$.input.value = this._convertData(newVal)
 
-                var valueInput = ""  
-
-                valueInput += value.substring(0, 3)
-                if(value.length >= 3){
-                    valueInput += '-'
-                }
-
-                valueInput +=  value.substring(3, 6)
-                if(value.length >= 6){
-                    valueInput +=  '-'
-                }
-
-                valueInput +=  value.substring(6, 10)
-                this.$.input.value = valueInput
-                //console.log(valueInput)
-            
             }
 
-            _inputChanged(e){
+            _convertData(newVal) {
+
+                var value = newVal || ""
+                var valueInput = ""
+
+                if (this.type == "phone") {
+                    valueInput += value.substring(0, 3)
+                    if (value.length >= 3) {
+                        valueInput += '-'
+                    }
+
+                    valueInput += value.substring(3, 6)
+                    if (value.length >= 6) {
+                        valueInput += '-'
+                    }
+
+                    valueInput += value.substring(6, 10)
+                    
+                }
+
+                return valueInput
+
+            }
+
+            _inputChanged(e) {
 
                 var value = e.target.value || ""
                 value = value.replace(/-/g, "")
+                value.substring(0, 10)
 
-                if(value!="" && this.allowedPattern!="" ){
-                    var patt = new RegExp('^'+this.allowedPattern+'*$');
+                if (value != "" && this.allowedPattern != "") {
+                    var patt = new RegExp('^' + this.allowedPattern + '*$');
                     var res = patt.test(value);
-                    if(!res){
-                        this.$.input.value = this.value
+                    if (!res) {
+                        e.target.value = this._convertData(this.value)
                     }
                 }
 
-                this.value = this.$.input.value
+                var value = e.target.value || ""
+                value = value.replace(/-/g, "")
+                this.value = value
 
 
                 // var value = this.newVal || ""
