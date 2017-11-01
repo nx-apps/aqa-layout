@@ -7,9 +7,9 @@
         <style>
             :host {
                 display: block
-            }
+            }   
         </style>
-        <slot on-mouseover="_showTooltip"></slot>
+        <slot on-mouseover="_showTooltip" on-mouseout="_hideTooltip"></slot>
 
     </template>
 
@@ -37,30 +37,16 @@
                 if(typeof  window.tooltipSection == "undefined"){
                     window.tooltipSection = document.createElement('aqa-tooltip-section')
                     tooltipSection.setAttribute('id',"tooltipSection")
-                    // tooltipSection.innerHTML = 'meow'
                     document.querySelector('body').appendChild(tooltipSection)
-
-                    // var tick = (render) => {
-                    //     render`
-                    //         <div id="xx">
-                    //             meow
-                    //     `;
-                    // }
-
-                    // setInterval(tick, 1000,
-                    //     hyperHTML(tooltipSection)
-                    // );
-
-                    
-
-                    //         </div>
                 }                
             }
 
             _showTooltip(e){
-                console.log(document.getElementById('tooltipSection'))
-                // document.getElementById('tooltipSection').label ="edit"
-                // console.log(document.getElementById('tooltipSection'))
+                //document.getElementById('tooltipSection')
+            }
+
+            _hideTooltip(e){
+
             }
 
         }
