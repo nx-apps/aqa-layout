@@ -22,6 +22,22 @@
         box-sizing: border-box;
       }
 
+      paper-input-container {
+        padding: 0px 0;
+        --paper-input-container-underline: {
+          display: none;
+        }
+        --paper-input-container-underline: {
+          display: none;
+        }
+        --paper-input-container-underline-focus: {
+          display: none;
+        }
+        --paper-input-container-underline-disabled: {
+          display: none;
+        }
+      }
+
       .form-group {
         position: relative;
         margin-bottom: 20px;
@@ -59,12 +75,17 @@
         font: inherit;
         color: inherit;
         outline: none;
-        width: 100%;
+        /* width: 100%; */
         height: auto;
       }
 
+      input {
+        border: none;
+      }
+
       input:focus {
-        border-color: #62a8ea
+        outline: none !important;
+        /* border-color: #62a8ea */
       }
 
       input::-webkit-input-placeholder {
@@ -123,9 +144,12 @@
       }
 
       iron-icon {
+        position: absolute;
+        /* top: 35px; */
+        width: 1rem;
+        height: 1rem;
+        right: 10px;
         cursor: pointer;
-        padding: 0.2rem; 
-        margin-right: 0.4rem;
       }
     </style>
     <!-- <label class="control-label" >[[label]]</label>
@@ -143,7 +167,48 @@
     </span>
     <paper-icon-button slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></paper-icon-button>
     <paper-input-error slot="add-on">Date invalid!</paper-input-error> -->
-    <div class="form-group">
+    <paper-input-container no-label-float attr-for-value="value" disabled$="[[disabled]]">
+      <!-- <label slot="label" class="control-label" has-error$="{{hasError}}">[[label]]
+        <template is="dom-if" if="[[required]]">
+          <span>*</span>
+        </template>
+      </label> -->
+      <span id="input" slot="input">
+        <div class="form-group">
+          <label class="control-label" has-error$="{{hasError}}">[[label]]
+            <template is="dom-if" if="[[required]]">
+              <span>*</span>
+            </template>
+          </label>
+          <span class="form-control">
+            <iron-input style="width: 1rem;" bind-value="{{dayBe}}" allowed-pattern="[0-9-]" aria-label="First 2 digits of date " on-focus="_setSeleteValue">
+              <input maxlength="2" size="2" min="1" max="31" on-focus="_setSeleteValue" on-focusout="checkDay">
+            </iron-input>
+            /
+            <iron-input style="width: 1rem;" bind-value="{{monthBe}}" allowed-pattern="[0-9-]" aria-label="Middle 2 digits of month "
+              on-focus="_setSeleteValue">
+              <input maxlength="2" size="2" min="1" max="12" on-focus="_setSeleteValue" on-focusout="checkMonth">
+            </iron-input>
+            /
+            <iron-input style="width: 2.5rem;" bind-value="{{yearBe}}" allowed-pattern="[0-9-]" aria-label="Last 4 digits of year" on-focus="_setSeleteValue">
+              <input maxlength="4" size="4" min="1" max="9999" on-focus="_setSeleteValue" on-focusout="checkYear">
+            </iron-input>
+            <iron-icon slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
+          </span>
+          <template is="dom-if" if="[[hasError]]">
+            <small class="help-block">[[errorMassage]]</small>
+          </template>
+        </div>
+      </span>
+      <!-- <iron-icon slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon> -->
+      <!-- <span slot="add-on">
+        <template is="dom-if" if="[[hasError]]">
+          <small class="help-block">[[errorMassage]]</small>
+        </template>
+      </span> -->
+      <!-- <paper-input-error slot="add-on">Date invalid!</paper-input-error> -->
+    </paper-input-container>
+    <!-- <div class="form-group">
       <label class="control-label" has-error$="{{hasError}}">[[label]]
         <template is="dom-if" if="[[required]]">
           <span>*</span>
@@ -153,10 +218,8 @@
         <input class="form-control" placeholder="[[placeholder]]" has-error$="{{hasError}}" >
         <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
       </iron-input>
-      <template is="dom-if" if="[[hasError]]">
-        <small class="help-block">[[errorMassage]]</small>
-      </template>
-    </div>
+      
+    </div> -->
     <!-- [[selected]] /// [[showBc]]
     <br> [[selectedBe]]
     <p>111212</p> -->
@@ -200,9 +263,18 @@
             notify: true,
             //value:'15/9/2560'
           },
-          dayBe: String,
-          monthBe: String,
-          yearBe: String,
+          dayBe: {
+            type: String,
+            value: '--',
+          },
+          monthBe: {
+            type: String,
+            value: '--'
+          },
+          yearBe: {
+            type: String,
+            value: '----'
+          },
           label: {
             type: String,
             value: ''
@@ -233,15 +305,6 @@
             value: false,
             observer: 'setCloseDropDown'
           },
-          // daysOfWeek: {
-          //   type: Array,
-          //   value: ['จัน', 'อัง', 'พุธ', 'พฤ', 'ศุกร์', 'เสาร์', 'อา']
-          //   // value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          // },
-          // months: {
-          //   type: Array,
-          //   value: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-          // },
           openAnimationConfig: {
             type: Array,
             value: function () {
@@ -273,7 +336,18 @@
           }
         };
       }
-
+      checkDay(e) {
+        if (e.target.value === '')
+          return e.target.value = '--'
+      }
+      checkMonth(e) {
+        if (e.target.value === '')
+          return e.target.value = '--'
+      }
+      checkYear(e) {
+        if (e.target.value === '')
+          return e.target.value = '----'
+      }
       _setSeleteValue(e) {
 
         let value = e.target
@@ -281,15 +355,6 @@
         // console.log(value.updateValueAndPreserveCaret());
         // console.log(value.select());
         value.select()
-      }
-      setZeroBefore(day) {
-        if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
-          // console.log(1);
-          return '0' + day
-        } else {
-          // console.log(2);
-          return day
-        }
       }
       openCalendar() {
         // console.log(this.$.dropdown.open());
