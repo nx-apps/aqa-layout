@@ -16,163 +16,28 @@
 <link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../../bower_components/iron-icons/social-icons.html">
 
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+
+<link rel="import" href="../../layout/flexbox-grid.html">
+
+<link rel="import" href="../../layout/shared-styles.html">
+
 <link rel="import" href="../../components/aqa-header/aqa-header.html">
+<link rel="import" href="../../components/aqa-tooltip/aqa-tooltip.html">
 
 <dom-module id="page-tests">
     <template>
-        <style>
-             :host {
-                --paper-listbox: {
-                    padding: 0.2rem;
-                    min-width: 300px;
-                    border-radius: 0.2rem;
-                }
-                --paper-item: {
-                    padding: 0.2rem 1rem;
-                    color: #76838f;
-                    font-weight: 100;
-                }
-                --paper-item-focused: {
-                    background-color: #f3f7f9;
-                    font-weight: 100;
-                    text-decoration: none;
-                }
-                ;
-                --paper-item-focused-before: {
-                    opacity: 0;
-                }
-                ;
-                --paper-item-selected: {
-                    background-color: #f3f7f9;
-                }
-                --paper-item-disabled: {
-                    background-color: #f3f7f9;
-                }
-                --paper-item-selected-weight:100;
-            }
+        <style include="flexbox-grid shared-styles">
 
-            paper-item,
-            paper-item-body {
-                height: 1px;
-                /* edit for ie.*/
-            }
-
-            .img-circle {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-            }
-
-            .flex-container {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .header-content>b {
-                font-family: MitrLight;
-            }
-
-            .icon {
-                --iron-icon-height: 32px;
-                --iron-icon-width: 32px;
-                margin: 0.4rem;
-                --iron-icon-fill-color: #37474F;
-            }
         </style>
-        <!-- <div class="flex-container">
-            <div class="flex-item">
-                <aqa-title>ทดสอบ</aqa-title>
-                <aqa-breadcrumb items="[[datas]]"></aqa-breadcrumb>
-            </div>
-            <div class="flex-item" style="display:flex">
-                <div style="margin:auto">
-                    <div class="header-content">
-                        <b>ผู้ประเมินระดับการศึกษาขั้นพื้นฐาน (ปฐมวัย)</b>
-                    </div>
-                    <div class="header-content" style="text-align:right">
-                        <b>รองศาสตร์จารย์บรรเจิด เริศฤดี</b>
-                    </div>
-                </div>
-                <div style="margin:auto">
-                    <paper-menu-button no-overlap horizontal-align="right">
-                        <div class="divImage" slot="dropdown-trigger" alt="menu">
-                            <img class="img-circle" src$="[[rootPath]]images/I20170901111610.jpg" />
-                        </div>
-                        <paper-listbox slot="dropdown-content">
-
-                            <paper-icon-item disabled>
-                                <img class="img-circle" src$="[[rootPath]]images/I20170901111610.jpg" / slot="item-icon">
-                                <paper-item-body two-line>
-                                    <div>รองศาสตร์จารย์บรรเจิด เริศฤดี</div>
-                                    <div secondary>test@gmail.com</div>
-                                </paper-item-body>
-                            </paper-icon-item>
-
-                            <paper-item>
-                                <iron-icon icon="social:person"></iron-icon>
-                                &nbsp;&nbsp;Profile
-                            </paper-item>
-                            <paper-item>
-                                <iron-icon icon="icons:settings"></iron-icon>
-                                &nbsp;&nbsp;Setting
-                            </paper-item>
-                            <paper-item>
-                                <iron-icon icon="icons:exit-to-app"></iron-icon>
-                                &nbsp;&nbsp;Log-out
-                            </paper-item>
-                        </paper-listbox>
-                    </paper-menu-button>
+        <div class="page-container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <aqa-combo-box></aqa-combo-box>
                 </div>
             </div>
         </div>
 
-
-        <aqa-vaadin-grid>
-            <vaadin-grid items="[[items]]" size="200">
-                <vaadin-grid-column width="66px" flex="0">
-                    <template class="header">
-                        <div class="cell">
-                            #
-                        </div>
-                    </template>
-                    <template>
-                        <div class="cell">[[index]]</div>
-                    </template>
-                </vaadin-grid-column>
-                <vaadin-grid-column width="100px" flex-glow="0">
-                    <template class="header">
-                        <div class="cell">Name</div>
-                    </template>
-                    <template>
-                        <div class="cell">[[item.name]]</div>
-                    </template>
-                </vaadin-grid-column>
-
-                <vaadin-grid-column flex="2">
-                    <template class="header">
-                        <div class="cell">Email</div>
-                    </template>
-                    <template>
-                        <aqa-icon-button label="showMe">
-                            <paper-icon-button icon="done"></paper-icon-button>
-                        </aqa-icon-button>
-                    </template>
-                </vaadin-grid-column>
-
-            </vaadin-grid>
-        </aqa-vaadin-grid> -->
-
-        <!-- <aqa-listbox></aqa-listbox> -->
-      
-        <nylon-rating name="1" selected="0"></nylon-rating>  
-        <nylon-rating name="2" selected="2"></nylon-rating>  
-        <aqa-button type="primary" icon="done">บันทึก</aqa-button>
-
-
-
-        <!-- <button class="btn btn-primary">บันทึก</button>
-        <button class="btn btn-success">ใช้งาน</button>
-        <button class="btn btn-default">บันทึก</button> -->
     </template>
 
     <script>
