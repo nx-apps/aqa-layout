@@ -1,4 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/lib/utils/debounce.html">
+
 
 <dom-module id="nylon-rating">
     <template>
@@ -21,9 +23,9 @@
             .section{
                 margin-right: 0.5rem;
             }
-            .rating>input {
+             .rating>input {
                 display: none;
-            }
+            } 
 
             .rating>label:before {
                 margin: 5px;
@@ -96,42 +98,45 @@
                     <div>4</div>
                 </div>
             </label>  -->
-
-            <input type="radio" id="star3" name="rating-[[name]]" value="3" />
-            <label class="full section" for="star3" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ดีมาก (Excellent)">
+            <!-- <input type="radio" id$="star[[name]]3" name$="rating-[[name]]" value="3" />
+            <label class="full section" for$="star[[name]]3" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ดีมาก (Excellent)">
                 <div class="avartar">
                     <div>3</div>
                 </div>
             </label>
 
-            <input type="radio" id="star2" name="rating-[[name]]" value="2" />
-            <label class="full section" for="star2" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ดี (Good)">
+            <input type="radio" id$="star[[name]]2" name$="rating-[[name]]" value="2" />
+            <label class="full section" for$="star[[name]]2" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ดี (Good)">
                 <div class="avartar">
                     <div>2</div>
                 </div>
             </label>
 
-            <input type="radio" id="star1" name="rating-[[name]]" value="1" />
-            <label class="full section" for="star1" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="พอใช้ (Fair)">
+            <input type="radio" id$="star[[name]]1" name$="rating-[[name]]" value="1" />
+            <label class="full section" for$="star[[name]]1" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="พอใช้ (Fair)">
                 <div class="avartar">
                     <div>1</div>
                 </div>
-            </label>
+            </label> -->
+            
+            <template is="dom-repeat" items="[[itemreverse(items)]]">
+                <input type="radio" id$="star[[name]][[item.pointer]]" name$="rating-[[name]]" checked$="[[selectedValue(item.pointer,item.label)]]" value="[[item.value]]"/>
+                <label class="full section" for$="star[[name]][[item.pointer]]" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="[[item.label]]">
+                    <div class="avartar">
+                        <div>[[item.pointer]]</div>
+                    </div>
+                </label>
+            </template>
 
-            <input type="radio" id="star0" name="rating-[[name]]" value="0" checked/>
-            <label class="full section" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ (No Skill)">
-                <div class="avartar">
-                    <div>0</div>
-                </div>
-            </label>
-
-            <input type="radio" id="star0" name="rating-[[name]]" value="0" checked hidden/>
-            <label class="full section" for="star0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ" hidden>
+            <input type="radio" id$="star[[name]]0" name$="rating-[[name]]" value="0" checked hidden/>
+            <label class="full section" for$="star[[name]]0" on-mouseover="showText" on-mouseout="clearText" on-click="setText" title="ไม่มีทักษะ" hidden>
                 <div class="avartar">
                     <div>0</div>
                 </div>
             </label>
         </fieldset>
+
+        <!-- <button on-click="test">show</button> -->
         <div class="resultRating"><div>[[value]]</div></div>
     </template>
 
@@ -157,8 +162,52 @@
                     name:{
                         type:String,
                         value:'0'
+                    },
+                    selected:{
+                        type:String,
+                        value:''
+                    },
+                    items:{
+                        type:Array,
+                        value:[
+                            {
+                                label:'ไม่มีทักษะ',
+                                value:'0'
+                            },
+                            {
+                                label:'พอใช้ (Fair)',
+                                value:'1'
+                            },
+                            {
+                                label:'ดี (Good)',
+                                value:'2'
+                            },
+                            {
+                                label:'ดีมาก (Excellent)',
+                                value:'3'
+                            }
+                        ]
                     }
                 }
+            }
+            selectedValue(pointer,label){
+                // console
+                if(pointer == this.selected) {
+                    // console.log(pointer,label)
+                    this.value = label;
+                    this.title = label;
+                    return true;
+                }
+                else return false
+                // var data = '#star'+this.name+val
+                // // console.log(Polymer.dom(this.root).querySelector(data))
+                // this._debouncer = Polymer.Debouncer.debounce(
+                //     this._debouncer, // initially undefined
+                //     Polymer.Async.timeOut.after(100),()=>{
+                //         //  console.log(Polymer.dom(this.root).querySelector(data))
+                //         if(Polymer.dom(this.root).querySelector(data))
+                //             Polymer.dom(this.root).querySelector(data).checked = true;
+                //     });
             }
             showText(e){
                 this.active = false;
@@ -167,6 +216,15 @@
             clearText(){
                 if(this.active != true)
                     this.value = this.title;
+            }
+            itemreverse(val){
+                // console.log(val.reverse())
+                var arr = [];
+                for (var index = val.length - 1; index >= 0; index--) {
+                    arr.push(Object.assign({},val[index],{pointer:index.toString()}))
+                }
+                // console.log(arr)
+                return arr;
             }
             setText(e){
                 this.active = true

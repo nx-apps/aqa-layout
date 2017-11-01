@@ -18,7 +18,7 @@
                     [[item.label]]
                 </div>
                 <div class="textRight col-xs-12 col-md-9">
-                    <nylon-rating></nylon-rating>
+                    <nylon-rating name="[[name]][[index]]"></nylon-rating>
                 </div>
             </template>
             <!-- <div class="row">
@@ -36,6 +36,10 @@
                     items: {
                         type: Array,
                         value: []
+                    },
+                    name:{
+                        type:String,
+                        value:'0'
                     }
                 }
             }
