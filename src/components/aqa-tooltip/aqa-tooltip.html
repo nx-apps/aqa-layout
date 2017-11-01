@@ -1,6 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
-<link rel="import" href="./aqa-tooltip-section.html">
+<!-- <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html"> -->
+ <link rel="import" href="./aqa-tooltip-section.html"> 
 
 <dom-module id="aqa-tooltip">
     <template>
@@ -35,8 +35,8 @@
             constructor(){
                 super()
                 if(typeof  window.tooltipSection == "undefined"){
-                    window.tooltipSection = document.createElement('aqa-tooltip-section')
-                    tooltipSection.setAttribute('id',"tooltipSection")
+                    window.tooltipSection = document.createElement('paper-tooltip')
+                    tooltipSection.setAttribute('id',"tooltipSection");
                     // tooltipSection.innerHTML = 'meow'
                     document.querySelector('body').appendChild(tooltipSection)
 
@@ -58,7 +58,9 @@
             }
 
             _showTooltip(e){
-                console.log(document.getElementById('tooltipSection'))
+                document.getElementById('tooltipSection').setAttribute("for",e.target.id);
+                document.getElementById('tooltipSection').textContent = 'test'
+                document.getElementById('tooltipSection').updatePosition()
                 // document.getElementById('tooltipSection').label ="edit"
                 // console.log(document.getElementById('tooltipSection'))
             }
