@@ -137,8 +137,12 @@
             <div class="calendar">
                 <div class="months">
                     <div class="month" data-date="2011.1">
-                        <div class="header"><span class="n" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;<span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;<span on-click="nextYear" class="n">&#62&#62</span></div>
+                        <div class="header">
+                            <span class="n" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;
+                            <span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;
+                            <span on-click="nextYear" class="n">&#62&#62</span>
+                        </div>
                         <div class="body">
 
                             <div class="day_names">
@@ -183,14 +187,14 @@
                         type: String,
                         observer: '_selectedChanged',
                         notify: true,
-                        // value: '2017-09-15',
+                        // value: '----/--/--',
                         // 2017-1-15
                     },
                     selectedBe: {
                         type: String,
                         observer: '_selectedBeChanged',
                         notify: true,
-                        //value:'15/9/2560'
+                        // value: '--/--/----'
                     },
                     dayBe: {
                         type: String,
@@ -257,10 +261,10 @@
             }
             setZeroBefore(day) {
                 if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
-                    // console.log(1);
+                    console.log(1);
                     return '0' + day
                 } else {
-                    // console.log(2);
+                    console.log(2);
                     return day
                 }
             }
@@ -482,13 +486,15 @@
                 let thisMonth = new Date().getMonth()
                 let thisYear = new Date().getFullYear()
                 let date = dates
-                if (select[1] > 12) {
+                if (Number(select[1]) === '' || Number(select[0]) === '' || Number(select[2]) === '')
+                    return
+                if (Number(select[1]) > 12) {
                     date = `${select[0]}/${thisMonth + 1}/${select[2]}`
                 }
-                if (select[0] > this._getlastDateOfCurrentMonth(select[2], select[1] - 1)) {
+                if (Number(select[0]) > this._getlastDateOfCurrentMonth(select[2], select[1] - 1)) {
                     date = `${thisDay}/${select[1]}/${select[2]}`
                 }
-                if (select[2] > 9998) {
+                if (Number(select[2]) > 9998) {
                     date = `${select[0]}/${select[1]}/${thisYear + 543}`
                 }
                 // if (date !== '') {
@@ -503,7 +509,10 @@
                 let thisMonth = new Date().getMonth()
                 let thisYear = new Date().getFullYear()
                 let date = dates
+                if (Number(select[1]) === '' || Number(select[0]) === '' || Number(select[2]) === '')
+                    return
                 // month
+
                 if (Number(select[1]) > 12) {
                     date = `${select[0]}-${thisMonth + 1}-${select[2]}`
                 }
@@ -546,6 +555,8 @@
                 // console.log(selected);
                 if (selected !== '' && selected !== undefined) {
                     selected = this._checkDateDc(selected)
+                    if (selected === '')
+                        return
                     var select = selected.split('-')
                     // console.log(select);
                     // console.log(this._checkDatePassDc(this.selected));
@@ -556,7 +567,7 @@
                             month: parseInt(select[1]) - 1,
                             year: parseInt(select[0])
                         }
-                        this.selectedBe = `${this.selectData.day}/${this.selectData.month + 1}/${this.selectData.year + 543}`
+                        this.selectedBe = `${this.selectData.day}/${this.setZeroBefore(Number(this.selectData.month + 1))}/${this.selectData.year + 543}`
                         this.currentYear = this.selectData.year
                         this.currentMonth = this.selectData.month
                         // console.log(this.selectedBe);
@@ -568,13 +579,12 @@
             }
 
             _selectedBeChanged(selectedBe) {
+                // console.log(selectedBe);
                 // console.log('_selectedBeChanged');
                 selectedBe = this._checkDateBc(selectedBe)
+                if (selectedBe === '')
+                    return
                 var select = selectedBe.split('/')
-                // var select = selectedBe.split('/')
-                // console.log(select);
-                // this._checkDateBc(select)
-                // console.log(select[0]);
                 this.set('dayBe', select[0])
                 this.set('monthBe', select[1])
                 if (this.showBc) {
@@ -583,7 +593,7 @@
                     this.set('yearBe', Number(select[2]) - 543)
                 }
                 // console.log(this._checkDatePassBc(select));
-                // console.log(select);
+                // console.log(this.setZeroBefore(select[1]));
                 if (this._checkDatePassBc(select)) {
                     var selectData = {
                         day: select[0],
