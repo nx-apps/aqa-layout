@@ -327,8 +327,8 @@
       </label>
       <!-- <vaadin-combo-box-light items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value"
         value="{{value}}"> -->
-      <iron-input bind-value="{{selectedBe}}">
-        <input class="form-control" id="inputdata" placeholder="--/--/----" has-error$="{{hasError}}" on-focus="_setSeleteValue">
+      <iron-input bind-value="{{selectedBe}}" on-tap="checkPosition">
+        <input class="form-control" id="inputdata" placeholder="--/--/----" has-error$="{{hasError}}"  on-focus="_setSeleteValue">
         <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
       </iron-input>
       <!-- </vaadin-combo-box-light> -->
@@ -485,7 +485,7 @@
         // value.value= ''
         // console.log(value.updateValueAndPreserveCaret());
         // console.log(value.select());
-        value.select()
+        // value.select()
       }
       _setChanged(selectedBe) {
         // console.log(selectedBe);
@@ -507,10 +507,16 @@
 
           valueInput += value.substring(6, 10)
         }
-
-
-        // console.log(valueInput);
         this.$.inputdata.value = valueInput
+      }
+      checkPosition(el) {
+        var val = this.$.inputdata.value;
+        
+        // console.log(el);
+        // if (val) {
+        //   console.log(val.slice(0, el.selectionStart).length);
+        // }
+
       }
       openCalendar() {
         // console.log(this.$.dropdown.open());
