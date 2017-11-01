@@ -10,7 +10,6 @@
             }   
         </style>
         <slot on-mouseover="_showTooltip" on-mouseout="_hideTooltip"></slot>
-
     </template>
 
     <script>
@@ -23,13 +22,13 @@
 
             static get properties() {
                 return {
-                    
+                    label:{
+                        type:String
+                    }
                 };
             }
             ready() {
                 super.ready();
-
-                console.log(this.shadowRoot)
             }
 
             constructor(){
@@ -42,11 +41,19 @@
             }
 
             _showTooltip(e){
-                //document.getElementById('tooltipSection')
+                var el = this.children[0]
+                document.getElementById("tooltipSection").label = this.label
+                var tooltip = document.getElementById("tooltipSection").$.tooltip
+                tooltip.style.display = 'inline'
+                tooltip.style.top = (el.getBoundingClientRect().top - tooltip.offsetHeight - 5) + 'px'
+                tooltip.style.left = (el.getBoundingClientRect().left - (tooltip.offsetWidth/2) +  (el.offsetWidth/2)) + 'px'
             }
 
             _hideTooltip(e){
-
+                var tooltip = document.getElementById("tooltipSection").$.tooltip
+                tooltip.style.display = 'none'
+                tooltip.style.top = '0'
+                tooltip.style.left = '0'
             }
 
         }
