@@ -30,8 +30,8 @@
             #output_image {
                 width: 100%;
                 height: auto;
-                max-width: 200px;
-                max-height: 200px;
+                min-width: 96px;  
+                min-height: auto;
                 margin: 0 auto;
             }
 
@@ -69,15 +69,15 @@
                     <div class="row center-sm" style="text-align:left">
                         <div class="col-xs-12 col-lg-10">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                                     <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                </div> -->
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
                                     <!-- <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker> -->
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
+                                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6">
                                     <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                                     <!-- <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker> -->
                                     <!-- <aqa-input label="วันที่บัตรหมดอายุ" value=""></aqa-input> -->
@@ -109,19 +109,19 @@
                             </div>
                         </div>
                         <div class="first-xs last-lg col-xs-12 col-sm-4 col-lg-2">
-                            <div class="flex">
-                                <div class="flex-item">
-                                    <img id="output_image" src$="[[rootPath]]../../../images/default_profile.png" />
-                                </div>
+                            <div>
+                                <!-- <div class="flex-item"> -->
+                                    <img id="output_image" src$="[[rootPath]]../../../images/user upload.png" />
+                                    <aqa-button type="primary btn-full-width" icon="icons:file-upload" style="max-width:96px">อัพโหลด</aqa-button>
+                                <!-- </div> -->
                             </div>
-                            <aqa-button type="primary btn-full-width" icon="icons:file-upload">อัพโหลด</aqa-button>
                             <div style="margin:1rem"></div>
                         </div>
                     </div>
 
 
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-1">
                             <aqa-combo-box label="เพศ" items="[[genderList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
@@ -137,11 +137,14 @@
                             <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker>
                             <!-- <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <aqa-input label="อายุ (ปี)" value="{{mathAge(birthDay)}}" disabled></aqa-input>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
                             <aqa-input class="form" label="เบอร์มือถือ" type="phone" required></aqa-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                            <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
                             <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker>
@@ -179,27 +182,27 @@
                         type: Array,
                         value: [
                             {
-                                label: 'ผู้ช่วยศาสตราจารย์',
+                                label: 'ศาสตราจารย์กิตติคุณ',
                                 value: '01'
                             },
                             {
-                                label: 'รองศาสตราจารย์',
+                                label: 'ศาสตราจารย์เกียรติคุณ',
                                 value: '02'
                             },
                             {
-                                label: 'ศาสตราจารย์',
+                                label: 'ศาสตราจารย์พิเศษ',
                                 value: '03'
                             },
                             {
-                                label: 'ศาสตราจารย์กิตติคุณ',
+                                label: 'ศาสตราจารย์',
                                 value: '04'
                             },
                             {
-                                label: 'ศาสตราจารย์พิเศษ',
+                                label: 'รองศาสตราจารย์',
                                 value: '05'
                             },
                             {
-                                label: 'ศาสตราจารย์เกียรติคุณ',
+                                label: 'ผู้ช่วยศาสตราจารย์',
                                 value: '06'
                             }
                         ]
@@ -460,7 +463,7 @@
 
 
                 if ((age.years > 0) && (age.months > 0) && (age.days > 0))
-                    ageString = age.years + yearString + ", " + age.months + monthString + " " + age.days + dayString 
+                    ageString = age.years + yearString + " " + age.months + monthString + " " + age.days + dayString 
                 else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
                     ageString = age.days + dayString 
                 else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
