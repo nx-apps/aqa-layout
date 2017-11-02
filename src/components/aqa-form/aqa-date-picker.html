@@ -104,11 +104,11 @@
         color: #f96868;
       }
 
-      label[has-error] {
+      label[invalid] {
         color: #f96868;
       }
 
-      input[has-error] {
+      input[invalid] {
         border-color: #f96868 !important;
       }
 
@@ -320,25 +320,27 @@
       </span>
     </paper-input-container> -->
     <div class="form-group">
-      <label class="control-label" has-error$="{{hasError}}">[[label]] (พ.ศ.)
+      <label class="control-label" invalid$="{{invalid}}">[[label]] (พ.ศ.)
         <template is="dom-if" if="[[required]]">
           <span>*</span>
         </template>
       </label>
       <!-- <vaadin-combo-box-light items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value"
         value="{{value}}"> -->
-      <iron-input bind-value="{{selectedBe}}" on-tap="checkPosition">
-        <input class="form-control" id="inputdata" placeholder="--/--/----" has-error$="{{hasError}}"  on-focus="_setSeleteValue">
-        <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-      </iron-input>
+      <!-- <iron-input on-tap="checkPosition"> -->
+      <input class="form-control" id="inputdata" maxlength="10" placeholder="--/--/----" invalid$="[[invalid]]" on-focus="_setSeleteValue"
+        on-input="_setSplad">
+      <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
+      <!-- </iron-input> -->
       <!-- </vaadin-combo-box-light> -->
 
 
 
-      <template is="dom-if" if="[[hasError]]">
+      <template is="dom-if" if="[[invalid]]">
         <small class="help-block">[[errorMassage]]</small>
       </template>
     </div>
+    <!-- [[invalid]]/// -->
     <!-- <div class="form-group">
       <label class="control-label" has-error$="{{hasError}}">[[label]]
         <template is="dom-if" if="[[required]]">
@@ -394,18 +396,18 @@
             observer: '_setChanged',
             //value:'15/9/2560'
           },
-          dayBe: {
-            type: String,
-            value: '--',
-          },
-          monthBe: {
-            type: String,
-            value: '--'
-          },
-          yearBe: {
-            type: String,
-            value: '----'
-          },
+          // dayBe: {
+          //   type: String,
+          //   value: '--',
+          // },
+          // monthBe: {
+          //   type: String,
+          //   value: '--'
+          // },
+          // yearBe: {
+          //   type: String,
+          //   value: '----'
+          // },
           label: {
             type: String,
             value: ''
@@ -435,6 +437,14 @@
             type: Boolean,
             value: false,
             observer: 'setCloseDropDown'
+          },
+          invalid: {
+            type: Boolean,
+            value: false,
+          },
+          required: {
+            type: Boolean,
+            value: false,
           },
           openAnimationConfig: {
             type: Array,
@@ -487,31 +497,66 @@
         // console.log(value.select());
         // value.select()
       }
-      _setChanged(selectedBe) {
-        // console.log(selectedBe);
-        let value = selectedBe || ""
-        let valueInput = ""
-        if (selectedBe === '') {
-          // valueInput = '--/--/----'
-          this.set('selected', '')
-        } else {
-          valueInput += value.substring(0, 2)
-          if (value.length === 2) {
-            valueInput += '/'
-          }
-
-          valueInput += value.substring(2, 6)
-          if (value.length === 5) {
-            valueInput += '/'
-          }
-
-          valueInput += value.substring(6, 10)
+      _setSplad(e) {
+        // console.log(this.$.inputdata.value);
+        let value = e.target.value
+        // console.log(this.selectedBe, "= ", this.selected, "= ", value);
+        // console.log(e);
+        // console.log(this._convertDataToPattern(value));
+        let reg = new RegExp('[0-9]')
+        if (reg.test(e.data) === false) {
+          let index = e.target.value.indexOf(e.data)
+          // console.log(e.target.value.indexOf(e.data));
+          // console.log(e.target.value.slice(0, -1));
+          // e.target.value = e.target.value.slice(0, index - 1)
         }
+        if (value != "" && (e.inputType !== 'deleteContentForward' && e.inputType !== 'deleteContentBackward')) {
+          var patt = new RegExp('^[0-9/]*$');
+          var res = patt.test(e.key);
+          // console.log(value.length);
+          // console.log(res);
+          if (!res) {
+            e.target.value = this._convertDataToPattern(value)
+          }
+          this.$.inputdata.value = this._convertDataToPattern(value)
+          this.set('selectedBe', this._convertDataToPattern(value))
+        }
+        if (value === '') {
+          this.set('selectedBe', '')
+          this.set('selected', '')
+        }
+        // if (e.key === '/') {
+        //   console.log(this.$.inputdata.value);
+        // }
+      }
+      _setChanged(newVal, oldVal) {
+        // console.log(newVal, oldVal);
+        // console.log(newVal);
+        let value = newVal || ""
+        let valueInput = ""
+        valueInput = this._convertDataToPattern(newVal)
         this.$.inputdata.value = valueInput
+      }
+      _convertDataToPattern(newVal) {
+
+        var value = newVal || ""
+        var valueInput = ""
+        valueInput += value.substring(0, 2)
+        if (value.length === 2) {
+          valueInput += '/'
+        }
+
+        valueInput += value.substring(2, 6)
+        if (value.length === 5) {
+          valueInput += '/'
+        }
+
+        valueInput += value.substring(6, 10)
+        return valueInput
       }
       checkPosition(el) {
         var val = this.$.inputdata.value;
-        
+
         // console.log(el);
         // if (val) {
         //   console.log(val.slice(0, el.selectionStart).length);
@@ -531,15 +576,19 @@
       }
       validate(value) {
         // 29/9/2560
-        let dc = (/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected)
-        let be = (/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe)
+        let arr = []
+        arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected))
+        arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe))
+        // let dc = (/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected)
+        // let be = (/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe)
+
+        // console.log(arr);
         let style = '1px solid green'
-        if (dc !== be)
-          style = '1px solid red'
-        this.updateStyles({
-          '--paper-input-border-success': style
-        })
-        return dc === be
+        let checkData = arr.every(item => item === true)
+        this.set('invalid', !checkData)
+        // console.log(this.invalid);
+
+        return checkData
       }
       reset() {
         this.updateStyles({ '--paper-input-border-success': '1px solid #737373' })
