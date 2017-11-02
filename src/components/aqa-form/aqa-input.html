@@ -112,7 +112,7 @@
                     <span>*</span>
                 </template>
             </label>
-            <input id="input" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
+            <input id="nativeInput" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
                 disabled$="[[disabled]]">
             <template is="dom-if" if="[[invalid]]">
                 <span class="help-block">[[errorMessage]]</span>
@@ -202,7 +202,7 @@
             }
 
             _valueChanged(newVal, oldVal) {
-                var input = this.$.input
+                var input = this.$.nativeInput
                 input.value = this._convertDataToPattern(newVal)
                
                 if(this.autoValidate){

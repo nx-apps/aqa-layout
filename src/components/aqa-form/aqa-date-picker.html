@@ -17,326 +17,97 @@
 <dom-module id="aqa-date-picker">
   <template>
     <style>
-      * {
-        font-family: TrirongLight;
-        box-sizing: border-box;
-      }
-
-      .form-group {
-        position: relative;
-        margin-bottom: 20px;
-      }
-
-      .form-control {
-        -webkit-appearance: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-
-        -moz-appearance: none;
-
-        display: block;
-        width: 100%;
-        height: 36px;
-        padding: 6px 15px;
-        font-size: 1rem;
-        line-height: 1.57142857;
-        color: #57626D;
-        background-color: #fff;
-        background-image: none;
-        border: 1px solid #e4eaec;
-        border-radius: 3px;
-        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-      }
-
-      iron-input {
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-        line-height: normal;
-        margin: 0;
-        font: inherit;
-        color: inherit;
-        outline: none;
-        width: 100%;
-        height: auto;
-      }
-
-      input:focus {
-        border-color: #62a8ea
-      }
-
-      input::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        color: #A9A9A9;
-      }
-
-      input::-moz-placeholder {
-        /* Firefox 19+ */
-        color: #A9A9A9;
-      }
-
-      input:-ms-input-placeholder {
-        /* IE 10+ */
-        color: #A9A9A9;
-      }
-
-      input:-moz-placeholder {
-        /* Firefox 18- */
-        color: #A9A9A9;
-      }
-
-      label {
-        font-weight: 300;
-        display: inline-block;
-        max-width: 100%;
-        margin-bottom: 5px;
-        color: #000;
-      }
-
-      .help-block {
-        margin-bottom: 0;
-      }
-
-      small {
-        font-size: 70%;
-        color: #f96868;
-      }
-
-      label[invalid] {
-        color: #f96868;
-      }
-
-      input[invalid] {
-        border-color: #f96868 !important;
-      }
-
-      label>span {
-        color: #f96868;
-      }
-
-      .arrow-drop-down {
-        position: absolute;
-        top: 35px;
-        width: 1rem;
-        height: 1rem;
-        right: 10px;
-        cursor: pointer;
-      }
-
-     
     </style>
+    <!-- <aqa-date-picker-light selected="{{selected}}" selected-be="{{selectedBe}}" show-bc="{{showBc}}" ></aqa-date-picker-light> -->
+    <!-- <aqa-date-picker-light></aqa-date-picker-light> -->
+    <slot id="slot"></slot>
     
-    <div class="form-group">
-      <label class="control-label" invalid$="{{invalid}}">[[label]] (พ.ศ.)
-        <template is="dom-if" if="[[required]]">
-          <span>*</span>
-        </template>
-      </label>
-
-      <input class="form-control" id="inputdata" maxlength="10" placeholder="--/--/----" invalid$="[[invalid]]" on-focus="_setSeleteValue"
-        on-input="_setSplad">
-      <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-
-
-      <template is="dom-if" if="[[invalid]]">
-        <small class="help-block">[[errorMassage]]</small>
-      </template>
-    </div>
-
-
-    <iron-dropdown id="dropdown" horizontal-align="right" vertical-align="top" open-animation-config="[[openAnimationConfig]]"
-      close-animation-config="[[closeAnimationConfig]]">
-      <div slot="dropdown-content" class="box">
-        <aqa-date-picker-light day-be="{{dayBe}}" month-be="{{monthBe}}" year-be="{{yearBe}}" selected="{{selected}}" selected-be="{{selectedBe}}"
-          show-bc="{{showBc}}" is-close="{{isClose}}"></aqa-date-picker-light>
-      </div>
-    </iron-dropdown>
   </template>
 
   <script>
 
     class AqaDatePicker extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior], Polymer.Element) {
+
       static get is() { return 'aqa-date-picker'; }
-      static get properties() {
-        return {
-          showBc: {
-            type: Boolean,
-            value: false,
-            notify: true,
-          },
-          selected: {
-            type: String,
-            notify: true,
-            value: '',
-          },
-          selectedBe: {
-            type: String,
-            notify: true,
-            observer: '_setChanged',
-          },
-          label: {
-            type: String,
-            value: ''
-          },
-          disabled: {
-            type: Boolean,
-            value: false
-          },
-          value: {
-            type: String,
-            value: '',
-            notify: true,
-          },
-          noLabelFloat: {
-            type: Boolean,
-            value: false
-          },
-          alwaysFloatLabel: {
-            type: Boolean,
-            value: false
-          },
-          hidden: {
-            type: Boolean,
-            value: false
-          },
-          isClose: {
-            type: Boolean,
-            value: false,
-            observer: 'setCloseDropDown'
-          },
-          invalid: {
-            type: Boolean,
-            value: false,
-          },
-          required: {
-            type: Boolean,
-            value: false,
-          },
-          openAnimationConfig: {
-            type: Array,
-            value: function () {
-              return [{
-                name: 'fade-in-animation',
-                timing: {
-                  delay: 150,
-                  duration: 50
-                }
-              }, {
-                name: 'expand-animation',
-                timing: {
-                  delay: 150,
-                  duration: 200
-                }
-              }];
-            }
-          },
-          closeAnimationConfig: {
-            type: Array,
-            value: function () {
-              return [{
-                name: 'fade-out-animation',
-                timing: {
-                  duration: 200
-                }
-              }];
-            }
-          }
-        };
-      }
-      checkDay(e) {
-        if (e.target.value === '')
-          return e.target.value = '--'
-      }
-      checkMonth(e) {
-        if (e.target.value === '')
-          return e.target.value = '--'
-      }
-      checkYear(e) {
-        if (e.target.value === '')
-          return e.target.value = '----'
-      }
-      _setSeleteValue(e) {
 
-        let value = e.target
-      }
-      _setSplad(e) {
-
-        let value = e.target.value
-
-        let reg = new RegExp('[0-9]')
-        if (reg.test(e.data) === false) {
-          let index = e.target.value.indexOf(e.data)
-
+      constructor(){
+        super()
+        
+        if(!window.aqaDataPickerSection){
+          window.aqaDataPickerSection = document.createElement('aqa-date-picker-light')
+          window.aqaDataPickerSection.id = "aqaDataPickerLight"
+          document.querySelector('body').appendChild(window.aqaDataPickerSection)
         }
-        if (value != "" && (e.inputType !== 'deleteContentForward' && e.inputType !== 'deleteContentBackward')) {
-          var patt = new RegExp('^[0-9/]*$');
-          var res = patt.test(e.key);
-  
-          if (!res) {
-            e.target.value = this._convertDataToPattern(value)
-          }
-          this.$.inputdata.value = this._convertDataToPattern(value)
-          this.set('selectedBe', this._convertDataToPattern(value))
-        }
-        if (value === '') {
-          this.set('selectedBe', '')
-          this.set('selected', '')
-        }
- 
+        
       }
-      _setChanged(newVal, oldVal) {
-        let value = newVal || ""
-        let valueInput = ""
-        valueInput = this._convertDataToPattern(newVal)
-        this.$.inputdata.value = valueInput
-      }
-      _convertDataToPattern(newVal) {
 
-        var value = newVal || ""
-        var valueInput = ""
+      connectedCallback(){
+        super.connectedCallback()
+        setTimeout(()=>{
+          
+          this.child = this.children[0]
+          this.nativeInput = this.child.$.nativeInput
+          this.nativeInput.addEventListener('focus',this._showDatePicker.bind(this))
+          this.nativeInput.addEventListener('blur',this._hideDatePicker.bind(this))
+
+          this.aqaDataPickerLight = document.getElementById('aqaDataPickerLight')
+          this.calendar = aqaDataPickerLight.$.calendar       
+
+        },1)
+        
+      }
+
+      _showDatePicker(){
+        
+        this.child.addEventListener('value-changed',this._childValueChanged.bind(this))
+
+        this.aqaDataPickerLight.child = this.child
+
+        this.calendar.style.display = "block"
+        var bodyHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        
+        var offsetChild = this.child.getBoundingClientRect()
+        var offsetCalendar = this.calendar.getBoundingClientRect()
+
+        if(
+          (bodyHeight - (offsetChild.top+offsetChild.height)) > offsetCalendar.height
+        ){
+          this.calendar.style.left = (offsetChild.left+offsetChild.width-offsetCalendar.width)+'px';
+          this.calendar.style.top = (offsetChild.top+offsetChild.height)+'px';
+        }else{
+          this.calendar.style.left = (offsetChild.left+offsetChild.width-offsetCalendar.width)+'px';
+          this.calendar.style.top = (offsetChild.top-offsetCalendar.height)+'px';
+        }
+        
+      }
+
+      _hideDatePicker(){
+        setTimeout(()=>{
+          this.calendar.style.display = "none"
+        },100)
+        
+      }
+
+      _childValueChanged(e){
+        var value = e.target.value
+        var valueInput = "";
+
         valueInput += value.substring(0, 2)
-        if (value.length === 2) {
-          valueInput += '/'
+        if (value.length > 2) {
+            valueInput += '/'
         }
-
-        valueInput += value.substring(2, 6)
-        if (value.length === 5) {
-          valueInput += '/'
+        valueInput += value.substring(2, 4)
+        if (value.length > 4) {
+            valueInput += '/'
         }
+        valueInput += value.substring(4, 8)
 
-        valueInput += value.substring(6, 10)
-        return valueInput
+        // console.log(this.aqaDataPickerLight.selectBe)
+        this.aqaDataPickerLight.selectedBe = valueInput
       }
-      checkPosition(el) {
-        var val = this.$.inputdata.value;
 
 
-      }
-      openCalendar() {
-        this.$.dropdown.open();
-        this.set('isClose', false)
-      }
-      setCloseDropDown(isClose) {
-        if (isClose)
-          this.$.dropdown.close();
-        this.set('isClose', false)
-      }
-      validate(value) {
-        let arr = []
-        arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected))
-        arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe))
 
-        let style = '1px solid green'
-        let checkData = arr.every(item => item === true)
-        this.set('invalid', !checkData)
-
-        return checkData
-      }
-      reset() {
-        this.updateStyles({ '--paper-input-border-success': '1px solid #737373' })
-      }
     }
 
     window.customElements.define(AqaDatePicker.is, AqaDatePicker);

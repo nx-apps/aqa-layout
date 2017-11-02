@@ -7,14 +7,33 @@
     <template>
         <custom-style>
             <style is="custom-style">
+                input {
+                    font: inherit;
+                    outline: none;
+                    box-shadow: none;
+                    border: none;
+                    width: auto;
+                    text-align: center;
+                    font-size: medium;
+                }
+
+                div {
+                    font-size: 10px
+                }
+
+
                 .calendar_modern {
-                    padding: 0px 8px;
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    display: none;
                 }
 
                 .calendar_modern .calendar {
                     margin: auto;
                     width: 245px;
                     height: auto;
+                    /* height: 260px; */
                 }
 
                 .calendar_modern .calendar .nav {
@@ -54,7 +73,7 @@
                     color: white;
                     line-height: 30px;
                     font-weight: bold;
-                    font-size: .8em;
+                    font-size: 1.4em;
                     text-align: center;
                     background: #372f2c;
                     border-radius: 3px;
@@ -88,14 +107,16 @@
                     width: 33px;
                     height: 33px;
                     background-color: #ffffff;
-                    font-size: .8em;
+                    font-size: 1.5em;
                     font-weight: bold;
                     line-height: 34px;
                     text-align: center;
                     font-style: normal;
                     text-decoration: none;
+                    /* table like borders */
                     border-right: 1px solid #aaaaaa;
                     border-bottom: 1px solid #aaaaaa;
+                    /* table like borders */
                     cursor: pointer;
                 }
 
@@ -110,6 +131,7 @@
 
                 [i-select] {
                     color: #3399ff;
+                    /* color:#fff; */
                 }
 
                 [i-frist],
@@ -128,16 +150,13 @@
             </style>
         </custom-style>
 
+        <!-- <div slot="dropdown-content" class="box"> -->
         <div id="calendar" class="calendar_modern">
             <div class="calendar">
                 <div class="months">
                     <div class="month" data-date="2011.1">
-                        <div class="header">
-                            <span class="n" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;
-                            <span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;
-                            <span on-click="nextYear" class="n">&#62&#62</span>
-                        </div>
+                        <div class="header"><span class="n" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;<span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;<span on-click="nextYear" class="n">&#62&#62</span></div>
                         <div class="body">
 
                             <div class="day_names">
@@ -158,10 +177,18 @@
                 </div>
             </div>
         </div>
+        <!-- </div> -->
     </template>
 
     <script>
-  
+        /**
+     * `nylon-date-picker`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
         class AqaDatePickerLight extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior], Polymer.Element) {
             static get is() { return 'aqa-date-picker-light'; }
             static get properties() {
@@ -174,11 +201,14 @@
                         type: String,
                         observer: '_selectedChanged',
                         notify: true
+                        // value: '2017-09-15',
+                        // 2017-1-15
                     },
                     selectedBe: {
                         type: String,
                         observer: '_selectedBeChanged',
-                        notify: true
+                        notify: true,
+                        //value:'15/9/2560'
                     },
                     dayBe: {
                         type: String,
@@ -210,7 +240,8 @@
                     },
                     daysOfWeek: {
                         type: Array,
-                        value: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา']
+                        value: ['จัน', 'อัง', 'พุธ', 'พฤ', 'ศุกร์', 'เสาร์', 'อา']
+                        // value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                     },
                     months: {
                         type: Array,
@@ -218,24 +249,63 @@
                     },
                 };
             }
-
+            static get observers() {
+                return [
+                    'checkDateBe(dayBe,monthBe,yearBe,dayBe.*)',
+                    'checkDayLimit(dayBe)',
+                    'checkMonthLimit(monthBe)',
+                ]
+            }
             constructor() {
                 super()
                 this.init()
                 this.renderCalendar()
             }
-
+            // check date
+            checkDayLimit(dayBe) {
+                // console.log('checkDayLimit');
+                if (Number(dayBe) > this._getlastDateOfCurrentMonth(Number(this.yearBe), Number(this.monthBe - 1))) {
+                    this.set('dayBe', this._getlastDateOfCurrentMonth(Number(this.yearBe), Number(this.monthBe - 1)));
+                }
+            }
+            checkMonthLimit(monthBe) {
+                // console.log('checkMonthLimit');
+                if (Number(this.monthBe) > 12)
+                    this.set('monthBe', new Date().getMonth() + 1)
+            }
             setZeroBefore(day) {
                 if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
+                    // console.log(1);
                     return '0' + day
                 } else {
+                    // console.log(2);
                     return day
                 }
             }
-           
+            checkDateBe(dayBe, monthBe, yearBe) {
+                if (dayBe !== undefined && dayBe <= 31 && dayBe !== ''
+                    && monthBe !== undefined && Number(monthBe) <= 12 && monthBe !== ''
+                    && yearBe !== undefined && yearBe !== ''
+                    && !isNaN(dayBe) && !isNaN(monthBe) && !isNaN(yearBe)) {
+
+                    // dayBe = this.checkDay(dayBe)
+                    // monthBe = this.checkMonth(monthBe)
+                    if (this.showBc) {
+                        this.set('selectedBe', dayBe + '/' + monthBe + '/' + yearBe)
+                    } else {
+                        this.set('selected', yearBe + '-' + monthBe + '-' + dayBe)
+                        // this.selected = (`${yearBe}-${monthBe}-${dayBey}`)
+                    }
+                }
+            }
+            // // end checkDate
             init() {
-                
+                // this.daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                // this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+                //xxx
                 this.format = 'dd/mm/yyyy'
+                // console.log('init');
                 var d = new Date()
                 this.currentMonth = d.getMonth()
                 this.currentYear = d.getFullYear()
@@ -249,21 +319,28 @@
             }
 
             renderCalendar() {
+                // console.log('renderCalendar');
+                // console.log(this.currentYear, this.currentMonth);
                 this.calendar(this.currentYear, this.currentMonth)
             }
             _getfirstDayOfCurrentMonth(y, m) {
+                // console.log('_getfirstDayOfCurrentMonth');
                 return new Date(y, m, 1).getDay()
             }
             _getlastDateOfCurrentMonth(y, m) {
+                // console.log('_getlastDateOfCurrentMonth');
                 return new Date(y, m + 1, 0).getDate()
             }
             _lastDateOfLastMonth(y, m) {
+                // console.log('_lastDateOfLastMonth');
                 return m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate()
             }
             calendar(y, m) {
+                // console.log(11);
                 var firstDayOfCurrentMonth = this._getfirstDayOfCurrentMonth(y, m)
                 var lastDateOfCurrentMonth = this._getlastDateOfCurrentMonth(y, m)
                 var lastDateOfLastMonth = this._lastDateOfLastMonth(y, m)
+                // console.log('calendar');
                 if (this.months !== undefined && !isNaN(y) && !isNaN(m)) {
                     if (this.showBc) {
                         var monthandyear = this.months[m] + ' - ' + (y + 543)
@@ -335,6 +412,7 @@
             }
 
             nextMonth() {
+                // console.log('nextMonth');
                 if (this.currentMonth == 11) {
 
                     this.currentMonth = 0;
@@ -348,6 +426,7 @@
                 this.renderCalendar()
             }
             previousMonth() {
+                // console.log('previousMonth');
                 if (this.currentMonth == 0) {
 
                     this.currentMonth = 11;
@@ -361,22 +440,27 @@
                 this.renderCalendar()
             }
             previousYear() {
+                // console.log('previousYear');
                 this.currentYear = this.currentYear - 1;
                 this.renderCalendar()
             }
             nextYear() {
+                // console.log('nextYear');
                 this.currentYear = this.currentYear + 1;
                 this.renderCalendar()
             }
 
             _checkType(type, select) {
+                // console.log('_checkType');
                 return type == select
             }
             _checkLeft(i) {
+                // console.log('_checkLeft');
                 return i == 0
             }
 
             _selectDate(e) {
+                // console.log('_selectDate');
                 const checkDay = (day) => {
                     if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
                         return '0' + day
@@ -386,52 +470,66 @@
                 }
                 let rawDate = e.model.item2.date.split('-')
                 rawDate = rawDate[0] + '-' + rawDate[1] + '-' + checkDay(rawDate[2])
-                this.selected = rawDate
+                // this.selected = rawDate
+                // let date = this.selected
                 let date = rawDate
-   
+                // console.log(date.split('-')[1])
+                // console.log(this.setZeroBefore(date.split('-')[1]));
+                this.set('dayBe', date.split('-')[2])
+                this.set('monthBe', date.split('-')[1])
+                if (this.showBc) {
+                    this.set('yearBe', Number(date.split('-')[0]) + 543)
+                } else {
+                    this.set('yearBe', Number(date.split('-')[0]))
+                }
                 this.set('isClose', true)
+                // this.$.dropdown.close();
             }
             _firstDayOfMonth() {
+                // console.log('_firstDayOfMonth');
                 new Date(Number(this.data.year) - 543, Number(this.data.month - 1), 1)
             }
             _lastDayOfMonth() {
+                // console.log('_lastDayOfMonth');
                 new Date(Number(this.data.year) - 543, Number(this.data.month - 1) + 1, 0)
             }
             _checkDateBc(dates) {
+                // console.log('_checkDateBc');
                 let select = dates.split('/')
                 let thisDay = new Date().getDate()
                 let thisMonth = new Date().getMonth()
                 let thisYear = new Date().getFullYear()
                 let date = dates
-                if (Number(select[1]) === '' || Number(select[0]) === '' || Number(select[2]) === '')
-                    return
-                if (Number(select[1]) > 12) {
-                    date = `${this.setZeroBefore(select[0])}/${thisMonth + 1}/${select[2]}`
+                if (select[1] > 12) {
+                    date = `${select[0]}/${thisMonth + 1}/${select[2]}`
                 }
-                if (Number(select[0]) > this._getlastDateOfCurrentMonth(select[2], select[1] - 1)) {
-                    date = `${this.setZeroBefore(thisDay)}/${select[1]}/${select[2]}`
+                if (select[0] > this._getlastDateOfCurrentMonth(select[2], select[1] - 1)) {
+                    date = `${thisDay}/${select[1]}/${select[2]}`
                 }
-                if (Number(select[2]) > 9998) {
-                    date = `${this.setZeroBefore(select[0])}/${select[1]}/${thisYear + 543}`
+                if (select[2] > 9998) {
+                    date = `${select[0]}/${select[1]}/${thisYear + 543}`
                 }
-           
+                // if (date !== '') {
+                //     this.selectedBe = date
+                // }
                 return date
             }
             _checkDateDc(dates) {
+                // console.log('_checkDateDc');
                 let select = dates.split('-')
                 let thisDay = new Date().getDate()
                 let thisMonth = new Date().getMonth()
                 let thisYear = new Date().getFullYear()
                 let date = dates
-                if (Number(select[1]) === '' || Number(select[0]) === '' || Number(select[2]) === '')
-                    return
-
+                // month
                 if (Number(select[1]) > 12) {
                     date = `${select[0]}-${thisMonth + 1}-${select[2]}`
                 }
+                // day
                 if (Number(select[2]) > this._getlastDateOfCurrentMonth(select[0], select[1] - 1)) {
                     date = `${select[0]}-${select[1]}-${thisDay}`
                 }
+                //year
                 if (Number(select[0]) > 9998) {
                     date = `${thisYear}-${select[1]}-${select[2]}`
                 }
@@ -440,6 +538,7 @@
 
             }
             _checkDatePassBc(select) {
+                // console.log('_checkDatePassBc');
                 if (select.length > 2) {
                     return select[2].length >= 4 && select[2] < 9999 &&
                         select[1].length >= 1 && select[1] < 13 &&
@@ -450,6 +549,7 @@
 
             }
             _checkDatePassDc(select) {
+                // console.log('_checkDatePassDc');
                 if (select.length > 2) {
                     return select[0].length >= 4 && Number(select[0]) < 9999 &&
                         select[1].length >= 1 && Number(select[1]) < 13 &&
@@ -459,47 +559,59 @@
                 }
             }
             _selectedChanged(selected) {
-               
+                // console.log('_selectedChanged');
+                //เช็คว่าค่าว่างมาไหม
+                // console.log(selected);
                 if (selected !== '' && selected !== undefined) {
                     selected = this._checkDateDc(selected)
-                    if (selected === '')
-                        return
                     var select = selected.split('-')
+                    // console.log(select);
+                    // console.log(this._checkDatePassDc(this.selected));
                     if (this._checkDatePassDc(select)) {
+                        // console.log(parseInt(select[2]))
                         this.selectData = {
                             day: select[2],
                             month: parseInt(select[1]) - 1,
                             year: parseInt(select[0])
                         }
-                        this.selectedBe = `${this.setZeroBefore(this.selectData.day)}/${this.setZeroBefore(Number(this.selectData.month + 1))}/${this.selectData.year + 543}`
+                        this.selectedBe = `${this.selectData.day}/${this.selectData.month + 1}/${this.selectData.year + 543}`
                         this.currentYear = this.selectData.year
                         this.currentMonth = this.selectData.month
+                        // console.log(this.selectedBe);
                         this.renderCalendar()
+                        // } else {
+                        //     // this.set('selected', new Date().toISOString().split('T')[0])
                     }
-
                 }
             }
 
             _selectedBeChanged(selectedBe) {
-    
-                if (selectedBe === '')
-                    return
+            
+                this.child.value = selectedBe.replace(/\//g, "")
 
-                if (selectedBe.length > 8) {
-
-                    var select = this._checkDateBc(selectedBe).split('/')
-               
-                    this.set('selectedBe', this._checkDateBc(selectedBe))
-
-                    if (this._checkDatePassBc(select)) {
-                        var selectData = {
-                            day: this.setZeroBefore(select[0]),
-                            month: this.setZeroBefore(select[1]),
-                            year: parseInt(select[2] - 543)
-                        }
-                        this.selected = (`${selectData.year}-${selectData.month}-${selectData.day}`)
-                    }
+                selectedBe = this._checkDateBc(selectedBe)
+                var select = selectedBe.split('/')
+           
+                this.set('dayBe', select[0])
+                this.set('monthBe', select[1])
+                if (this.showBc) {
+                    this.set('yearBe', select[2])
+                } else {
+                    this.set('yearBe', Number(select[2]) - 543)
                 }
+
+                if (this._checkDatePassBc(select)) {
+                    var selectData = {
+                        day: select[0],
+                        month: this.setZeroBefore(select[1]),
+                        year: parseInt(select[2] - 543)
+                    }
+                    this.selected = (`${selectData.year}-${selectData.month}-${selectData.day}`)
+                    
+                }
+
+
+                
             }
 
 
