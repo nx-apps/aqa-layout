@@ -1,9 +1,13 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../../../components/nylon-rating/nylon-rating.html">
 <link rel="import" href="../../../components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../layout/shared-styles.html">
 <link rel="import" href="../../../layout/flexbox-grid.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/iron-icons/test/iron-icons.html">
+
 <dom-module id="skill-form">
     <template>
         <style include="shared-styles flexbox-grid">
@@ -17,8 +21,13 @@
                 <div class="textRight col-xs-12 col-md-3" style="margin:auto 0">
                     [[item.label]]
                 </div>
-                <div class="textRight col-xs-12 col-md-9">
-                    <nylon-rating name="[[name]][[index]]"></nylon-rating>
+                <div class="textRight col-xs-12 col-md-4">
+                    <nylon-rating name="[[name]][[index]]"></nylon-rating> 
+                </div>
+                <div class="col-md-5" style="margin:auto 0;text-align:left">
+                    <template is="dom-if" if="[[item.isDelete]]">
+                        <paper-icon-button on-tap="delData" icon="delete"></paper-icon-button>
+                    </template>
                 </div>
             </template>
             <!-- <div class="row">
@@ -42,6 +51,10 @@
                         value:'0'
                     }
                 }
+            }
+            delData(e){
+                // console.log(e.model.index)
+                this.splice('items',e.model.index,1)
             }
         }
         window.customElements.define(SkillForm.is, SkillForm);

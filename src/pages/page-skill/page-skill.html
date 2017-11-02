@@ -52,9 +52,9 @@
                 font-weight: normal;
             }
         </style>
-         <div class="page-container">
+        <div class="page-container">
             <aqa-title-name></aqa-title-name>
-             <div class="row">
+            <div class="row">
                 <div class="col-xs-12">
                     <aqa-panel id="card basic">
                         <app-toolbar slot="header">
@@ -101,7 +101,7 @@
                         </div>
                     </aqa-panel>
                 </div>
-                 <div class="white-space"></div>
+                <div class="white-space"></div>
                 <div class="col-xs-12">
                     <aqa-panel id="card basic">
                         <app-toolbar slot="header">
@@ -137,11 +137,20 @@
                         </app-toolbar>
                         <div slot="content">
                             <div>
-                                <skill-form name="3" items="[[language]]"></skill-form>
+                                <skill-form name="2" items="[[language]]"></skill-form>
+                                <div class="row center-xs">
+                                    <div class="textRight col-xs-12 col-md-3" style="margin:auto 0">
+                                        อื่นๆ
+                                    </div>
+                                    <div class="textRight col-xs-12 col-md-3">
+                                        <aqa-combo-box items="[[alllanguage]]" placeholder="เลือก" item-label-path="label" item-value-path="label" value="{{selectLanguage}}"></aqa-combo-box>
+                                    </div>
+                                     <div class="col-xs-6"></div> 
+                                </div>
                             </div>
                         </div>
                     </aqa-panel>
-                </div> 
+                </div>
             </div>
             <div style="margin:1rem"></div>
             <div class="row center-xs">
@@ -151,14 +160,18 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </template>
     <script>
         class PageSkill extends Polymer.Element {
             static get is() { return 'page-skill'; }
             static get properties() {
                 return {
-
+                    selectLanguage:{
+                        type:String,
+                        value:'',
+                        observer:'addData'
+                    },
                     computer: {
                         type: Array,
                         value: [
@@ -193,6 +206,19 @@
                             }
                         ]
                     },
+                    alllanguage:{
+                        type:Array,
+                        value:[
+                            {
+                                label: 'ภาษาฮ้อ',
+                                value:'1'
+                            },
+                            {
+                                label:'ภาษาอราเมอิกใหม่คัลเดีย',
+                                value:'2'
+                            }
+                        ]
+                    },
                     print: {
                         type: Array,
                         value: [
@@ -220,6 +246,10 @@
             ready() {
                 super.ready();
 
+            }
+            addData(val){
+                if(val)
+                    this.push('language',{label:val,isDelete:true})
             }
         }
         window.customElements.define(PageSkill.is, PageSkill);
