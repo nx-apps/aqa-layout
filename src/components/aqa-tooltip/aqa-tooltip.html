@@ -47,10 +47,12 @@
                 tooltip.style.display = 'inline'
                 tooltip.style.top = (el.getBoundingClientRect().top - tooltip.offsetHeight - 5) + 'px'
                 tooltip.style.left = (el.getBoundingClientRect().left - (tooltip.offsetWidth/2) +  (el.offsetWidth/2)) + 'px'
+                tooltip.classList.add('tooltip-visable')
             }
 
             _hideTooltip(e){
                 var tooltip = document.getElementById("tooltipSection").$.tooltip
+                tooltip.classList.remove('tooltip-visable')
                 tooltip.style.display = 'none'
                 tooltip.style.top = '0'
                 tooltip.style.left = '0'
