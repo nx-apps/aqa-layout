@@ -9,9 +9,66 @@
 <link rel="import" href="../../components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-form/aqa-input.html">
 
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../components/aqa-lightbox/aqa-lightbox.html">
+
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+
+
 <dom-module id="page-bank">
     <template>
-        <style include="flexbox-grid shared-styles"></style>
+        <style include="flexbox-grid shared-styles">
+            .upload-area {
+                background-color: #e4eaec;
+                display: flex;
+                margin: 0.5rem;
+                border: 1px solid #e4eaec;
+                border-radius: 0.2rem;
+            }
+
+            #output_image {
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+                max-height: auto;
+                margin: 0 auto;
+            }
+
+            .upload-body {
+                margin: auto 0;
+                padding: 0.5rem;
+            }
+
+            .box-file {
+                border: 1px solid #e4eaec;
+                width: 100%;
+                height: auto;
+            }
+
+            .box-item {
+                padding: 0.5rem;
+            }
+
+            .box-item-footer {
+                background-color: #e4eaec;
+            }
+
+            .sizing-contain {
+                /* width: 100%;
+                height: auto; */
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+                max-height: 200px;
+            }
+
+            .img-hover:hover {
+                cursor: pointer;
+                background-color: #e4eaec;
+                opacity: 0.5;
+            }
+        </style>
         <div class="page-container">
             <aqa-title-name></aqa-title-name>
             <aqa-panel id="basic">
@@ -20,34 +77,66 @@
                 </app-toolbar>
                 <div slot="content">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <aqa-combo-box required label="ธนาคาร" items="[[bankList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                        <div class="col-xs-12 col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <aqa-combo-box required label="ธนาคาร" items="[[bankList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <aqa-input required label="ประเภทบัญชี" value=""></aqa-input>
+                                    <!-- <aqa-combo-box label="ประเภทบัญชี" items="[[typeAccount]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <aqa-input label="สาขา" value="" required></aqa-input>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <aqa-input required label="เลขที่บัญชี" type="number" value=""></aqa-input>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <aqa-input required label="ชื่อบัญชี" value=""></aqa-input>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <aqa-input required label="ประเภทบัญชี" value=""></aqa-input>
-                            <!-- <aqa-combo-box label="ประเภทบัญชี" items="[[typeAccount]]" item-label-path="label" item-value-path="value"></aqa-combo-box> -->
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <aqa-input label="สาขา" value="" required></aqa-input>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <b>แนบไฟล์ : ภาพถ่ายสมุดบัญชีธนาคาร <span style="color:red">*</span></b>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="box-file">
+                                        <div class="box-item img-hover">
+                                            <div class="row center-xs">
+                                                <div class="col-xs-12">
+                                                    <aqa-lightbox>
+                                                        <img id="img" class="sizing-contain" src="http://www.recetass.com/imgreceta/no.png" alt="">
+                                                        <!-- <iron-image sizing="contain" id="img" src="http://i0.kym-cdn.com/entries/icons/mobile/000/005/608/nyan-cat-01-625x450.jpg"
+                                                                class="sizing-contain"></iron-image> -->
+                                                    </aqa-lightbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-item box-item-footer">
+                                            <div>
+                                                <input type="file" id="upFile" on-change="fileChange" hidden>
+                                                <aqa-button type="primary" on-tap="upLoadFile" icon="icons:file-upload">อัพโหลด</aqa-button>
+                                                <span id="imgname"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row center-xs">
+                                <div class="col-xs-12 upload-area">
+                                    <div class="upload-body">
+                                       
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-sm-4 col-lg-3">
-                            <aqa-input required label="เลขที่บัญชี" type="number" value=""></aqa-input>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-sm-4 col-lg-4">
-                            <aqa-input required label="ชื่อบัญชี" value=""></aqa-input>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <b>แนบไฟล์ : ภาพถ่ายสมุดบัญชีธนาคาร <span style="color:red">*</span></b>
-                        </div>
-                        <div class="col-xs-12 col-md-6 col-sm-4 col-lg-2">
-                            <p></p>
-                            <aqa-button type="primary" icon="icons:file-upload">อัพโหลด</aqa-button>
-                        </div>
-                    </div>
+
+
                 </div>
             </aqa-panel>
             <div style="margin:1rem"></div>
@@ -170,8 +259,35 @@
                                 value: '03'
                             }
                         ]
+                    },
+                    hasFile: {
+                        type: Boolean,
+                        value: false
                     }
                 }
+            }
+            upLoadFile() {
+                this.$.upFile.click()
+            }
+            showImage(e) {
+                var url = e.target.getAttribute('src');
+                // this.$.dialog.open()
+                window.open(url)
+                // console.log(this.$.myModal.style.display = "block")
+            }
+            fileChange(e) {
+                console.log(e.currentTarget.files)
+                if (e.currentTarget.files.length == 0) return;
+                this.hasFile = true;
+                var reader = new FileReader();
+                this.$.imgname.textContent = e.currentTarget.files[0].name;
+                reader.onload = function (e) {
+                    // get loaded data and render thumbnail.
+                    this.$.img.src = e.target.result;
+                }.bind(this);
+                // read the image file as a data URL.
+
+                reader.readAsDataURL(e.currentTarget.files[0]);
             }
         }
         window.customElements.define(PageBank.is, PageBank);
