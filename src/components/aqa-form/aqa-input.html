@@ -93,11 +93,11 @@
                 color: #f96868;
             }
           
-            label[has-error] {
+            label[invalid] {
                 color: #f96868;
             }
 
-            input[has-error] {
+            input[invalid] {
                 border-color: #f96868 !important;
             }
 
@@ -107,14 +107,14 @@
             
         </style>
         <div class="form-group">
-            <label class="control-label" has-error$="{{hasError}}">[[label]]
+            <label class="control-label" invalid$="{{invalid}}">[[label]]
                 <template is="dom-if" if="[[required]]">
                     <span>*</span>
                 </template>
             </label>
-            <input id="input" type="[[type]]" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" has-error$="[[hasError]]"
+            <input id="input" type="[[type]]" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
                 disabled$="[[disabled]]">
-            <template is="dom-if" if="[[hasError]]">
+            <template is="dom-if" if="[[invalid]]">
                 <span class="help-block">[[errorMessage]]</span>
             </template>
         </div>
@@ -143,9 +143,10 @@
                         type: String,
                         value:""
                     },
-                    hasError: {
+                    invalid: {
                         type: Boolean,
-                        value: false
+                        value: false,
+                        notify:true
                     },
                     required: {
                         type: Boolean,
@@ -180,17 +181,17 @@
             }
 
             validate() {
-                this.hasError = false
+                this.invalid = false
                 // this.value = this.value.trim()
                 if (this.required && this.value == "") {
-                    this.hasError = true
+                    this.invalid = true
                 }
 
-                return this.hasError
+                return this.invalid
             }
 
             reset() {
-                this.hasError = false
+                this.invalid = false
                 this.value = ""
             }
 
@@ -209,18 +210,18 @@
                         var patt = new RegExp('^' + this.pattern + '$');
                         var res = patt.test(input.value);
                         if (!res) {
-                            this.hasError = true
+                            this.invalid = true
                         }else{
-                            this.hasError = false
+                            this.invalid = false
                         }
                     }else if(this.required){
                         if(input.value==""){
-                            this.hasError = true
+                            this.invalid = true
                         }else{
-                            this.hasError = false
+                            this.invalid = false
                         }
                     }else{
-                        this.hasError = false
+                        this.invalid = false
                     }
                     
                 }

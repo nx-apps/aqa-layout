@@ -90,10 +90,10 @@
                 font-size: 70%;
                 color: #f96868;
             }
-            label[has-error]{
+            label[invalid]{
                 color: #f96868;
             }
-            input[has-error]{
+            input[invalid]{
                 border-color: #f96868 !important;
             }
 
@@ -111,14 +111,14 @@
         
 
         <div class="form-group">
-            <label class="control-label" has-error$="{{hasError}}">[[label]] &nbsp;
+            <label class="control-label" invalid$="{{invalid}}">[[label]] &nbsp;
                 <template is="dom-if" if="[[required]]">
                     <span>*</span>
                 </template>
             </label>
             <vaadin-combo-box-light items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value" value="{{value}}">
                 <iron-input>
-                    <input class="form-control" placeholder="[[placeholder]]" has-error$="{{hasError}}">
+                    <input class="form-control" placeholder="[[placeholder]]" invalid$="{{invalid}}">
                     <iron-icon class="arrow-drop-down" icon="icons:arrow-drop-down"></iron-icon>
                 </iron-input>
                 <template>
@@ -128,8 +128,8 @@
 
          
             
-            <template is="dom-if" if="[[hasError]]">
-                <small class="help-block" >[[errorMassage]]</small>
+            <template is="dom-if" if="[[invalid]]">
+                <small class="help-block" >[[errorMessage]]</small>
             </template>
         </div>
         
@@ -158,7 +158,7 @@
                     pattern:{
                         type: String
                     },
-                    errorMassage:{
+                    errorMessage:{
                         type:String,
                         value:""
                     },
@@ -179,9 +179,10 @@
                         observer:'_valueChanged'
                     },
                     
-                    hasError:{
+                    invalid:{
                         type:Boolean,
-                        value:false
+                        value:false,
+                        notify:true
                     },
                     placeholder:{
                         type:String,
@@ -192,38 +193,38 @@
             }
 
             validate(){
-                this.hasError = false
+                this.invalid = false
                 // this.value = this.value.trim()
                 if(this.required && this.value==""){
-                    this.hasError = true
+                    this.invalid = true
                 }
 
-                return this.hasError
+                return this.invalid
             }
 
             
 
             reset(){
-                this.hasError = false
+                this.invalid = false
                 this.value = {}
             }
 
             _valueChanged(val){
                 if(this.autoValidate && this.required){
                     if(this.fristValue && this.value==""){
-                        this.hasError = false
+                        this.invalid = false
                         this.fristValue = false
                     }else if(this.value==""){
-                        this.hasError = true
+                        this.invalid = true
                     }else{
-                        this.hasError = false
+                        this.invalid = false
                     }
                 }
 
                 // if(val==""){
-                //     this.hasError = true
+                //     this.invalid = true
                 // }else{
-                //     this.hasError = false
+                //     this.invalid = false
                 // }
             }
         }
