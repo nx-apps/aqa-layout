@@ -112,7 +112,7 @@
                     <span>*</span>
                 </template>
             </label>
-            <input id="input" type="[[type]]" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
+            <input id="input" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
                 disabled$="[[disabled]]">
             <template is="dom-if" if="[[invalid]]">
                 <span class="help-block">[[errorMessage]]</span>
@@ -196,7 +196,7 @@
             }
 
             _typeChanged(type) {
-                if (type == "phone" || type == "pid") {
+                if (type == "phone" || type == "pid" || type == "date") {
                     this.allowedPattern = "[0-9]"
                 }
             }
@@ -248,7 +248,6 @@
                     valueInput += value.substring(6, 10)
                     
                 }else if(this.type == "pid"){
-                    //1-2006-00190-21-4
                     valueInput += value.substring(0, 1)
                     if (value.length > 1) {
                         valueInput += '-'
@@ -271,7 +270,21 @@
 
                     valueInput += value.substring(12, 13)
                     
-                }else{
+                }else if(this.type == "date"){
+                    valueInput += value.substring(0, 2)
+                    if (value.length > 2) {
+                        valueInput += '/'
+                    }
+
+                    valueInput += value.substring(2, 4)
+                    if (value.length > 4) {
+                        valueInput += '/'
+                    }
+
+                    valueInput += value.substring(4, 8)
+                    
+                }
+                else{
                     valueInput = value
                 }
 
@@ -291,6 +304,10 @@
                 }else if(this.type == "pid"){
                     var val = value.replace(/-/g, "")
                     val = val.substring(0, 13)
+                    valueInput = val
+                }else if(this.type == "date"){
+                    var val = value.replace(/\//g, "")
+                    val = val.substring(0, 8)
                     valueInput = val
                 }else{
                     valueInput = value

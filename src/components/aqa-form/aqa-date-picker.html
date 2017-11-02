@@ -125,237 +125,26 @@
         cursor: pointer;
       }
 
-      /* paper-input-container {
-        padding: 0px 0;
-        --paper-input-container-underline: {
-          display: none;
-        }
-        --paper-input-container-underline: {
-          display: none;
-        }
-        --paper-input-container-underline-focus: {
-          display: none;
-        }
-        --paper-input-container-underline-disabled: {
-          display: none;
-        }
-      }
-
-      .form-group {
-        position: relative;
-        margin-bottom: 20px;
-      }
-
-      .form-control {
-        -webkit-appearance: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-
-        -moz-appearance: none;
-
-        display: block;
-        width: 100%;
-        height: 36px;
-        padding: 6px 15px;
-        font-size: 1rem;
-        line-height: 1.57142857;
-        color: #57626D;
-        background-color: #fff;
-        background-image: none;
-        border: 1px solid #e4eaec;
-        border-radius: 3px;
-        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-      }
-
-      iron-input {
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-        line-height: normal;
-        margin: 0;
-        font: inherit;
-        color: inherit;
-        outline: none;
-        height: auto;
-      }
-
-      input {
-        border: none;
-      }
-
-      input:focus {
-        outline: none !important;
-      }
-
-      input::-webkit-input-placeholder {
-        color: #A9A9A9;
-      }
-
-      input::-moz-placeholder {
-        color: #A9A9A9;
-      }
-
-      input:-ms-input-placeholder {
-        color: #A9A9A9;
-      }
-
-      input:-moz-placeholder {
-        color: #A9A9A9;
-      }
-
-      label {
-        font-weight: 300;
-        display: inline-block;
-        max-width: 100%;
-        margin-bottom: 5px;
-        color: #000;
-      }
-
-      .help-block {
-        margin-bottom: 0;
-      }
-
-      small {
-        font-size: 70%;
-        color: #f96868;
-      }
-
-      label[has-error] {
-        color: #f96868;
-      }
-
-      input[has-error] {
-        border-color: #f96868 !important;
-      }
-
-      label>span {
-        color: #f96868;
-      }
-
-      .arrow-drop-down {
-        position: absolute;
-        top: 35px;
-        right: 0;
-      }
-
-      .arrow-drop-down-two {
-        position: absolute;
-        top: 35px;
-        right: 0;
-        margin: 3px 5px;
-        cursor: pointer;
-      }
-
-      iron-icon {
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        right: 10px;
-        cursor: pointer;
-      } */
+     
     </style>
-    <!-- <label class="control-label" >[[label]]</label>
-    <iron-input bind-value="{{dayBe}}" allowed-pattern="[0-9]" aria-label="First 2 digits of date" on-focus="_setSeleteValue">
-      <input class="form-control" maxlength="2" size="2" min="1" max="31">
-    </iron-input>
-    /
-    <iron-input bind-value="{{monthBe}}" allowed-pattern="[0-9]" aria-label="Middle 2 digits of month " on-focus="_setSeleteValue">
-      <input class="form-control" maxlength="2" size="2" min="1" max="12">
-    </iron-input>
-    /
-    <iron-input bind-value="{{yearBe}}" allowed-pattern="[0-9]" aria-label="Last 4 digits of year" on-focus="_setSeleteValue">
-      <input class="form-control" maxlength="4" size="4" min="1" max="9999">
-    </iron-input>
-    </span>
-    <paper-icon-button slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></paper-icon-button>
-    <paper-input-error slot="add-on">Date invalid!</paper-input-error> -->
-    <!-- <paper-input-container no-label-float attr-for-value="value" disabled$="[[disabled]]">
-      <span id="input" slot="input">
-        <div class="form-group">
-          <label class="control-label" has-error$="{{hasError}}">[[label]]
-            <template is="dom-if" if="[[required]]">
-              <span>*</span>
-            </template>
-          </label>
-          <span class="form-control">
-            <iron-input style="width: 1rem;" bind-value="{{dayBe}}" allowed-pattern="[0-9-]" aria-label="First 2 digits of date " on-focus="_setSeleteValue">
-              <input maxlength="2" size="2" min="1" max="31" on-focus="_setSeleteValue" on-focusout="checkDay">
-            </iron-input>
-            /
-            <iron-input style="width: 1rem;" bind-value="{{monthBe}}" allowed-pattern="[0-9-]" aria-label="Middle 2 digits of month "
-              on-focus="_setSeleteValue">
-              <input maxlength="2" size="2" min="1" max="12" on-focus="_setSeleteValue" on-focusout="checkMonth">
-            </iron-input>
-            /
-            <iron-input style="width: 2.5rem;" bind-value="{{yearBe}}" allowed-pattern="[0-9-]" aria-label="Last 4 digits of year" on-focus="_setSeleteValue">
-              <input maxlength="4" size="4" min="1" max="9999" on-focus="_setSeleteValue" on-focusout="checkYear">
-            </iron-input>
-            <iron-icon slot="suffix" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-          </span>
-          <template is="dom-if" if="[[hasError]]">
-            <small class="help-block">[[errorMassage]]</small>
-          </template>
-        </div>
-      </span>
-    </paper-input-container> -->
-
-    <!-- <paper-input-container no-label-float attr-for-value="value" disabled$="[[disabled]]">
-      <span id="input" slot="input">
-        <div class="form-group">
-          <label class="control-label" has-error$="{{hasError}}">[[label]]
-            <template is="dom-if" if="[[required]]">
-              <span>*</span>
-            </template>
-          </label>
-          <iron-input bind-value="{{selectedBe}}">
-            <input class="form-control" id="inputdata" placeholder="[[placeholder]]" has-error$="{{hasError}}" on-focus="_setSeleteValue">
-            <iron-icon class="arrow-drop-down-two" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-          </iron-input>
-          <template is="dom-if" if="[[hasError]]">
-            <small class="help-block">[[errorMassage]]</small>
-          </template>
-        </div>
-      </span>
-    </paper-input-container> -->
+    
     <div class="form-group">
       <label class="control-label" invalid$="{{invalid}}">[[label]] (พ.ศ.)
         <template is="dom-if" if="[[required]]">
           <span>*</span>
         </template>
       </label>
-      <!-- <vaadin-combo-box-light items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value"
-        value="{{value}}"> -->
-      <!-- <iron-input on-tap="checkPosition"> -->
+
       <input class="form-control" id="inputdata" maxlength="10" placeholder="--/--/----" invalid$="[[invalid]]" on-focus="_setSeleteValue"
         on-input="_setSplad">
       <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-      <!-- </iron-input> -->
-      <!-- </vaadin-combo-box-light> -->
-
 
 
       <template is="dom-if" if="[[invalid]]">
         <small class="help-block">[[errorMassage]]</small>
       </template>
     </div>
-    <!-- [[invalid]]/// -->
-    <!-- <div class="form-group">
-      <label class="control-label" has-error$="{{hasError}}">[[label]]
-        <template is="dom-if" if="[[required]]">
-          <span>*</span>
-        </template>
-      </label>
-      <iron-input bind-value="{{selectedBe}}">
-        <input class="form-control" placeholder="[[placeholder]]" has-error$="{{hasError}}" >
-        <iron-icon class="arrow-drop-down" icon="aqa-data-icon:calendar" on-tap="openCalendar"></iron-icon>
-      </iron-input>
-      
-    </div> -->
-    <!-- [[selected]] /// [[showBc]]
-    <br> [[selectedBe]]
-    <p>111212</p> -->
+
 
     <iron-dropdown id="dropdown" horizontal-align="right" vertical-align="top" open-animation-config="[[openAnimationConfig]]"
       close-animation-config="[[closeAnimationConfig]]">
@@ -367,14 +156,7 @@
   </template>
 
   <script>
-    /**
-     * `aqa-date-picker`
-     * 
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
+
     class AqaDatePicker extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior], Polymer.Element) {
       static get is() { return 'aqa-date-picker'; }
       static get properties() {
@@ -386,7 +168,6 @@
           },
           selected: {
             type: String,
-            // observer: '_selectedChanged',
             notify: true,
             value: '',
           },
@@ -394,20 +175,7 @@
             type: String,
             notify: true,
             observer: '_setChanged',
-            //value:'15/9/2560'
           },
-          // dayBe: {
-          //   type: String,
-          //   value: '--',
-          // },
-          // monthBe: {
-          //   type: String,
-          //   value: '--'
-          // },
-          // yearBe: {
-          //   type: String,
-          //   value: '----'
-          // },
           label: {
             type: String,
             value: ''
@@ -492,29 +260,20 @@
       _setSeleteValue(e) {
 
         let value = e.target
-        // value.value= ''
-        // console.log(value.updateValueAndPreserveCaret());
-        // console.log(value.select());
-        // value.select()
       }
       _setSplad(e) {
-        // console.log(this.$.inputdata.value);
+
         let value = e.target.value
-        // console.log(this.selectedBe, "= ", this.selected, "= ", value);
-        // console.log(e);
-        // console.log(this._convertDataToPattern(value));
+
         let reg = new RegExp('[0-9]')
         if (reg.test(e.data) === false) {
           let index = e.target.value.indexOf(e.data)
-          // console.log(e.target.value.indexOf(e.data));
-          // console.log(e.target.value.slice(0, -1));
-          // e.target.value = e.target.value.slice(0, index - 1)
+
         }
         if (value != "" && (e.inputType !== 'deleteContentForward' && e.inputType !== 'deleteContentBackward')) {
           var patt = new RegExp('^[0-9/]*$');
           var res = patt.test(e.key);
-          // console.log(value.length);
-          // console.log(res);
+  
           if (!res) {
             e.target.value = this._convertDataToPattern(value)
           }
@@ -525,13 +284,9 @@
           this.set('selectedBe', '')
           this.set('selected', '')
         }
-        // if (e.key === '/') {
-        //   console.log(this.$.inputdata.value);
-        // }
+ 
       }
       _setChanged(newVal, oldVal) {
-        // console.log(newVal, oldVal);
-        // console.log(newVal);
         let value = newVal || ""
         let valueInput = ""
         valueInput = this._convertDataToPattern(newVal)
@@ -557,36 +312,25 @@
       checkPosition(el) {
         var val = this.$.inputdata.value;
 
-        // console.log(el);
-        // if (val) {
-        //   console.log(val.slice(0, el.selectionStart).length);
-        // }
 
       }
       openCalendar() {
-        // console.log(this.$.dropdown.open());
         this.$.dropdown.open();
         this.set('isClose', false)
       }
       setCloseDropDown(isClose) {
-        // console.log(isClose);
         if (isClose)
           this.$.dropdown.close();
         this.set('isClose', false)
       }
       validate(value) {
-        // 29/9/2560
         let arr = []
         arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected))
         arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe))
-        // let dc = (/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(this.selected)
-        // let be = (/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(this.selectedBe)
 
-        // console.log(arr);
         let style = '1px solid green'
         let checkData = arr.every(item => item === true)
         this.set('invalid', !checkData)
-        // console.log(this.invalid);
 
         return checkData
       }
