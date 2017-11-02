@@ -73,7 +73,7 @@
                                     <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
                                 </div> -->
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
+                                    <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value" auto-validate required></aqa-combo-box>
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
                                     <!-- <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker> -->
                                 </div>
@@ -86,13 +86,13 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
                                      <!-- <aqa-input class="form" label="คำนำหน้า (ไทย)" value="" required></aqa-input>  -->
-                                     <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> 
+                                     <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value" ></aqa-combo-box> 
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                                     <aqa-input class="form" label="ชื่อ (ไทย)" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น" required></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                                    <aqa-input class="form" label="นามสกุล (ไทย)" value="" required></aqa-input>
+                                    <aqa-input class="form" label="นามสกุล (ไทย)" auto-validate required></aqa-input>
                                 </div>
                             </div>
                             <div class="row">

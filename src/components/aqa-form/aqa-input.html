@@ -92,9 +92,7 @@
                 margin-bottom: 0;
                 color: #f96868;
             }
-
           
-
             label[has-error] {
                 color: #f96868;
             }
@@ -106,6 +104,7 @@
             label>span {
                 color: #f96868;
             }
+            
         </style>
         <div class="form-group">
             <label class="control-label" has-error$="{{hasError}}">[[label]]
@@ -141,7 +140,8 @@
                     },
                     autoValidate:Boolean,
                     pattern: {
-                        type: String
+                        type: String,
+                        value:""
                     },
                     hasError: {
                         type: Boolean,
@@ -203,15 +203,26 @@
             _valueChanged(newVal, oldVal) {
                 var input = this.$.input
                 input.value = this._convertDataToPattern(newVal)
-
+               
                 if(this.autoValidate){
-                    var patt = new RegExp('^' + this.pattern + '$');
-                    var res = patt.test(input.value);
-                    if (!res) {
-                        this.hasError = true
+                    if(this.pattern!=""){
+                        var patt = new RegExp('^' + this.pattern + '$');
+                        var res = patt.test(input.value);
+                        if (!res) {
+                            this.hasError = true
+                        }else{
+                            this.hasError = false
+                        }
+                    }else if(this.required){
+                        if(input.value==""){
+                            this.hasError = true
+                        }else{
+                            this.hasError = false
+                        }
                     }else{
                         this.hasError = false
                     }
+                    
                 }
                 
             }

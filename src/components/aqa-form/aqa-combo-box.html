@@ -143,15 +143,20 @@
                         type:Array,
                         value:function(){
                             return []
-                        }
+                        },
+
                     },
                     label:{
                         type:String,
                         value:""
                     },
+                    autoValidate:Boolean,
                     required:{
                         type:Boolean,
                         value:false
+                    },
+                    pattern:{
+                        type: String
                     },
                     errorMassage:{
                         type:String,
@@ -165,12 +170,15 @@
                         type:String, 
                         value:"name"
                     },
+                    fristValue:{
+                        type:Boolean,
+                        value: true
+                    },
                     value:{
-                        notify:true
+                        notify:true,
+                        observer:'_valueChanged'
                     },
-                    pattern:{
-                        type: String
-                    },
+                    
                     hasError:{
                         type:Boolean,
                         value:false
@@ -198,6 +206,25 @@
             reset(){
                 this.hasError = false
                 this.value = {}
+            }
+
+            _valueChanged(val){
+                if(this.autoValidate && this.required){
+                    if(this.fristValue && this.value==""){
+                        this.hasError = false
+                        this.fristValue = false
+                    }else if(this.value==""){
+                        this.hasError = true
+                    }else{
+                        this.hasError = false
+                    }
+                }
+
+                // if(val==""){
+                //     this.hasError = true
+                // }else{
+                //     this.hasError = false
+                // }
             }
         }
         window.customElements.define(AqaComboBox.is, AqaComboBox);
