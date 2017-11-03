@@ -7,6 +7,8 @@
 <link rel="import" href="../../../layout/flexbox-grid.html">
 <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../../bower_components/iron-icons/test/iron-icons.html">
+<link rel="import" href="../../../../images/icon-moon-delete.html">
+<link rel="import" href="../../../components/aqa-tooltip/aqa-tooltip.html">
 
 <dom-module id="skill-form">
     <template>
@@ -14,19 +16,27 @@
             .textRight {
                 text-align: right;
             }
+            paper-icon-button{
+                color:#616161 
+            }
+            .btn-delete:hover{
+                color:#C62828 ;
+            }
         </style>
         <div class="row center-xs">
 
             <template is="dom-repeat" items="[[items]]">
-                <div class="textRight col-xs-12 col-md-3" style="margin:auto 0">
+                <div class="start-xs end-md col-xs-12 col-md-4" style="margin:auto 0">
                     [[item.label]]
                 </div>
-                <div class="textRight col-xs-12 col-md-4">
+                <div class="center-xs col-xs-12 col-md-5">
                     <nylon-rating name="[[name]][[index]]"></nylon-rating> 
                 </div>
-                <div class="col-md-5" style="margin:auto 0;text-align:left">
+                <div class="col-xs-12 col-md-3" style="margin:auto 0;text-align:left">
                     <template is="dom-if" if="[[item.isDelete]]">
-                        <paper-icon-button on-tap="delData" icon="delete"></paper-icon-button>
+                        <aqa-tooltip label="ลบ">
+                            <paper-icon-button class="btn-delete" on-tap="delData" icon="icomoon:bin"></paper-icon-button>
+                        </aqa-tooltip>
                     </template>
                 </div>
             </template>

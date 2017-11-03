@@ -25,10 +25,16 @@
 <link rel="import" href="../../components/aqa-header/aqa-header.html">
 <link rel="import" href="../../components/aqa-tooltip/aqa-tooltip.html">
 
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../images/icon-moon-delete.html">
+
 <dom-module id="page-tests">
     <template>
         <style include="flexbox-grid shared-styles">
-
+            .danger:hover{
+                color:red;
+                cursor: pointer;
+            }
         </style>
         <div class="page-container">
             <div class="row">
@@ -37,7 +43,7 @@
                 </div>
             </div>
         </div>
-
+        <iron-icon class="danger" icon="icomoon:bin"></iron-icon>
     </template>
 
     <script>
