@@ -5,22 +5,28 @@
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../bower_components/iron-dropdown/iron-dropdown.html">
 <link rel="import" href="../../../bower_components/neon-animation/neon-animations.html">
-<link rel="import" href="./aqa-date-icon.html">
-<link rel="import" href="../../../bower_components/iron-validator-behavior/iron-validator-behavior.html">
-<link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
-<link rel="import" href="../../../bower_components/paper-input/paper-input-container.html">
-<link rel="import" href="../../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../../bower_components/iron-icon/test/iron-icon.html">
 
 <link rel="import" href="./aqa-date-picker-light.html">
 <link rel="import" href="../aqa-font/aqa-trirong-font.html">
+<link rel="import" href="./aqa-date-icon.html">
 
 <dom-module id="aqa-date-picker">
   <template>
     <style>
+      .container{
+        position: relative;
+      }
+      .container > iron-icon{
+        position: absolute;
+        bottom: 6px;
+        right: 6px;
+      }
     </style>
-    <!-- <aqa-date-picker-light selected="{{selected}}" selected-be="{{selectedBe}}" show-bc="{{showBc}}" ></aqa-date-picker-light> -->
-    <!-- <aqa-date-picker-light></aqa-date-picker-light> -->
-    <slot id="slot"></slot>
+    <div class="container">
+      <slot id="slot"></slot>
+      <iron-icon icon="aqa-data-icon:calendar" on-click="_iconClick"></iron-icon>
+    </div>
     
   </template>
 
@@ -46,6 +52,8 @@
         setTimeout(()=>{
           
           this.child = this.children[0]
+          this.child.type = "date"
+          
           this.nativeInput = this.child.$.nativeInput
           this.nativeInput.addEventListener('focus',this._showDatePicker.bind(this))
           this.nativeInput.addEventListener('blur',this._hideDatePicker.bind(this))
@@ -55,6 +63,10 @@
 
         },1)
         
+      }
+
+      _iconClick(){
+        this.nativeInput.focus()
       }
 
       _showDatePicker(){
