@@ -23,10 +23,6 @@
         right: 6px;
       }
     </style>
-    <!-- <aqa-date-picker-light selected="{{selected}}" selected-be="{{selectedBe}}" show-bc="{{showBc}}" ></aqa-date-picker-light> -->
-    <!-- <aqa-date-picker-light></aqa-date-picker-light> -->
-    <slot id="slot"></slot>
-
     <div class="container">
       <slot id="slot"></slot>
       <iron-icon icon="aqa-data-icon:calendar" on-click="_iconClick"></iron-icon>
@@ -39,59 +35,36 @@
     class AqaDatePicker extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior], Polymer.Element) {
 
       static get is() { return 'aqa-date-picker'; }
-      static get properties() {
-        return {
-          showBc: {
-            type: Boolean,
-            value: false
-          },
-          selected: {
-            type: String,
-            notify: true
-            // value: '2017-09-15',
-            // 2017-1-15
-          },
-          selectedBe: {
-            type: String,
-            notify: true,
-            //value:'15/9/2560'
-          },
-        }
-      }
-      constructor() {
-        super()
 
-        if (!window.aqaDataPickerSection) {
+      constructor(){
+        super()
+        
+        if(!window.aqaDataPickerSection){
           window.aqaDataPickerSection = document.createElement('aqa-date-picker-light')
           window.aqaDataPickerSection.id = "aqaDataPickerLight"
           document.querySelector('body').appendChild(window.aqaDataPickerSection)
         }
-
+        
       }
 
-      connectedCallback() {
+      connectedCallback(){
         super.connectedCallback()
-        setTimeout(() => {
-
+        setTimeout(()=>{
+          
           this.child = this.children[0]
           this.child.type = "date"
           
           this.nativeInput = this.child.$.nativeInput
-          this.nativeInput.addEventListener('focus', this._showDatePicker.bind(this))
-          this.nativeInput.addEventListener('blur', this._hideDatePicker.bind(this))
+          this.nativeInput.addEventListener('focus',this._showDatePicker.bind(this))
+          this.nativeInput.addEventListener('blur',this._hideDatePicker.bind(this))
 
           this.aqaDataPickerLight = document.getElementById('aqaDataPickerLight')
-          this.calendar = aqaDataPickerLight.$.calendar
+          this.calendar = aqaDataPickerLight.$.calendar       
 
-        }, 1)
-
+        },1)
+        
       }
 
-<<<<<<< HEAD
-      _showDatePicker() {
-
-        this.child.addEventListener('value-changed', this._childValueChanged.bind(this))
-=======
       _iconClick(){
         this.nativeInput.focus()
       }
@@ -99,46 +72,45 @@
       _showDatePicker(){
         
         this.child.addEventListener('value-changed',this._childValueChanged.bind(this))
->>>>>>> 8140a05602534d07d50a192ec5ebf386573c5c5b
 
         this.aqaDataPickerLight.child = this.child
 
         this.calendar.style.display = "block"
         var bodyHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-
+        
         var offsetChild = this.child.getBoundingClientRect()
         var offsetCalendar = this.calendar.getBoundingClientRect()
 
-        if (
-          (bodyHeight - (offsetChild.top + offsetChild.height)) > offsetCalendar.height
-        ) {
-          this.calendar.style.left = (offsetChild.left + offsetChild.width - offsetCalendar.width) + 'px';
-          this.calendar.style.top = (offsetChild.top + offsetChild.height) + 'px';
-        } else {
-          this.calendar.style.left = (offsetChild.left + offsetChild.width - offsetCalendar.width) + 'px';
-          this.calendar.style.top = (offsetChild.top - offsetCalendar.height) + 'px';
+        if(
+          (bodyHeight - (offsetChild.top+offsetChild.height)) > offsetCalendar.height
+        ){
+          this.calendar.style.left = (offsetChild.left+offsetChild.width-offsetCalendar.width)+'px';
+          this.calendar.style.top = (offsetChild.top+offsetChild.height)+'px';
+        }else{
+          this.calendar.style.left = (offsetChild.left+offsetChild.width-offsetCalendar.width)+'px';
+          this.calendar.style.top = (offsetChild.top-offsetCalendar.height)+'px';
         }
-
+        
       }
 
-      _hideDatePicker() {
-        setTimeout(() => {
+      _hideDatePicker(){
+        setTimeout(()=>{
           this.calendar.style.display = "none"
-        }, 100)
-
+        },100)
+        
       }
 
-      _childValueChanged(e) {
+      _childValueChanged(e){
         var value = e.target.value
         var valueInput = "";
 
         valueInput += value.substring(0, 2)
         if (value.length > 2) {
-          valueInput += '/'
+            valueInput += '/'
         }
         valueInput += value.substring(2, 4)
         if (value.length > 4) {
-          valueInput += '/'
+            valueInput += '/'
         }
         valueInput += value.substring(4, 8)
 
