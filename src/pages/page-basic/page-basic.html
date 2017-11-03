@@ -76,14 +76,14 @@
                                     <aqa-input class="form" label="รหัสการสมัคร"></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                     <aqa-input label="สถานะ" value=""></aqa-input> 
+                                    <aqa-input label="สถานะ" value=""></aqa-input>
                                     <!-- <aqa-input label="วันที่ออกบัตร" value=""></aqa-input> -->
                                     <!-- <aqa-date-picker id="date" label="วันที่ออกบัตร" selected="" show-bc></aqa-date-picker> -->
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
-                                     <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value" auto-validate
+                                    <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value" auto-validate
                                         required></aqa-combo-box>
-                                     <!-- <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>  -->
+                                    <!-- <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>  -->
                                     <!-- <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker> -->
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                             <aqa-combo-box label="สัญชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                            <aqa-date-picker>
+                            <aqa-date-picker class="form" value="{{birthDay}}" required>
                                 <aqa-input label="วัน/เดือน/ปี เกิด (พ.ศ.)"></aqa-input>
                             </aqa-date-picker>
                             <!-- <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker> -->
@@ -166,7 +166,7 @@
                             <!-- <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker> -->
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                            <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box> 
+                            <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
                     </div>
 
@@ -410,7 +410,9 @@
                 });
             }
             getForm() {
-                // console.log(this.queryFrom('.form'))
+                // this.$.testdate.errorMassage = "กรุณากรอกข้อมูล"
+                // console.log(this.$.testdate.getAttribute('error-massage'));
+                // this.$.testdate.validate()
                 for (var index = 0; index < this.queryFrom('.form').length; index++) {
                     if (this.queryFrom('.form')[index].validate() == true) {
                         this.queryFrom('.form')[index].errorMassage = "กรุณากรอกข้อมูล"

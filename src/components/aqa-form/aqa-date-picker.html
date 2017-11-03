@@ -15,6 +15,7 @@
 
       .container>iron-icon {
         position: absolute;
+        cursor: pointer;
         bottom: 6px;
         right: 6px;
       }
@@ -35,13 +36,22 @@
         return {
           value: {
             type: String,
-            value: '',
+            observer: 'setData',
             notify: true
           },
           errorMessage: {
             type: String,
-            value: '',
-          }
+            // value: '2222222222222222222222222',
+          },
+          invalid: {
+            type: Boolean,
+            value: false,
+            notify: true
+          },
+          required: {
+            type: Boolean,
+            value: false
+          },
         }
       }
       constructor() {
@@ -60,7 +70,10 @@
         setTimeout(() => {
 
           this.child = this.children[0]
-          this.child.type = "date"
+          this.child.type = 'date'
+          this.child.required = this.required
+          this.child.invalid = this.invalid
+          this.child.errorMessage = this.errorMessage
 
           this.nativeInput = this.child.$.nativeInput
           this.nativeInput.addEventListener('focus', this._showDatePicker.bind(this))
@@ -124,9 +137,38 @@
 
         this.aqaDataPickerLight.selectedBe = valueInput
         this.set('value', this.aqaDataPickerLight.selected)
+        if (valueInput.length < 7) {
+          this.set('value', valueInput)
+          this.aqaDataPickerLight.selected = valueInput
+        }
+
+
+      }
+      setData(value) {
+        
+        if (value === undefined)
+          return
+
+        if (value.length > 9) {
+          setTimeout(() => {
+            this.child.required = this.required
+            var select = value.split('-')
+            var selectData = {
+              day: select[2],
+              month: select[1],
+              year: parseInt(select[0])
+            }
+            let da = `${selectData.day}/${selectData.month}/${selectData.year + 543}`
+            this.aqaDataPickerLight.child = this.child
+            this.aqaDataPickerLight.selectedBe = da
+          }, 2)
+        }
       }
       validate() {
         // 29/9/2560
+        setTimeout(() => {
+
+
         let be = this.aqaDataPickerLight.selectedBe
         let dc = this.aqaDataPickerLight.selected
         // console.log(be, dc);
@@ -134,7 +176,7 @@
         arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(dc))
         arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(be))
         let checkData = (arr.find(item => item === false) === undefined ? false : true)
-        // console.log(this.errorMessage);
+        console.log(this.errorMessage);
         // console.log(checkData);
         this.child.invalid = checkData
         this.child.errorMessage = this.errorMessage
@@ -143,6 +185,7 @@
         // console.log(this.invalid);
 
         return checkData
+        }, 4)
       }
 
 

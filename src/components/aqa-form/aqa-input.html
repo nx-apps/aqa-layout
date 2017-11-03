@@ -183,7 +183,8 @@
             validate() {
                 this.invalid = false
                 // this.value = this.value.trim()
-                if (this.required && this.value == "") {
+                // console.log(this.required,this.value)
+                if (this.required && (this.value == "" || typeof this.value=="undefined")) {
                     this.invalid = true
                 }
 
