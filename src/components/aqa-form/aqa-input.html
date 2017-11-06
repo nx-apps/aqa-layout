@@ -49,7 +49,11 @@
 
             input[disabled] {
                 /* border: 0; */
-                background-color: #f7f7f7;
+                background-color: #F3F7F9;
+                border-color: #e4eaec;
+                color: #a8b3c5;
+                cursor: pointer;
+                cursor:no-drop;
             }
 
             input:focus {
@@ -92,7 +96,7 @@
                 margin-bottom: 0;
                 color: #f96868;
             }
-          
+
             label[invalid] {
                 color: #f96868;
             }
@@ -104,7 +108,6 @@
             label>span {
                 color: #f96868;
             }
-            
         </style>
         <div class="form-group">
             <label class="control-label" invalid$="{{invalid}}">[[label]]
@@ -138,15 +141,15 @@
                         type: String,
                         value: ""
                     },
-                    autoValidate:Boolean,
+                    autoValidate: Boolean,
                     pattern: {
                         type: String,
-                        value:""
+                        value: ""
                     },
                     invalid: {
                         type: Boolean,
                         value: false,
-                        notify:true
+                        notify: true
                     },
                     required: {
                         type: Boolean,
@@ -176,7 +179,7 @@
                         type: String,
                         value: ""
                     }
-                    
+
                 }
             }
 
@@ -184,7 +187,7 @@
                 this.invalid = false
                 // this.value = this.value.trim()
                 // console.log(this.required,this.value)
-                if (this.required && (this.value == "" || typeof this.value=="undefined")) {
+                if (this.required && (this.value == "" || typeof this.value == "undefined")) {
                     this.invalid = true
                 }
 
@@ -205,28 +208,28 @@
             _valueChanged(newVal, oldVal) {
                 var input = this.$.nativeInput
                 input.value = this._convertDataToPattern(newVal)
-               
-                if(this.autoValidate){
-                    if(this.pattern!=""){
+
+                if (this.autoValidate) {
+                    if (this.pattern != "") {
                         var patt = new RegExp('^' + this.pattern + '$');
                         var res = patt.test(input.value);
                         if (!res) {
                             this.invalid = true
-                        }else{
+                        } else {
                             this.invalid = false
                         }
-                    }else if(this.required){
-                        if(input.value==""){
+                    } else if (this.required) {
+                        if (input.value == "") {
                             this.invalid = true
-                        }else{
+                        } else {
                             this.invalid = false
                         }
-                    }else{
+                    } else {
                         this.invalid = false
                     }
-                    
+
                 }
-                
+
             }
 
             _convertDataToPattern(newVal) {
@@ -247,8 +250,8 @@
                     }
 
                     valueInput += value.substring(6, 10)
-                    
-                }else if(this.type == "pid"){
+
+                } else if (this.type == "pid") {
                     valueInput += value.substring(0, 1)
                     if (value.length > 1) {
                         valueInput += '-'
@@ -270,8 +273,8 @@
                     }
 
                     valueInput += value.substring(12, 13)
-                    
-                }else if(this.type == "date"){
+
+                } else if (this.type == "date") {
                     valueInput += value.substring(0, 2)
                     if (value.length > 2) {
                         valueInput += '/'
@@ -283,9 +286,9 @@
                     }
 
                     valueInput += value.substring(4, 8)
-                    
+
                 }
-                else{
+                else {
                     valueInput = value
                 }
 
@@ -293,7 +296,7 @@
 
             }
 
-            _convertPatternToData(newVal){
+            _convertPatternToData(newVal) {
 
                 var value = newVal || ""
                 var valueInput = ""
@@ -302,20 +305,20 @@
                     var val = value.replace(/-/g, "")
                     val = val.substring(0, 10)
                     valueInput = val
-                }else if(this.type == "pid"){
+                } else if (this.type == "pid") {
                     var val = value.replace(/-/g, "")
                     val = val.substring(0, 13)
                     valueInput = val
-                }else if(this.type == "date"){
+                } else if (this.type == "date") {
                     var val = value.replace(/\//g, "")
                     val = val.substring(0, 8)
                     valueInput = val
-                }else{
+                } else {
                     valueInput = value
                 }
 
                 return valueInput
-                
+
 
             }
 
@@ -323,7 +326,7 @@
 
                 e.target.value = this._convertDataToPattern(this._convertPatternToData(e.target.value))
                 var value = this._convertPatternToData(e.target.value)
-                
+
 
                 if (value != "" && this.allowedPattern != "") {
                     var patt = new RegExp('^' + this.allowedPattern + '*$');

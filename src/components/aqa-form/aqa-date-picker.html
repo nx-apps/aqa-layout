@@ -52,6 +52,11 @@
             type: Boolean,
             value: false
           },
+          disabled: {
+            type: Boolean,
+            value: false,
+            observer: 'setDisabled'
+          }
         }
       }
       constructor() {
@@ -74,6 +79,7 @@
           this.child.required = this.required
           this.child.invalid = this.invalid
           this.child.errorMessage = this.errorMessage
+          this.child.disabled = this.disabled
 
           this.nativeInput = this.child.$.nativeInput
           this.nativeInput.addEventListener('focus', this._showDatePicker.bind(this))
@@ -85,9 +91,14 @@
         }, 1)
 
       }
-
+      setDisabled() {
+        this.child.disabled = this.disabled
+      }
       _iconClick() {
-        this.nativeInput.focus()
+        if (!this.disabled) {
+          this.nativeInput.focus()
+        }
+
       }
 
       _showDatePicker() {
@@ -145,7 +156,7 @@
 
       }
       setData(value) {
-        
+
         if (value === undefined)
           return
 
@@ -169,22 +180,22 @@
         setTimeout(() => {
 
 
-        let be = this.aqaDataPickerLight.selectedBe
-        let dc = this.aqaDataPickerLight.selected
-        // console.log(be, dc);
-        let arr = []
-        arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(dc))
-        arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(be))
-        let checkData = (arr.find(item => item === false) === undefined ? false : true)
-        console.log(this.errorMessage);
-        // console.log(checkData);
-        this.child.invalid = checkData
-        this.child.errorMessage = this.errorMessage
-        // console.log(this.child.invalid = checkData);
-        // this.set('invalid', !checkData)
-        // console.log(this.invalid);
+          let be = this.aqaDataPickerLight.selectedBe
+          let dc = this.aqaDataPickerLight.selected
+          // console.log(be, dc);
+          let arr = []
+          arr.push((/^\d{4}[-]\d{1,2}[-]\d{1,2}/).test(dc))
+          arr.push((/^\d{1,2}[/]\d{1,2}[/]\d{4}/).test(be))
+          let checkData = (arr.find(item => item === false) === undefined ? false : true)
+          console.log(this.errorMessage);
+          // console.log(checkData);
+          this.child.invalid = checkData
+          this.child.errorMessage = this.errorMessage
+          // console.log(this.child.invalid = checkData);
+          // this.set('invalid', !checkData)
+          // console.log(this.invalid);
 
-        return checkData
+          return checkData
         }, 4)
       }
 

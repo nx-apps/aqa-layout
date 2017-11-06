@@ -59,6 +59,15 @@
                 border-color: #62a8ea
             }
 
+            input[disabled] {
+                /* border: 0; */
+                background-color: #F3F7F9;
+                border-color: #e4eaec;
+                color: #a8b3c5;
+                cursor: pointer;
+                cursor: no-drop;
+            }
+
             input::-webkit-input-placeholder {
                 /* Chrome/Opera/Safari */
                 color: #A9A9A9;
@@ -107,9 +116,11 @@
             label>span {
                 color: #f96868;
             }
+
             .input-container {
                 position: relative;
             }
+
             .arrow-drop-down {
                 position: absolute;
                 top: 6px;
@@ -126,10 +137,10 @@
                 </template>
             </label>
             <div class="input-container">
-                <vaadin-combo-box-light id="vaadinComboBox" items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]" attr-for-value="bind-value"
-                    value="{{value}}">
+                <vaadin-combo-box-light id="vaadinComboBox" items="[[items]]" item-label-path="[[itemLabelPath]]" item-value-path="[[itemValuePath]]"
+                    attr-for-value="bind-value" value="{{value}}" disabled$="[[disabled]]">
                     <iron-input>
-                        <input id="nativeInput" class="form-control" placeholder="[[placeholder]]" invalid$="{{invalid}}">
+                        <input id="nativeInput" class="form-control" placeholder="[[placeholder]]" invalid$="{{invalid}}" disabled$="[[disabled]]">
                     </iron-input>
                     <template>
                         <aqa-combo-box-item item="[[item]]" item-label-path="[[itemLabelPath]]"></aqa-combo-box-item>
@@ -195,7 +206,10 @@
                     placeholder: {
                         type: String,
                         value: 'เลือก'
-                    }
+                    },
+                    disabled: {
+                        type: Boolean
+                    },
 
                 }
             }
@@ -231,7 +245,7 @@
 
             }
 
-            _focusInput(){
+            _focusInput() {
                 this.$.nativeInput.click()
             }
         }
