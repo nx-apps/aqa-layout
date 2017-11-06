@@ -229,6 +229,12 @@
                     }
 
                 }
+                if (this.type === 'phone') {
+                    this.invalid = (newVal.length !== 10 ? true : false)
+                }
+                if (this.type === 'pid') {
+                    this.invalid = (newVal.length !== 13 ? true : false)
+                }
 
             }
 
