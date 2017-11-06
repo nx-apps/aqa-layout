@@ -73,7 +73,7 @@
                                     <aqa-input class="form" label="เลขประจำตัวประชาชน" type="pid" required></aqa-input>
                                 </div> -->
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input class="form" label="รหัสการสมัคร"></aqa-input>
+                                    <aqa-input class="form" label="รหัสผู้ประเมิน"></aqa-input>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <aqa-input label="สถานะ" value=""></aqa-input>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
                                     <aqa-combo-box label="ตำแหน่งทางวิชาการ" items="[[academicList]]" item-label-path="label" item-value-path="value" auto-validate
-                                        required></aqa-combo-box>
+                                        required disabled></aqa-combo-box>
                                     <!-- <aqa-combo-box label="สถานะการทำงาน" items="[[statusList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>  -->
                                     <!-- <aqa-date-picker id="date" label="วันที่บัตรหมดอายุ" selected="" show-bc></aqa-date-picker> -->
                                 </div>
@@ -138,7 +138,7 @@
                             <aqa-combo-box label="สัญชาติ" items="[[nationalityList]]" item-label-path="label" item-value-path="value"></aqa-combo-box>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                            <aqa-date-picker class="form" value="{{birthDay}}" required>
+                            <aqa-date-picker class="form" value="{{birthDay}}" required disabled>
                                 <aqa-input label="วัน/เดือน/ปี เกิด (พ.ศ.)"></aqa-input>
                             </aqa-date-picker>
                             <!-- <aqa-date-picker id="date" label="วัน/เดือน/ปี เกิด" selected="{{birthDay}}" show-bc></aqa-date-picker> -->
@@ -478,18 +478,34 @@
                 else dayString = " วัน";
 
 
+                // if ((age.years > 0) && (age.months > 0) && (age.days > 0))
+                //     ageString = age.years + yearString + " " + age.months + monthString + " " + age.days + dayString
+                // else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
+                //     ageString = age.days + dayString
+                // else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
+                //     ageString = age.years + yearString + " old. Happy Birthday!!";
+                // else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
+                //     ageString = age.years + yearString + " " + age.months + monthString
+                // else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
+                //     ageString = age.months + monthString + " " + age.days + dayString
+                // else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
+                //     ageString = age.years + yearString + " " + age.days + dayString
+                // else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
+                //     ageString = age.months + monthString
+                // else ageString = "ไม่สามารถคำนวนอายุได้!";
+
                 if ((age.years > 0) && (age.months > 0) && (age.days > 0))
-                    ageString = age.years + yearString + " " + age.months + monthString + " " + age.days + dayString
+                    ageString = age.years + yearString + " " + age.months + monthString + " " 
                 else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
                     ageString = age.days + dayString
                 else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
-                    ageString = age.years + yearString + " old. Happy Birthday!!";
+                    ageString = age.years + yearString + " สุขสันต์วันเกิด!!";
                 else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
                     ageString = age.years + yearString + " " + age.months + monthString
                 else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
-                    ageString = age.months + monthString + " " + age.days + dayString
+                    ageString = age.months + monthString 
                 else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
-                    ageString = age.years + yearString + " " + age.days + dayString
+                    ageString = age.years + yearString
                 else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
                     ageString = age.months + monthString
                 else ageString = "ไม่สามารถคำนวนอายุได้!";
