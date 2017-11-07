@@ -16,11 +16,13 @@
             .textRight {
                 text-align: right;
             }
-            paper-icon-button{
-                color:#616161 
+
+            paper-icon-button {
+                color: #616161
             }
-            .btn-delete:hover{
-                color:#C62828 ;
+
+            .btn-delete:hover {
+                color: #C62828;
             }
         </style>
         <div class="row center-xs">
@@ -29,8 +31,9 @@
                 <div class="start-xs end-md col-xs-12 col-md-4" style="margin:auto 0">
                     [[item.label]]
                 </div>
+                <!-- on-tap="getData" value-as="{{item.value}}" -->
                 <div class="center-xs col-xs-12 col-md-5">
-                    <nylon-rating name="[[name]][[index]]"></nylon-rating> 
+                    <nylon-rating name="[[name]][[index]]" selected="{{item.value}}"></nylon-rating>
                 </div>
                 <div class="col-xs-12 col-md-3" style="margin:auto 0;text-align:left">
                     <template is="dom-if" if="[[item.isDelete]]">
@@ -56,15 +59,24 @@
                         type: Array,
                         value: []
                     },
-                    name:{
-                        type:String,
-                        value:'0'
+                    name: {
+                        type: String,
+                        value: '0'
                     }
                 }
             }
-            delData(e){
+            delData(e) {
                 // console.log(e.model.index)
-                this.splice('items',e.model.index,1)
+                this.splice('items', e.model.index, 1)
+            }
+            getData(e) {
+                let motherItem = e.model.__data.item.id
+                if (e.currentTarget.valueAs !== undefined){
+                    // console.log(motherItem);
+                    // console.log(e.currentTarget.value);
+                }
+                    
+                // console.log(e.currentTarget.value);
             }
         }
         window.customElements.define(SkillForm.is, SkillForm);
