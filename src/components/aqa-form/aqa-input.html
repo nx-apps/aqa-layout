@@ -53,7 +53,7 @@
                 border-color: #e4eaec;
                 color: #a8b3c5;
                 cursor: pointer;
-                cursor:no-drop;
+                cursor: no-drop;
             }
 
             input:focus {
@@ -116,7 +116,7 @@
                 </template>
             </label>
             <input id="nativeInput" class="form-control" placeholder="[[placeholder]]" on-input="_inputChanged" invalid$="[[invalid]]"
-                disabled$="[[disabled]]">
+                disabled$="[[disabled]]" maxlength$="[[maxlength]]" minlength$="[[minlength]]">
             <template is="dom-if" if="[[invalid]]">
                 <span class="help-block">[[errorMessage]]</span>
             </template>
@@ -145,6 +145,12 @@
                     pattern: {
                         type: String,
                         value: ""
+                    },
+                    maxlength: {
+                        type: Number,
+                    },
+                    minlength: {
+                        type: Number,
                     },
                     invalid: {
                         type: Boolean,
@@ -190,6 +196,19 @@
                 if (this.required && (this.value == "" || typeof this.value == "undefined")) {
                     this.invalid = true
                 }
+                // console.log(this.value);
+                if (this.value !== undefined) {
+                    switch (this.type) {
+                        case 'phone':
+                            this.invalid = (this.value.length !== 10 ? true : false)
+                            break;
+                        case 'pid':
+                            this.invalid = (this.value.length !== 13 ? true : false)
+                            break;
+                        default:
+
+                    }
+                }
 
                 return this.invalid
             }
@@ -229,11 +248,22 @@
                     }
 
                 }
-                if (this.type === 'phone') {
-                    this.invalid = (newVal.length !== 10 ? true : false)
-                }
-                if (this.type === 'pid') {
-                    this.invalid = (newVal.length !== 13 ? true : false)
+                // if (this.type === 'phone') {
+                //     this.invalid = (newVal.length !== 10 ? true : false)
+                // }
+                // if (this.type === 'pid') {
+                //     this.invalid = (newVal.length !== 13 ? true : false)
+                // }
+                if (this.value !== undefined) {
+                    switch (this.type) {
+                        case 'phone':
+                            this.invalid = (this.value.length !== 10 ? true : false)
+                            break;
+                        case 'pid':
+                            this.invalid = (this.value.length !== 13 ? true : false)
+                            break;
+                        default:
+                    }
                 }
 
             }
